@@ -1,0 +1,41 @@
+.main_container_favorite {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  min-height: 80vh;
+  height: auto;
+  padding: 1rem;
+  background-color: #040926;
+  padding-top: 6rem;
+  position: relative;
+}
+
+.main_container_favorite_container_withoutgames {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  min-height: 65vh;
+}
+
+.main_container_favorite_container_withoutgames h1 {
+  font-size: 4rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  text-align: center;
+}
+
+.main_container_favorite_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row wrap;
+  width: 100%;
+  height: 100%;
+  margin: 1rem 0 1rem 0;
+}
+
+@media only screen and (min-width: 1024px) {
+}

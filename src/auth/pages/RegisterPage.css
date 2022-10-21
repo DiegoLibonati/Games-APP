@@ -1,0 +1,229 @@
+.container_main_register {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #040926;
+}
+
+.register_container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  height: 55rem;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.register_container_information {
+  width: 100%;
+  height: 25rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: relative;
+}
+
+.register_container_information img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.register_container_form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 30rem;
+  background-color: #251351;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.register_container_form img {
+  display: none;
+}
+
+.register_container_form input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  outline: none;
+  color: #fff;
+  background: #040926;
+  border: none;
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.1rem;
+}
+
+.register_container_form input::placeholder {
+  color: #fff;
+}
+
+.register_container_form button {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: #fff;
+  background: #040926;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}
+
+.register_container_form a {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: #fff;
+  background: #040926;
+  text-decoration: none;
+  border: none;
+  text-align: end;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}
+
+.register_wave {
+  position: absolute;
+  bottom: 0;
+  height: 10rem;
+}
+
+.register_container_form button:hover {
+  background-image: linear-gradient(
+    to right,
+    #000000,
+    #000000 16.65%,
+    #02040f 33.3%,
+    #040926 49.95%,
+    #060e3d 66.6%,
+    #091454 83.25%,
+    #251351 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.register_container_form a:hover {
+  background-image: linear-gradient(
+    to right,
+    #000000,
+    #000000 16.65%,
+    #02040f 33.3%,
+    #040926 49.95%,
+    #060e3d 66.6%,
+    #091454 83.25%,
+    #251351 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.slide_button_container_main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  width: 5rem;
+  height: auto;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 2rem;
+}
+
+@keyframes slidebg {
+  to {
+    background-position: 20vw;
+  }
+}
+
+@media only screen and (min-width: 280px) and (orientation: landscape) {
+  .container_main_register {
+    height: 80rem;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .register_container {
+    width: 50rem;
+    height: 60rem;
+  }
+
+  .register_container_information {
+    height: 30rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container_main_register {
+    justify-content: center;
+  }
+
+  .register_wave {
+    height: 15rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .container_main_register {
+    height: 100vh;
+    justify-content: center;
+  }
+  .register_container {
+    grid-template-columns: repeat(2, 1fr);
+    height: 50rem;
+    width: 80rem;
+    padding: 0 1rem 0 1rem;
+  }
+
+  .register_container_information {
+    height: 50rem;
+  }
+
+  .register_container_form {
+    justify-content: flex-end;
+    height: 50rem;
+    position: relative;
+  }
+
+  .register_container_form img {
+    display: block;
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    position: absolute;
+    top: 0.5rem;
+  }
+
+  .register_container_form input {
+    margin-bottom: 1rem;
+  }
+
+  .register_container_form button {
+    margin-bottom: 1rem;
+  }
+
+  .register_container_form a {
+    margin-bottom: 1rem;
+  }
+
+  .register_wave {
+    height: 10rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .register_wave {
+    height: 15rem;
+  }
+} ;

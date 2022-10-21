@@ -1,0 +1,157 @@
+.active_game_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.504);
+  position: fixed;
+  top: 0;
+  z-index: 99999999;
+}
+
+.active_game_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 90%;
+  background-color: #040926;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.active_game_container_header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+
+.active_game_container_header img {
+  width: 10rem;
+  height: auto;
+  object-fit: cover;
+}
+
+.active_game_container_header h2 {
+  font-size: 2rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  text-align: center;
+  width: 100%;
+}
+
+.active_game_container p {
+  font-size: 1.5rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.active_game_container_specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: column wrap;
+  width: 100%;
+  height: auto;
+  margin: 1rem 0 1rem 0;
+  text-align: center;
+}
+
+.active_game_container_specs h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  margin: 1rem 0 1rem 0;
+}
+
+.active_game_container_specs h3 span {
+  font-size: 1.2rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+}
+
+.active_game_container_specs_links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  height: auto;
+  width: 100%;
+  margin: 1rem 0 1rem 0;
+}
+
+.active_game_container_specs_links a {
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  cursor: pointer;
+}
+
+.close_active_game {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.active_game_trash {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 2.5rem;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .active_game_container_specs {
+    flex-flow: row wrap;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .active_game_container {
+    width: 70rem;
+  }
+
+  .active_game_container_header img {
+    width: 25rem;
+  }
+
+  .active_game_container_header h2 {
+    font-size: 4rem;
+  }
+
+  .active_game_container p {
+    font-size: 3rem;
+  }
+
+  .active_game_container_specs h3 {
+    font-size: 2.5rem;
+  }
+
+  .active_game_container_specs h3 span {
+    font-size: 2rem;
+  }
+
+  .active_game_container_specs_links a {
+    font-size: 1.5rem;
+  }
+}

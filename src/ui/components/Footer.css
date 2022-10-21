@@ -1,0 +1,31 @@
+.footer_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: column wrap;
+  width: 100%;
+  height: auto;
+  background-color: #251351;
+  padding: 0 0 5rem 0;
+}
+
+.footer_container_icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  width: 80%;
+  height: auto;
+}
+
+.footer_icon {
+  font-size: 3rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 1s;
+}
+
+.footer_icon:hover {
+  color: #040926;
+  transition: color 1s;
+}

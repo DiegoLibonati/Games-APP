@@ -1,0 +1,15 @@
+.header_presentation {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 5rem;
+  font-size: 3rem;
+  color: #fff;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  font-family: var(--font-montserrat);
+}

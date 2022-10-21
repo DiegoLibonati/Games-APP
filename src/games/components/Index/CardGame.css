@@ -1,0 +1,206 @@
+.card_game_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding: 1rem;
+}
+
+.card_game_container_img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 30rem;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 0.1rem solid #888;
+  transition: opacity 1s, border-radius 1s;
+}
+
+.card_game_container_img div {
+  background-color: #251351;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  border: 0.1rem solid #888;
+}
+
+.card_game_container_img:hover {
+  opacity: 0.5;
+  transition: opacity 1s;
+}
+
+.card_game_container_img.card_game_container_img_open {
+  border-radius: 0;
+  transition: border-radius 1s;
+}
+
+.card_game_container_information {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: column nowrap;
+  width: 100%;
+  height: auto;
+  max-height: 0;
+  padding: 0 1rem 0 1rem;
+  background-color: #251351;
+  overflow: hidden;
+  transition: max-height 1s;
+}
+
+.card_game_container_information.open_information_card_game {
+  max-height: 100rem;
+  transition: max-height 1s;
+}
+
+.card_game_container_information h2 {
+  font-size: 3rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.card_game_container_information p {
+  font-size: 2.5rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  margin-bottom: 1rem;
+}
+
+.card_game_container_information h3 {
+  font-size: 2rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  margin-bottom: 1rem;
+}
+
+.card_game_container_information h3 span {
+  font-size: 1.5rem;
+  color: #fff;
+  font-family: var(--font-montserrat);
+}
+
+.card_game_container_information_links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  width: 100%;
+  height: auto;
+  padding-bottom: 1rem;
+}
+
+.card_game_container_information_links a {
+  width: auto;
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: #fff;
+  background: #040926;
+  text-decoration: none;
+  border: none;
+  text-align: end;
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.card_game_container_information_links button {
+  width: auto;
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: #fff;
+  background: #040926;
+  text-decoration: none;
+  border: none;
+  text-align: end;
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.card_game_container_information_links button:hover {
+  background-image: linear-gradient(
+    to right,
+    #000000,
+    #000000 16.65%,
+    #02040f 33.3%,
+    #040926 49.95%,
+    #060e3d 66.6%,
+    #091454 83.25%,
+    #251351 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.card_game_container_information_links a:hover {
+  background-image: linear-gradient(
+    to right,
+    #000000,
+    #000000 16.65%,
+    #02040f 33.3%,
+    #040926 49.95%,
+    #060e3d 66.6%,
+    #091454 83.25%,
+    #251351 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nospin {
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes slidebg {
+  to {
+    background-position: 20vw;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .card_game_container {
+    width: auto;
+    margin: 0;
+  }
+
+  .card_game_container_img {
+    height: 40rem;
+    width: 40rem;
+  }
+  .card_game_container_information {
+    width: 40rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .card_game_container {
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+}
