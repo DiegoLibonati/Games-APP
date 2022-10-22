@@ -40,6 +40,18 @@ Basically my APP has 3 sections or pages. A home page where there is general inf
 DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 ```
 
+## Galery
+
+![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/gamesapp.png)
+
+![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/1.png)
+
+![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/2.png)
+
+![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/3.png)
+
+![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/4.png)
+
 ## Portfolio Link
 
 `https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Games%20APP`
