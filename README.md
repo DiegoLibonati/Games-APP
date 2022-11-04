@@ -1,4 +1,4 @@
-# Games APP
+# FreeToPlayGames-App-Page
 
 ## Getting Started
 
@@ -40,6 +40,15 @@ Basically my APP has 3 sections or pages. A home page where there is general inf
 DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 ```
 
+## Technologies used
+
+1. REACT JS
+2. HTML5
+3. CSS
+4. JAVASCRIPT
+5. FIREBASE
+6. FIRESTORE
+
 ## Galery
 
 ![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/gamesapp.png)
@@ -54,4 +63,11 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Games%20APP`
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=FreeToPlayGames%20app%20page`
+
+## Video
+
+
+
+https://user-images.githubusercontent.com/99032604/199869745-843b6845-fdc8-423c-83f9-1772e6732971.mp4
+
