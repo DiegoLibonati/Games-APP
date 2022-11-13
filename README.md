@@ -63,11 +63,8 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=FreeToPlayGames%20app%20page`
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=FreeToPlayGames%20App%20Page`
 
 ## Video
 
-
-
 https://user-images.githubusercontent.com/99032604/199869745-843b6845-fdc8-423c-83f9-1772e6732971.mp4
-
