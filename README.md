@@ -49,21 +49,9 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 5. FIREBASE
 6. FIRESTORE
 
-## Galery
-
-![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/gamesapp.png)
-
-![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/1.png)
-
-![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/2.png)
-
-![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/3.png)
-
-![Games-APP](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/gamesapp/4.png)
-
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=FreeToPlayGames%20App%20Page`
+[`https://www.diegolibonati.com.ar/#/project/4`](https://www.diegolibonati.com.ar/#/project/4)
 
 ## Video
 
