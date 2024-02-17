@@ -45,7 +45,7 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 1. REACT JS
 2. HTML5
 3. CSS
-4. JAVASCRIPT
+4. TYPESCRIPT
 5. FIREBASE
 6. FIRESTORE
 

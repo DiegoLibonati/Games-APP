@@ -17,6 +17,14 @@
   margin: 1rem 0 1rem 0;
 }
 
+.card_games_section_container_list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+}
+
 @media only screen and (min-width: 540px) {
   .cards_games_section_container_title {
     font-size: 6rem;
