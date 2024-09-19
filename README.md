@@ -1,4 +1,4 @@
-# FreeToPlayGames-App-Page
+# FreeToPlayGames
 
 ## Getting Started
 
@@ -51,7 +51,7 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/4`](https://www.diegolibonati.com.ar/#/project/4)
+[`https://www.diegolibonati.com.ar/#/project/FreeToPlayGames`](https://www.diegolibonati.com.ar/#/project/FreeToPlayGames)
 
 ## Video
 
