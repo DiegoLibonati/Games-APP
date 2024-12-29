@@ -4,41 +4,16 @@
 
 1. Clone the repository
 2. Join to the correct path of the clone
-3. Install node_modules with yarn install
-4. Use yarn dev or start (depends package.json) to run the app page
+3. Execute: `yarn install` or `npm install`
+4. Execute: `yarn start` or `npm start` and enjoy!
 
-## App instructions
+## Description
 
-```
 The theme of this Tp will be free, they will have to consume some API to provide content to their application, there are many free of all kinds. A favorites section should be created, where the user can store information about that API. They will have to use Firestore to manage the database in this section and will use FireAuth for user authentication. They will also have to use a minimum of 2 custom hooks.
 
 The test will not be mandatory, but will give extra points if they do it.
 
 Everything else I leave in your hands
-
-Minimum requirements:
-
-React.
-Redux Toolkit.
-ReactRouter V6.
-SDK Firebase V9.
-Axios.
-Github repository, with Readme detailing your application.
-```
-
-## Personal explanation
-
-In this case use a free internet api that deals with all or some of the free to play games that exist on the internet.
-
-```
-API LINK: https://www.freetogame.com/api-doc
-```
-
-Basically my APP has 3 sections or pages. A home page where there is general information, a favorites page where all the games that the user has saved in his favorites will be saved and a last page called games where the user can see and search among all the categories the different games there are.
-
-```
-DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
-```
 
 ## Technologies used
 
@@ -49,6 +24,43 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 5. FIREBASE
 6. FIRESTORE
 
+## Libraries used
+
+#### Dependencies
+
+```
+"@types/jest": "^28.1.4"
+"@types/react": "^18.0.0"
+"@types/react-dom": "^18.0.0"
+"react": "^18.2.0"
+"react-dom": "^18.2.0"
+"react-icons": "^4.4.0"
+"react-router-dom": "^6.4.0"
+"react-scripts": "^5.0.1"
+"web-vitals": "^2.1.4"
+"firebase": "^9.9.4"
+"axios": "^0.27.2"
+"query-string": "^7.1.1"
+"@reduxjs/toolkit": "^2.5.0"
+"react-redux": "^9.2.0"
+"react-wavify": "^1.6.2"
+"sweetalert2": "^11.4.33"
+```
+
+#### devDependencies
+
+```
+"@testing-library/dom": "^10.4.0"
+"@testing-library/jest-dom": "^6.6.2"
+"@testing-library/react": "^16.0.1"
+"@testing-library/user-event": "^14.5.2"
+"axios-mock-adapter": "^2.1.0"
+"jest": "^29.7.0"
+"jest-environment-jsdom": "^29.7.0"
+"ts-jest": "^29.2.5"
+"typescript": "^5.3.3"
+```
+
 ## Portfolio Link
 
 [`https://www.diegolibonati.com.ar/#/project/FreeToPlayGames`](https://www.diegolibonati.com.ar/#/project/FreeToPlayGames)
@@ -56,3 +68,8 @@ DEPLOY LINK: https://gamesapplibonatidiego.netlify.app/
 ## Video
 
 https://user-images.githubusercontent.com/99032604/199869745-843b6845-fdc8-423c-83f9-1772e6732971.mp4
+
+## Testing
+
+1. Join to the correct path of the clone
+2. Execute: `yarn test` or `npm test`

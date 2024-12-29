@@ -1,61 +1,90 @@
-import { useSelector } from "react-redux";
+import { Game } from "../entities/entities";
+
 import {
-  resetActiveGame,
-  resetAllGames,
-  setActiveGame,
-  startDeleteFavoriteGame,
+  startDeletingFavoriteGame,
+  startGettingFavoriteGames,
+  startGettingGames,
+  startGettingGamesByCategory,
   startSaveNewGameToFavorite,
-} from "../store/games/exports";
-import { RootState, useAppDispatch } from "../store/store";
-import { Game, UseGameStore } from "../entities/entities";
+} from "../store/games/thunks";
+import {
+  clearActiveGame,
+  setActiveGame,
+  stateToInitialValue,
+} from "../store/games/gamesSlice";
+import { useAppDispatch, useAppSelector } from "../constants/redux";
+
+type UseGameStore = {
+  games: Game[];
+  isLoadingGames: boolean;
+  categories: string[];
+  isLoadingCategories: boolean;
+  favoritesGames: Game[];
+  isLoadingFavoritesGames: boolean;
+  activeGame: Game;
+  handleGetGames: () => void;
+  handleGetFavoriteGames: () => void;
+  handleSetNewGameToFavorite: (game: Game) => void;
+  handleSetToInitialState: () => void;
+  handleSetActiveGame: (game: Game) => void;
+  handleClearActiveGame: () => void;
+  handleDeleteFavoriteGame: (game: Game) => void;
+  handleGetGamesByCategory: (category: string) => void;
+};
 
 export const useGamesStore = (): UseGameStore => {
+  const { games, categories, favorites, activeGame } = useAppSelector(
+    (state) => state.games
+  );
   const dispatch = useAppDispatch();
 
-  const {
-    homeCard,
-    gamesSliders,
-    homeCardsWithInformation,
-    favoriteGames,
-    activeGame,
-    allGames,
-    allCategoriesOfApi,
-    alertFavoriteGame,
-  } = useSelector((state: RootState) => state.games);
-
-  const setNewGameToFavorite = (objectGame: Game): void => {
-    dispatch(startSaveNewGameToFavorite(objectGame));
+  const handleGetGames = (): void => {
+    dispatch(startGettingGames());
   };
 
-  const onDeleteGameInFavorite = (favoriteGame: Game): void => {
-    dispatch(startDeleteFavoriteGame(favoriteGame));
+  const handleGetGamesByCategory = (category: string): void => {
+    dispatch(startGettingGamesByCategory(category));
   };
 
-  const onActiveGame = (game: Game): void => {
+  const handleGetFavoriteGames = (): void => {
+    dispatch(startGettingFavoriteGames());
+  };
+
+  const handleSetNewGameToFavorite = (game: Game): void => {
+    dispatch(startSaveNewGameToFavorite(game));
+  };
+
+  const handleSetToInitialState = (): void => {
+    dispatch(stateToInitialValue());
+  };
+
+  const handleSetActiveGame = (game: Game): void => {
     dispatch(setActiveGame(game));
   };
 
-  const onResetActiveGame = (): void => {
-    dispatch(resetActiveGame());
+  const handleClearActiveGame = (): void => {
+    dispatch(clearActiveGame());
   };
 
-  const resetAllGamesArray = (): void => {
-    dispatch(resetAllGames());
+  const handleDeleteFavoriteGame = (game: Game): void => {
+    dispatch(startDeletingFavoriteGame(game));
   };
 
   return {
-    homeCard,
-    gamesSliders,
-    homeCardsWithInformation,
-    favoriteGames,
-    activeGame,
-    allGames,
-    allCategoriesOfApi,
-    alertFavoriteGame,
-    setNewGameToFavorite,
-    onDeleteGameInFavorite,
-    onActiveGame,
-    onResetActiveGame,
-    resetAllGamesArray,
+    games: games.games,
+    isLoadingGames: games.isLoading,
+    categories: categories.categories,
+    isLoadingCategories: categories.isLoading,
+    favoritesGames: favorites.games,
+    isLoadingFavoritesGames: favorites.isLoading,
+    activeGame: activeGame!,
+    handleGetGames: handleGetGames,
+    handleGetFavoriteGames: handleGetFavoriteGames,
+    handleSetNewGameToFavorite: handleSetNewGameToFavorite,
+    handleSetToInitialState: handleSetToInitialState,
+    handleSetActiveGame: handleSetActiveGame,
+    handleClearActiveGame: handleClearActiveGame,
+    handleDeleteFavoriteGame: handleDeleteFavoriteGame,
+    handleGetGamesByCategory: handleGetGamesByCategory,
   };
 };

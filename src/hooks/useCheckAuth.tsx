@@ -1,28 +1,33 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { Status } from "../entities/entities";
+
+import { useAuthStore } from "./useAuthStore";
 import { FirebaseAuth } from "../firebase/config";
-import { login, logout } from "../store/auth/exports";
-import { UseCheckAuth } from "../entities/entities";
-import { RootState, useAppDispatch } from "../store/store";
+
+type UseCheckAuth = {
+  status: Status;
+};
 
 export const useCheckAuth = (): UseCheckAuth => {
-  const { status } = useSelector((state: RootState) => state.auth);
-
-  const dispatch = useAppDispatch();
+  const { status, handleLogOut, handleLogin } = useAuthStore();
 
   useEffect(() => {
     onAuthStateChanged(FirebaseAuth, async (user) => {
-      if (!user) return dispatch(logout());
+      if (!user) return handleLogOut();
 
-      const { uid, email, displayName, photoURL } = user;
-
-      dispatch(login({ uid, email, displayName, photoURL }));
+      handleLogin({
+        displayName: user.displayName!,
+        email: user.email!,
+        photoURL: user.photoURL!,
+        uid: user.uid!,
+      });
     });
     // eslint-disable-next-line
   }, []);
 
   return {
-    status,
+    status: status,
   };
 };

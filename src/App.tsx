@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { AppRouter } from "./router/AppRouter";
 import Swal from "sweetalert2";
-import { RootState } from "./store/store";
+
+import { AppRouter } from "./router/AppRouter";
+import { useAuthStore } from "./hooks/useAuthStore";
+
 import "./App.css";
 
 function App(): JSX.Element {
-  const { errorMessage } = useSelector((state: RootState) => state.auth);
+  const { errorMessage } = useAuthStore();
 
   useEffect(() => {
     if (errorMessage) Swal.fire("Error", errorMessage, "error");

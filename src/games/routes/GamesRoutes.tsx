@@ -1,42 +1,19 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { IndexPage, FavoritePage, GamesPage } from "../pages/exports";
+import { Fragment } from "react/jsx-runtime";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { IoMdRocket } from "react-icons/io";
-import { ActiveGame, LoaderAlert } from "../../ui/components/exports";
-import { useGamesStore } from "../../hooks/exports";
-import { useEffect } from "react";
-import Swal from "sweetalert2";
-import { resetAlertFavoriteGame } from "../../store/games/exports";
-import { useAppDispatch } from "../../store/store";
+
+import { ActiveGame } from "../../ui/components/ActiveGame/ActiveGame";
+import { IndexPage } from "../pages/IndexPage/IndexPage";
+import { FavoritePage } from "../pages/FavoritePage/FavoritePage";
+import { GamesPage } from "../pages/GamesPage/GamesPage";
+
+import { useGamesStore } from "../../hooks/useGamesStore";
 
 export const GamesRoutes = (): JSX.Element => {
-  const {
-    activeGame,
-    alertFavoriteGame,
-    onResetActiveGame,
-    resetAllGamesArray,
-  } = useGamesStore();
-
-  const location = useLocation();
-  const dispatch = useAppDispatch();
-
-  const { type, message, isLoadingAlert } = alertFavoriteGame;
-
-  useEffect(() => {
-    onResetActiveGame();
-    resetAllGamesArray();
-    // eslint-disable-next-line
-  }, [location]);
-
-  useEffect(() => {
-    if (message && type) {
-      Swal.fire("Favorite Game", message, type);
-      dispatch(resetAlertFavoriteGame());
-    }
-    // eslint-disable-next-line
-  }, [type, message]);
+  const { activeGame } = useGamesStore();
 
   return (
-    <>
+    <Fragment>
       <Routes>
         <Route path="/games/index" element={<IndexPage></IndexPage>}></Route>
 
@@ -59,8 +36,6 @@ export const GamesRoutes = (): JSX.Element => {
       ></IoMdRocket>
 
       {activeGame && <ActiveGame></ActiveGame>}
-
-      {isLoadingAlert && <LoaderAlert></LoaderAlert>}
-    </>
+    </Fragment>
   );
 };

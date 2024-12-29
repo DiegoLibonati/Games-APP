@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const gamesApi = axios.create({
-  baseURL: " https://free-to-play-games-database.p.rapidapi.com/api",
-});
+import { CONFIG } from "../constants/config";
 
-export default gamesApi;
+export const gamesApi = axios.create({
+  baseURL: "https://free-to-play-games-database.p.rapidapi.com",
+  headers: {
+    "X-RapidAPI-Key": CONFIG.xRapid.apiKey,
+    "X-RapidAPI-Host": CONFIG.xRapid.apiHost,
+  },
+});

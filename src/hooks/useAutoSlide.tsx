@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-export const useAutoSlide = (arrayImages: string[]): number => {
+export const useAutoSlide = <T,>(arr: T[]): number => {
   const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
     if (index < 0) {
-      setIndex(arrayImages.length - 1);
+      setIndex(arr.length - 1);
     }
 
-    if (index > arrayImages.length - 1) {
+    if (index > arr.length - 1) {
       setIndex(0);
     }
-  }, [index, arrayImages]);
+  }, [index, arr]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,5 +21,5 @@ export const useAutoSlide = (arrayImages: string[]): number => {
     return () => clearInterval(interval);
   }, [index]);
 
-  return index
+  return index;
 };

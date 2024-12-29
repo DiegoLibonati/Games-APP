@@ -1,27 +1,65 @@
-import { useSelector } from "react-redux";
-import { manageCategoryFilter, manageNavbar } from "../store/ui/exports";
-import { RootState, useAppDispatch } from "../store/store";
-import { UseUiStore } from "../entities/entities";
+import { Alert } from "../entities/entities";
+
+import {
+  openNavBar,
+  closeNavBar,
+  openFilterCategories,
+  closeFilterCategories,
+  closeAlert,
+  openAlert,
+} from "../store/ui/uiSlice";
+import { useAppDispatch, useAppSelector } from "../constants/redux";
+
+type UseUiStore = {
+  alert: Alert;
+  isNavBarOpen: boolean;
+  isFilterCategoriesOpen: boolean;
+  handleOpenNavBar: () => void;
+  handleCloseNavBar: () => void;
+  handleOpenFilterCategories: () => void;
+  handleCloseFilterCategories: () => void;
+  handleOpenAlert: (alert: Alert) => void;
+  handleCloseAlert: () => void;
+};
 
 export const useUiStore = (): UseUiStore => {
   const dispatch = useAppDispatch();
 
-  const { isNavbarOpen, isCategoryFilterOpen } = useSelector(
-    (state: RootState) => state.ui
-  );
+  const { navBar, filters, alert } = useAppSelector((state) => state.ui);
 
-  const handleNavbarMobile = (): void => {
-    dispatch(manageNavbar());
+  const handleOpenNavBar = (): void => {
+    dispatch(openNavBar());
   };
 
-  const handleCategoryFilter = (): void => {
-    dispatch(manageCategoryFilter());
+  const handleCloseNavBar = (): void => {
+    dispatch(closeNavBar());
+  };
+
+  const handleOpenFilterCategories = (): void => {
+    dispatch(openFilterCategories());
+  };
+
+  const handleCloseFilterCategories = (): void => {
+    dispatch(closeFilterCategories());
+  };
+
+  const handleOpenAlert = (alert: Alert): void => {
+    dispatch(openAlert(alert));
+  };
+
+  const handleCloseAlert = (): void => {
+    dispatch(closeAlert());
   };
 
   return {
-    isNavbarOpen,
-    isCategoryFilterOpen,
-    handleNavbarMobile,
-    handleCategoryFilter,
+    alert: alert,
+    isNavBarOpen: navBar.isOpen,
+    isFilterCategoriesOpen: filters.categories.isOpen,
+    handleOpenNavBar: handleOpenNavBar,
+    handleCloseNavBar: handleCloseNavBar,
+    handleOpenFilterCategories: handleOpenFilterCategories,
+    handleCloseFilterCategories: handleCloseFilterCategories,
+    handleOpenAlert: handleOpenAlert,
+    handleCloseAlert: handleCloseAlert,
   };
 };

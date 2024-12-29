@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
-import { UseSlide } from "../entities/entities";
+
+type UseSlide<T> = {
+  index: number;
+  handleSetIndex: (index: number) => void;
+};
 
 export const useSlide = <T,>(arr: T[]): UseSlide<T> => {
   const [index, setIndex] = useState<number>(0);
+
+  const handleSetIndex = (index: number): void => {
+    setIndex(index);
+  };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -17,7 +25,7 @@ export const useSlide = <T,>(arr: T[]): UseSlide<T> => {
   }, [index, arr]);
 
   return {
-    index,
-    setIndex,
+    index: index,
+    handleSetIndex: handleSetIndex,
   };
 };

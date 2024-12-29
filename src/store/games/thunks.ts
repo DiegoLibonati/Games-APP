@@ -1,310 +1,261 @@
 import {
-  deleteFavoriteGame,
-  isLoadingAllGamesArray,
-  setAlertFavoriteGame,
-  setAllGames,
-  setFavoriteGames,
-  setGamesSliderOne,
-  setGamesSliderTr,
-  setGamesSliderTwo,
-  setHomeCard,
-  setHomeCardsWithInformation,
-  setLoading,
-  setLoadingFavoriteGames,
-  setLoadingGamesSliders,
-  setLoadingHomeCardsWithInformation,
-  setNewGameToFavoriteGames,
-} from "./exports";
-import {
   collection,
   doc,
   setDoc,
   getDocs,
   deleteDoc,
 } from "firebase/firestore/lite";
-import { FirebaseDB } from "../../firebase/config";
-import gamesApi from "../../api/gamesApi";
-import { AppDispatch, RootState } from "../store";
-import { Game } from "../../entities/entities";
 
-export const startGettingInformationToHomeCard = () => {
+import { AppDispatch, Game, RootState } from "../../entities/entities";
+
+import { getGames } from "../../api/getGames";
+import { getGamesByCategory } from "../../api/getGamesByCategory";
+import { FirebaseDB } from "../../firebase/config";
+import {
+  setCategories,
+  setFavoritesGames,
+  setGames,
+  setLoadingFavoritesGames,
+  setLoadingGames,
+} from "./gamesSlice";
+import { openAlert } from "../ui/uiSlice";
+
+// --- NEW ---
+
+export const startGettingGames = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      dispatch(setLoading());
-      dispatch(setLoadingHomeCardsWithInformation());
+      dispatch(setLoadingGames(true));
 
-      const response = await gamesApi.get("/games", {
-        method: "GET",
-        params: { id: "452" },
-        headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_GAMES_API_KEY!,
-          "X-RapidAPI-Host": process.env.REACT_APP_GAMES_HOST!,
-        },
-      });
+      const data = await getGames();
 
-      const data = await response.data;
-      const shuffledData = [...data].sort(() => 0.5 - Math.random());
-      const dataSliced: Game[] = shuffledData.slice(0, 12);
-      const singleGame: Game = data[Math.floor(Math.random() * data.length)];
-
-      dispatch(setHomeCard(singleGame));
-      dispatch(setHomeCardsWithInformation(dataSliced));
+      dispatch(setGames(data));
+      dispatch(setCategories(data));
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-export const startGettingGamesToSliders = () => {
+export const startSaveNewGameToFavorite = (game: Game) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const categories = [];
+    const { user } = getState().auth;
 
-    try {
-      dispatch(setLoadingGamesSliders());
-
-      const shuffled = getState()
-        .games.allCategoriesOfApi.map((value) => ({
-          value,
-          sort: Math.random(),
-        }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value);
-
-      for await (const item of shuffled) {
-        if (categories.length === 3) {
-          break;
-        } else {
-          if (categories[item as keyof string[]] || item === "all") {
-            continue;
-          } else {
-            categories.push(item);
-          }
-        }
-      }
-
-      const responseSliderOne = await gamesApi.get(
-        `/games?category=${categories[0]}`,
-        {
-          method: "GET",
-          params: { id: "452" },
-          headers: {
-            "X-RapidAPI-Key": process.env.REACT_APP_GAMES_API_KEY!,
-            "X-RapidAPI-Host": process.env.REACT_APP_GAMES_HOST!,
-          },
-        }
-      );
-
-      const dataSliderOne: Game[] = await responseSliderOne.data;
-      const dataSliderOneSliced: Game[] = dataSliderOne.slice(0, 9);
-
-      const finalObjectOne = {
-        categoryName: categories[0],
-        games: dataSliderOneSliced,
-      };
-
-      dispatch(setGamesSliderOne(finalObjectOne));
-
-      const responseSliderTwo = await gamesApi.get(
-        `/games?category=${categories[1]}`,
-        {
-          method: "GET",
-          params: { id: "452" },
-          headers: {
-            "X-RapidAPI-Key": process.env.REACT_APP_GAMES_API_KEY!,
-            "X-RapidAPI-Host": process.env.REACT_APP_GAMES_HOST!,
-          },
-        }
-      );
-
-      const dataSliderTwo: Game[] = await responseSliderTwo.data;
-      const dataSliderTwoSliced: Game[] = dataSliderTwo.slice(0, 9);
-
-      const finalObjectTwo = {
-        categoryName: categories[1],
-        games: dataSliderTwoSliced,
-      };
-
-      dispatch(setGamesSliderTwo(finalObjectTwo));
-
-      const responseSliderTr = await gamesApi.get(
-        `/games?category=${categories[2]}`,
-        {
-          method: "GET",
-          params: { id: "452" },
-          headers: {
-            "X-RapidAPI-Key": process.env.REACT_APP_GAMES_API_KEY!,
-            "X-RapidAPI-Host": process.env.REACT_APP_GAMES_HOST!,
-          },
-        }
-      );
-
-      const dataSliderTr: Game[] = await responseSliderTr.data;
-      const dataSliderTrSliced: Game[] = dataSliderTr.slice(0, 9);
-
-      const finalObjectTr = {
-        categoryName: categories[2],
-        games: dataSliderTrSliced,
-      };
-
-      dispatch(setGamesSliderTr(finalObjectTr));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const startSaveNewGameToFavorite = (objectGame: Game) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    dispatch(setLoadingFavoriteGames());
-
-    const { uid } = getState().auth;
-
-    const collectionRef = collection(FirebaseDB, `${uid}/games/game`);
+    const collectionRef = collection(FirebaseDB, `${user.uid}/games/game`);
     const { docs } = await getDocs(collectionRef);
 
-    const gameExistInFavorite = docs.filter(
-      (document) => document.data().id === objectGame.id
+    const gameExistInFavorite = docs.find(
+      (document) => document.data().id === game.id
     );
 
-    if (docs.length === 0) {
-      const newGame = {
-        developer: objectGame.developer,
-        freetogame_profile_url: objectGame.freetogame_profile_url,
-        game_url: objectGame.game_url,
-        genre: objectGame.genre,
-        id: objectGame.id,
-        platform: objectGame.platform,
-        publisher: objectGame.publisher,
-        release_date: objectGame.release_date,
-        short_description: objectGame.short_description,
-        thumbnail: objectGame.thumbnail,
-        title: objectGame.title,
-        firebaseID: "",
-      };
-
-      const newDoc = doc(collection(FirebaseDB, `${uid}/games/game`));
-
-      newGame.firebaseID = newDoc.id;
-
-      await setDoc(newDoc, newGame);
-
-      dispatch(setNewGameToFavoriteGames(objectGame));
+    if (gameExistInFavorite) {
       return dispatch(
-        setAlertFavoriteGame({
-          type: "success",
-          message: "¡Game added to your favorites successfully!",
+        openAlert({
+          isOpen: true,
+          title: "Favorite Game",
+          type: "error",
+          message: "¡You already have that game with favorite!",
         })
       );
     }
 
-    if (gameExistInFavorite.length === 0) {
-      const newGame = {
-        developer: objectGame.developer,
-        freetogame_profile_url: objectGame.freetogame_profile_url,
-        game_url: objectGame.game_url,
-        genre: objectGame.genre,
-        id: objectGame.id,
-        platform: objectGame.platform,
-        publisher: objectGame.publisher,
-        release_date: objectGame.release_date,
-        short_description: objectGame.short_description,
-        thumbnail: objectGame.thumbnail,
-        title: objectGame.title,
-        firebaseID: "",
-      };
+    const newGame = {
+      ...game,
+      idFirebase: "",
+    };
 
-      const newDoc = doc(collection(FirebaseDB, `${uid}/games/game`));
+    const newDoc = doc(collection(FirebaseDB, `${user.uid}/games/game`));
 
-      newGame.firebaseID = newDoc.id;
+    newGame.idFirebase = newDoc.id;
 
-      await setDoc(newDoc, newGame);
+    await setDoc(newDoc, newGame);
 
-      dispatch(setNewGameToFavoriteGames(objectGame));
-      return dispatch(
-        setAlertFavoriteGame({
-          type: "success",
-          message: "¡Game added to your favorites successfully!",
-        })
-      );
-    }
     return dispatch(
-      setAlertFavoriteGame({
-        type: "error",
-        message: "¡You already have that game with favorite!",
+      openAlert({
+        isOpen: true,
+        title: "Favorite Game",
+        type: "success",
+        message: "¡Game added to your favorites successfully!",
       })
     );
   };
 };
 
-export const startLoadingFavoriteGames = () => {
+export const startGettingFavoriteGames = () => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    dispatch(setLoadingFavoriteGames());
-    const { uid } = getState().auth;
+    dispatch(setLoadingFavoritesGames(true));
 
-    const collectionRef = collection(FirebaseDB, `${uid}/games/game`);
+    const { user } = getState().auth;
+
+    const collectionRef = collection(FirebaseDB, `${user.uid}/games/game`);
     const { docs } = await getDocs(collectionRef);
 
-    const games = docs.map((doc) => ({ id: doc.id,...doc.data() }));
+    const games: Game[] = docs.map((doc) => {
+      const data = doc.data();
 
-    // @ts-ignore:next-line 
-    dispatch(setFavoriteGames(games));
+      return {
+        id: data.id,
+        developer: data.developer,
+        freetogame_profile_url: data.freetogame_profile_url,
+        game_url: data.game_url,
+        genre: data.genre,
+        platform: data.platform,
+        publisher: data.publisher,
+        release_date: data.release_date,
+        short_description: data.short_description,
+        thumbnail: data.thumbnail,
+        title: data.title,
+        idFirebase: doc.id,
+      };
+    });
+
+    dispatch(setFavoritesGames(games as Game[]));
   };
 };
 
-export const startDeleteFavoriteGame = (objectGame: Game) => {
+export const startDeletingFavoriteGame = (game: Game) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
-    const { uid } = getState().auth;
+    const { user } = getState().auth;
 
-    const docRef = doc(
-      FirebaseDB,
-      `${uid}/games/game/${objectGame.firebaseID}`
-    );
+    const docRef = doc(FirebaseDB, `${user.uid}/games/game/${game.idFirebase}`);
 
     await deleteDoc(docRef);
 
-    dispatch(deleteFavoriteGame(objectGame));
+    dispatch(startGettingFavoriteGames());
   };
 };
 
 export const startGettingGamesByCategory = (category: string) => {
   return async (dispatch: AppDispatch) => {
     try {
-      dispatch(isLoadingAllGamesArray());
-      if (
-        category === null ||
-        !category ||
-        category === undefined ||
-        category === "" ||
-        category === "all"
-      ) {
-        const response = await gamesApi.get(`/games`, {
-          method: "GET",
-          params: { id: "452" },
-          headers: {
-            "X-RapidAPI-Key": process.env.REACT_APP_GAMES_API_KEY!,
-            "X-RapidAPI-Host": process.env.REACT_APP_GAMES_HOST!,
-          },
-        });
+      dispatch(setLoadingGames(true));
 
-        const data: Game[] = await response.data;
-
-        dispatch(setAllGames(data));
-      } else {
-        const response = await gamesApi.get(`/games?category=${category}`, {
-          method: "GET",
-          params: { id: "452" },
-          headers: {
-            "X-RapidAPI-Key": process.env.REACT_APP_GAMES_API_KEY!,
-            "X-RapidAPI-Host": process.env.REACT_APP_GAMES_HOST!,
-          },
-        });
-
-        const data: Game[] = await response.data;
-
-        dispatch(setAllGames(data));
+      if (!category || category === "all") {
+        const data: Game[] = await getGames();
+        dispatch(setGames(data));
+        dispatch(setCategories(data));
+        return;
       }
+
+      const allGames = await getGames();
+      dispatch(setCategories(allGames));
+
+      const data: Game[] = await getGamesByCategory(category);
+      dispatch(setGames(data));
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+// --- END - NEW ---
+
+// export const startGettingInformationToHomeCard = () => {
+//   return async (dispatch: AppDispatch) => {
+//     try {
+//       dispatch(setLoading());
+//       dispatch(setLoadingHomeCardsWithInformation());
+
+//       const response = await gamesApi.get("/api/games", {
+//         method: "GET",
+//         params: { id: "452" },
+//       });
+
+//       const data = await response.data;
+//       const shuffledData = [...data].sort(() => 0.5 - Math.random());
+//       const dataSliced: Game[] = shuffledData.slice(0, 12);
+//       const singleGame: Game = data[Math.floor(Math.random() * data.length)];
+
+//       dispatch(setHomeCard(singleGame));
+//       dispatch(setHomeCardsWithInformation(dataSliced));
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
+
+// export const startGettingGamesToSliders = () => {
+//   return async (dispatch: AppDispatch, getState: () => RootState) => {
+//     const categories = [];
+
+//     try {
+//       dispatch(setLoadingGamesSliders());
+
+//       const shuffled = getState()
+//         .games.allCategoriesOfApi.map((value) => ({
+//           value,
+//           sort: Math.random(),
+//         }))
+//         .sort((a, b) => a.sort - b.sort)
+//         .map(({ value }) => value);
+
+//       for await (const item of shuffled) {
+//         if (categories.length === 3) {
+//           break;
+//         } else {
+//           if (categories[item as keyof string[]] || item === "all") {
+//             continue;
+//           } else {
+//             categories.push(item);
+//           }
+//         }
+//       }
+
+//       const responseSliderOne = await gamesApi.get(
+//         `/api/games?category=${categories[0]}`,
+//         {
+//           method: "GET",
+//           params: { id: "452" },
+//         }
+//       );
+
+//       const dataSliderOne: Game[] = await responseSliderOne.data;
+//       const dataSliderOneSliced: Game[] = dataSliderOne.slice(0, 9);
+
+//       const finalObjectOne = {
+//         categoryName: categories[0],
+//         games: dataSliderOneSliced,
+//       };
+
+//       dispatch(setGamesSliderOne(finalObjectOne));
+
+//       const responseSliderTwo = await gamesApi.get(
+//         `/api/games?category=${categories[1]}`,
+//         {
+//           method: "GET",
+//           params: { id: "452" },
+//         }
+//       );
+
+//       const dataSliderTwo: Game[] = await responseSliderTwo.data;
+//       const dataSliderTwoSliced: Game[] = dataSliderTwo.slice(0, 9);
+
+//       const finalObjectTwo = {
+//         categoryName: categories[1],
+//         games: dataSliderTwoSliced,
+//       };
+
+//       dispatch(setGamesSliderTwo(finalObjectTwo));
+
+//       const responseSliderTr = await gamesApi.get(
+//         `/api/games?category=${categories[2]}`,
+//         {
+//           method: "GET",
+//           params: { id: "452" },
+//         }
+//       );
+
+//       const dataSliderTr: Game[] = await responseSliderTr.data;
+//       const dataSliderTrSliced: Game[] = dataSliderTr.slice(0, 9);
+
+//       const finalObjectTr = {
+//         categoryName: categories[2],
+//         games: dataSliderTrSliced,
+//       };
+
+//       dispatch(setGamesSliderTr(finalObjectTr));
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };

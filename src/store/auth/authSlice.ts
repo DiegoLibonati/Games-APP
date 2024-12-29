@@ -1,60 +1,61 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AuthPayload, AuthState } from "../../entities/entities";
+
+import { AuthState, User } from "../../entities/entities";
 
 const initialState: AuthState = {
-  imagesLoginAndRegister: [],
-  isLoading: false,
-  isChecking: false,
-  status: "checking",
-  uid: null,
-  email: null,
-  displayName: null,
-  photoURL: null,
-  errorMessage: null,
+  images: { images: [], isLoadingImages: false },
+  auth: { isChecking: false, status: "checking", errorMessage: "" },
+  user: { uid: "", email: "", displayName: "", photoURL: "" },
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setImagesLoginAndRegister: (state, action: PayloadAction<AuthPayload["setImagesLoginAndRegister"]>) => {
-      state.imagesLoginAndRegister = action.payload;
+    setImagesLoginAndRegister: (state, action: PayloadAction<string[]>) => {
+      const images = action.payload;
+
+      state.images.images = images;
     },
-    setLoadingToTrue: (state) => {
-      state.isLoading = true;
+    setLoadingImages: (state, action: PayloadAction<boolean>) => {
+      const boolean = action.payload;
+
+      state.images.isLoadingImages = boolean;
     },
-    setLoadingToFalse: (state) => {
-      state.isLoading = false;
-    },
-    login: (state, action: PayloadAction<AuthPayload["login"]>) => {
-      state.status = "authenticated";
-      state.uid = action.payload.uid;
-      state.email = action.payload.email;
-      state.displayName = action.payload.displayName;
-      state.photoURL = action.payload.photoURL;
-      state.errorMessage = action.payload.errorMessage!;
-      state.isChecking = false;
+    login: (state, action: PayloadAction<User>) => {
+      const uid = action.payload.uid;
+      const email = action.payload.email;
+      const displayName = action.payload.displayName;
+      const photoURL = action.payload.photoURL;
+
+      state.auth.status = "authenticated";
+      state.auth.isChecking = false;
+
+      state.user.uid = uid;
+      state.user.email = email;
+      state.user.displayName = displayName;
+      state.user.photoURL = photoURL;
     },
     logout: (state) => {
-      state.status = "not-authenticated";
-      state.uid = null;
-      state.email = null;
-      state.displayName = null;
-      state.photoURL = null
-      state.errorMessage = null;
-      state.isChecking = false;
+      state.auth.status = "not-authenticated";
+      state.auth.isChecking = false;
+      state.auth.errorMessage = "";
+
+      state.user.uid = "";
+      state.user.email = "";
+      state.user.displayName = "";
+      state.user.photoURL = "";
     },
     checkingCredentials: (state) => {
-      state.status = "checking";
-      state.isChecking = true;
+      state.auth.status = "checking";
+      state.auth.isChecking = true;
     },
   },
 });
 
 export const {
   setImagesLoginAndRegister,
-  setLoadingToTrue,
-  setLoadingToFalse,
+  setLoadingImages,
   login,
   logout,
   checkingCredentials,

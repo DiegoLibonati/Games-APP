@@ -19,6 +19,11 @@ body {
   height: 100%;
 }
 
+button {
+  background: none;
+  border: none;
+}
+
 :root {
   --font-montserrat: "Montserrat", Helvetica, sans-serif;
 }

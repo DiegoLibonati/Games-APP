@@ -1,46 +1,37 @@
 import {
+  AppDispatch,
+  UserLogin,
+  UserLoginWithoutUsername,
+} from "../../entities/entities";
+
+import {
   loginWithEmailPassword,
   logoutFirebase,
   registerUserWithEmail,
   signInWithGoogle,
 } from "../../firebase/providers";
-import { resetAll } from "../games/exports";
 import {
   setImagesLoginAndRegister,
-  setLoadingToTrue,
-  setLoadingToFalse,
+  setLoadingImages,
   checkingCredentials,
   logout,
   login,
-} from "./exports";
-import gamesApi from "../../api/gamesApi";
-import { AppDispatch } from "../store";
-import { FormDataAuth, Game } from "../../entities/entities";
+} from "./authSlice";
+import { getGames } from "../../api/getGames";
 
-export const startGettingImagesToLoginAndRegisterPage  = () => {
+export const startGettingImagesToLoginAndRegisterPage = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      dispatch(setLoadingToTrue());
-      const images: string[] = [];
+      dispatch(setLoadingImages(true));
 
-      const response = await gamesApi.get("/games", {
-        method: "GET",
-        params: { id: "452" },
-        headers: {
-          "X-RapidAPI-Key":
-            "a878486f85msh13fab38caf89f92p13147cjsnc85e42c2a55c",
-          "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
-        },
-      });
-
-      const data: Game[] = await response.data;
+      const data = await getGames();
 
       const dataSlice = data.slice(0, 3);
 
-      dataSlice.map((game) => images.push(game.thumbnail));
+      const images = dataSlice.map((game) => game.thumbnail);
 
       dispatch(setImagesLoginAndRegister(images));
-      dispatch(setLoadingToFalse());
+      dispatch(setLoadingImages(false));
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +45,6 @@ export const startGoogleSignIn = () => {
     const result = await signInWithGoogle();
 
     if (!result.ok) {
-      dispatch(resetAll());
       return dispatch(logout());
     }
 
@@ -62,19 +52,17 @@ export const startGoogleSignIn = () => {
   };
 };
 
-export const startCreatingUserWithEmail = ({ email, password, username }: FormDataAuth) => {
+export const startCreatingUserWithEmail = ({
+  email,
+  password,
+  username,
+}: UserLogin) => {
   return async (dispatch: AppDispatch) => {
     dispatch(checkingCredentials());
-    // TODO: DisplayName -> Tendria que ser un objeto..
 
-    const result = await registerUserWithEmail({
-      email,
-      password,
-      username,
-    });
+    const result = await registerUserWithEmail(email, password, username);
 
     if (!result.ok) {
-      dispatch(resetAll());
       return dispatch(logout());
     }
 
@@ -82,13 +70,16 @@ export const startCreatingUserWithEmail = ({ email, password, username }: FormDa
   };
 };
 
-export const startLoginWithEmailPassword = ({ email, password }: FormDataAuth) => {
+export const startLoginWithEmailPassword = ({
+  email,
+  password,
+}: UserLoginWithoutUsername) => {
   return async (dispatch: AppDispatch) => {
     dispatch(checkingCredentials());
 
-    const result = await loginWithEmailPassword({ email, password });
+    const result = await loginWithEmailPassword(email, password);
+
     if (!result.ok) {
-      dispatch(resetAll());
       return dispatch(logout());
     }
 
@@ -98,9 +89,8 @@ export const startLoginWithEmailPassword = ({ email, password }: FormDataAuth) =
 
 export const startLogOutWithButton = () => {
   return async (dispatch: AppDispatch) => {
-    const result = await logoutFirebase();
+    await logoutFirebase();
 
-    dispatch(resetAll());
-    return dispatch(logout(result));
+    return dispatch(logout());
   };
 };

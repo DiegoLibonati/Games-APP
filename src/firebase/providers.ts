@@ -1,3 +1,4 @@
+import { FirebaseError } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -5,45 +6,51 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+
+import {
+  LoginWithEmailPassword,
+  RegisterUserWithEmail,
+  SignInWithGoogle,
+} from "../entities/entities";
+
 import { FirebaseAuth } from "./config";
-import { FormDataAuth, LoginWithEmailPassword, RegisterUserWithEmail, SignInWithGoogle } from "../entities/entities";
 
 const googleProvider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async (): Promise<SignInWithGoogle> => {
   try {
     const result = await signInWithPopup(FirebaseAuth, googleProvider);
-
-    const { displayName, email, photoURL, uid } = result.user;
+    const { displayName, photoURL, uid, email } = result.user;
 
     return {
       ok: true,
-      displayName,
-      email,
-      photoURL,
-      uid,
+      displayName: displayName!,
+      email: email!,
+      photoURL: photoURL!,
+      uid: uid,
     };
-  } catch (error) {
-    let errorMessage: string;
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    } else {
-      errorMessage = String(error);
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      return {
+        ok: false,
+        errorCode: error.code,
+        errorMessage: error.message,
+      };
     }
 
     return {
       ok: false,
-      displayName: null,
-      email: null,
-      photoURL: null,
-      uid: null,
-      errorMessage,
+      errorCode: "unknown_error",
+      errorMessage: "An unknown error occurred.",
     };
   }
 };
 
-export const registerUserWithEmail = async ({ email, password, username }: FormDataAuth): Promise<RegisterUserWithEmail> => {
+export const registerUserWithEmail = async (
+  email: string,
+  password: string,
+  username: string
+): Promise<RegisterUserWithEmail> => {
   try {
     const result = await createUserWithEmailAndPassword(
       FirebaseAuth,
@@ -53,36 +60,36 @@ export const registerUserWithEmail = async ({ email, password, username }: FormD
 
     await updateProfile(FirebaseAuth.currentUser!, { displayName: username });
 
-    const { uid, photoURL } = result.user;
+    const { uid, photoURL, displayName } = result.user;
 
     return {
       ok: true,
-      displayName: username!,
-      email,
-      photoURL,
-      uid,
+      displayName: displayName!,
+      email: email!,
+      photoURL: photoURL!,
+      uid: uid!,
     };
-  } catch (error) {
-    let errorMessage: string;
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    } else {
-      errorMessage = String(error);
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      return {
+        ok: false,
+        errorCode: error.code,
+        errorMessage: error.message,
+      };
     }
 
     return {
       ok: false,
-      displayName: null,
-      email: null,
-      photoURL: null,
-      uid: null,
-      errorMessage,
+      errorCode: "unknown_error",
+      errorMessage: "An unknown error occurred.",
     };
   }
 };
 
-export const loginWithEmailPassword = async ({ email, password }: FormDataAuth): Promise<LoginWithEmailPassword> => {
+export const loginWithEmailPassword = async (
+  email: string,
+  password: string
+): Promise<LoginWithEmailPassword> => {
   try {
     const result = await signInWithEmailAndPassword(
       FirebaseAuth,
@@ -90,29 +97,27 @@ export const loginWithEmailPassword = async ({ email, password }: FormDataAuth):
       password
     );
     const { uid, photoURL, displayName } = result.user;
+
     return {
       ok: true,
-      displayName,
-      email,
-      photoURL,
-      uid,
+      displayName: displayName!,
+      email: email,
+      photoURL: photoURL!,
+      uid: uid!,
     };
   } catch (error) {
-    let errorMessage: string;
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    } else {
-      errorMessage = String(error);
+    if (error instanceof FirebaseError) {
+      return {
+        ok: false,
+        errorCode: error.code,
+        errorMessage: error.message,
+      };
     }
 
     return {
       ok: false,
-      displayName: null,
-      email: null,
-      photoURL: null,
-      uid: null,
-      errorMessage,
+      errorCode: "unknown_error",
+      errorMessage: "An unknown error occurred.",
     };
   }
 };

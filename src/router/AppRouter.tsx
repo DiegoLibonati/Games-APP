@@ -1,11 +1,25 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { CheckingAuth } from "../auth/components/exports";
-import { AuthRoutes } from "../auth/routes/exports";
-import { GamesRoutes } from "../games/routes/exports";
-import { useCheckAuth } from "../hooks/exports";
+import Swal, { SweetAlertIcon } from "sweetalert2";
+
+import { CheckingAuth } from "../auth/components/CheckingAuth/CheckingAuth";
+
+import { useCheckAuth } from "../hooks/useCheckAuth";
+import { AuthRoutes } from "../auth/routes/AuthRoutes";
+import { GamesRoutes } from "../games/routes/GamesRoutes";
+
+import { useUiStore } from "../hooks/useUiStore";
 
 export const AppRouter = (): JSX.Element => {
+  const { alert, handleCloseAlert } = useUiStore();
   const { status } = useCheckAuth();
+
+  useEffect(() => {
+    if (!alert.isOpen) return;
+
+    Swal.fire(alert.title, alert.message, alert.type as SweetAlertIcon);
+    handleCloseAlert();
+  }, [alert.isOpen]);
 
   if (status === "checking") return <CheckingAuth></CheckingAuth>;
 
