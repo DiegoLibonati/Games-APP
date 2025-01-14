@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-type UseSlide<T> = {
+type UseSlide = {
   index: number;
   handleSetIndex: (index: number) => void;
 };
 
-export const useSlide = <T,>(arr: T[]): UseSlide<T> => {
+export const useSlide = <T,>(arr: T[]): UseSlide => {
   const [index, setIndex] = useState<number>(0);
 
   const handleSetIndex = (index: number): void => {
