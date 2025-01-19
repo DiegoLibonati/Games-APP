@@ -11,6 +11,7 @@ import { InputForm } from "../../components/InputForm/InputForm";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useForm } from "../../../hooks/useForm";
 import { useSlide } from "../../../hooks/useSlide";
+import { rootCss } from "../../../constants/configCss";
 
 import logo from "../../../assets/logo.png";
 import "./LoginPage.css";
@@ -66,9 +67,9 @@ export const LoginPage = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="main_container_login">
-      <section className="login_container">
-        <article className="login_container_information">
+    <main className="login__page">
+      <section className="login">
+        <article className="login__information">
           {isLoadingImages ? (
             <Loader></Loader>
           ) : (
@@ -91,7 +92,7 @@ export const LoginPage = (): JSX.Element => {
           )}
         </article>
 
-        <form className="login_container_form" onSubmit={onSubmitForm}>
+        <form className="login__form" onSubmit={onSubmitForm}>
           <img src={logo} alt="logo"></img>
 
           <InputForm
@@ -127,8 +128,8 @@ export const LoginPage = (): JSX.Element => {
       </section>
 
       <Wave
-        className="login_wave"
-        fill="#251351"
+        className="login__wave"
+        fill={rootCss.colors.secondary}
         paused={false}
         options={{
           amplitude: 40,

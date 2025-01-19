@@ -22,7 +22,7 @@ export const HomeCard = (): JSX.Element => {
   return (
     <article
       className={
-        !game ? "home_container_card effect_load" : "home_container_card"
+        !game ? "home__card effect__load" : "home__card"
       }
     >
       {!game ? (
@@ -30,11 +30,11 @@ export const HomeCard = (): JSX.Element => {
       ) : (
         <Fragment>
           <img
-            className="home_container_card_img"
+            className="home__card-img"
             src={game.thumbnail}
             alt={game.title}
           ></img>
-          <div className="home_container_card_information">
+          <div className="home__card-information">
             <h2>{game.title}</h2>
             <h3>{game.genre}</h3>
             <h4>{game.publisher}</h4>

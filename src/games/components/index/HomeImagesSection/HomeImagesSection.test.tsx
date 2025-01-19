@@ -23,64 +23,68 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render all images.", () => {
-  const { container } = renderComponent();
+describe("HomeImagesSection.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render all images.", () => {
+      const { container } = renderComponent();
 
-  // eslint-disable-next-line
-  const images = container.querySelectorAll(
-    ".home_container_background"
-  ) as NodeList;
+      // eslint-disable-next-line
+      const images = container.querySelectorAll(
+        ".home__images-background"
+      ) as NodeList;
 
-  expect(images).toHaveLength(imagesOfGames.length);
+      expect(images).toHaveLength(imagesOfGames.length);
+    });
+
+    test("It must render the first image with the activeSlide class.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const images = container.querySelectorAll(
+        ".home__images-background"
+      ) as NodeList;
+
+      const firstImg = images[0];
+
+      expect(firstImg).toBeInTheDocument();
+      expect(firstImg).toHaveClass("activeSlide");
+    });
+
+    test("It must render the image that follows the first image with the nextSlide class.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const images = container.querySelectorAll(
+        ".home__images-background"
+      ) as NodeList;
+
+      const secondImg = images[1];
+
+      expect(secondImg).toBeInTheDocument();
+      expect(secondImg).toHaveClass("nextSlide");
+    });
+
+    test("It must render the last image with the lastSlide class.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const images = container.querySelectorAll(
+        ".home__images-background"
+      ) as NodeList;
+
+      const lastImg = images[images.length - 1];
+
+      expect(lastImg).toBeInTheDocument();
+      expect(lastImg).toHaveClass("lastSlide");
+    });
+
+    test("It must render the HomeCard component.", () => {
+      renderComponent();
+
+      const homeCardRoot = screen.getByRole("article");
+
+      expect(homeCardRoot).toBeInTheDocument();
+      expect(homeCardRoot).toHaveClass("home__card");
+    });
+  });
 });
-
-test("It must render the first image with the activeSlide class.", () => {
-  const { container } = renderComponent();
-
-  // eslint-disable-next-line
-  const images = container.querySelectorAll(
-    ".home_container_background"
-  ) as NodeList;
-
-  const firstImg = images[0];
-
-  expect(firstImg).toBeInTheDocument();
-  expect(firstImg).toHaveClass("activeSlide");
-});
-
-test("It must render the image that follows the first image with the nextSlide class.", () => {
-  const { container } = renderComponent();
-
-  // eslint-disable-next-line
-  const images = container.querySelectorAll(
-    ".home_container_background"
-  ) as NodeList;
-
-  const secondImg = images[1];
-
-  expect(secondImg).toBeInTheDocument();
-  expect(secondImg).toHaveClass("nextSlide");
-});
-
-test("It must render the last image with the lastSlide class.", () => {
-  const { container } = renderComponent();
-
-  // eslint-disable-next-line
-  const images = container.querySelectorAll(
-    ".home_container_background"
-  ) as NodeList;
-
-  const lastImg = images[images.length - 1];
-
-  expect(lastImg).toBeInTheDocument();
-  expect(lastImg).toHaveClass("lastSlide");
-});
-
-test("It must render the HomeCard component.", () => {
-    renderComponent()
-
-    const homeCardRoot = screen.getByRole("article")
-
-    expect(homeCardRoot).toBeInTheDocument()
-    expect(homeCardRoot).toHaveClass("home_container_card")
-})

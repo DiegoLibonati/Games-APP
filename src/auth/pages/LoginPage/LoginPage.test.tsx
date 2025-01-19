@@ -11,23 +11,14 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { store } from "../../../store/store";
 
 import {
-  ASSETS_IMAGE,
-  IMAGES_MOCK,
-  SLIDE_IMAGES_AUTH,
-} from "../../../tests/jest.setup";
+  mockAssetsImage,
+  mockImages,
+  mockSlideImagesAuth,
+} from "../../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;
 };
-
-jest.mock("../../../hooks/useAuthStore", () => ({
-  ...jest.requireActual("../../../hooks/useAuthStore"),
-  useAuthStore: jest.fn(),
-}));
-
-const mockHandleLoginWithEmailAndPassword = jest.fn();
-const mockHandleLoginWithGoogle = jest.fn();
-const mockHandleGetImages = jest.fn();
 
 const renderComponent = (): RenderComponent => {
   const { container } = render(
@@ -45,194 +36,215 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("If the key isLoadingImages is 'true'.", () => {
-  const isLoadingImages = true;
+jest.mock("../../../hooks/useAuthStore", () => ({
+  ...jest.requireActual("../../../hooks/useAuthStore"),
+  useAuthStore: jest.fn(),
+}));
 
-  beforeEach(() => {
-    (useAuthStore as jest.Mock).mockReturnValue({
-      images: [],
-      isLoadingImages: isLoadingImages,
-      handleLoginWithEmailAndPassword: mockHandleLoginWithEmailAndPassword,
-      handleLoginWithGoogle: mockHandleLoginWithGoogle,
-      handleGetImages: mockHandleGetImages,
+describe("LoginPage.tsx", () => {
+  describe("If the key isLoadingImages is 'true'.", () => {
+    const mockHandleLoginWithEmailAndPassword = jest.fn();
+    const mockHandleLoginWithGoogle = jest.fn();
+    const mockHandleGetImages = jest.fn();
+
+    const isLoadingImages = true;
+
+    beforeEach(() => {
+      (useAuthStore as jest.Mock).mockReturnValue({
+        images: [],
+        isLoadingImages: isLoadingImages,
+        handleLoginWithEmailAndPassword: mockHandleLoginWithEmailAndPassword,
+        handleLoginWithGoogle: mockHandleLoginWithGoogle,
+        handleGetImages: mockHandleGetImages,
+      });
+    });
+
+    test("It must render the loading of the images.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const loader = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+
+      expect(loader).toBeInTheDocument();
     });
   });
 
-  test("It must render the loading of the images.", () => {
-    const { container } = renderComponent();
+  describe("If the key isLoadingImages is 'false'.", () => {
+    const mockHandleLoginWithEmailAndPassword = jest.fn();
+    const mockHandleLoginWithGoogle = jest.fn();
+    const mockHandleGetImages = jest.fn();
 
-    // eslint-disable-next-line
-    const loader = container.querySelector(
-      ".loader_wrapper_all"
-    ) as HTMLDivElement;
+    const isLoadingImages = false;
 
-    expect(loader).toBeInTheDocument();
-  });
-});
+    beforeEach(() => {
+      (useAuthStore as jest.Mock).mockReturnValue({
+        images: mockImages,
+        isLoadingImages: isLoadingImages,
+        handleLoginWithEmailAndPassword: mockHandleLoginWithEmailAndPassword,
+        handleLoginWithGoogle: mockHandleLoginWithGoogle,
+        handleGetImages: mockHandleGetImages,
+      });
+    });
 
-describe("If the key isLoadingImages is 'false'.", () => {
-  const isLoadingImages = false;
+    test("It must not render the loading of the images.", () => {
+      const { container } = renderComponent();
 
-  beforeEach(() => {
-    (useAuthStore as jest.Mock).mockReturnValue({
-      images: IMAGES_MOCK,
-      isLoadingImages: isLoadingImages,
-      handleLoginWithEmailAndPassword: mockHandleLoginWithEmailAndPassword,
-      handleLoginWithGoogle: mockHandleLoginWithGoogle,
-      handleGetImages: mockHandleGetImages,
+      // eslint-disable-next-line
+      const loader = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+
+      expect(loader).not.toBeInTheDocument();
+    });
+
+    test("It must render the image of the first game, the corresponding title and the slide buttons.", () => {
+      const firstImg = mockImages[0];
+      const firstTitle = mockSlideImagesAuth["0"];
+      const slideKeys = Object.keys(mockSlideImagesAuth);
+
+      renderComponent();
+
+      const img = screen.getByAltText("loginimage");
+      const heading = screen.getByRole("heading", { name: firstTitle });
+
+      expect(img).toBeInTheDocument();
+      expect(img).toHaveAttribute("src", firstImg);
+      expect(img).toHaveAttribute("alt", "loginimage");
+      expect(heading).toBeInTheDocument();
+
+      for (const slideKey of slideKeys) {
+        const btnSlide = screen.getByRole("button", {
+          name: `item-${slideKey}`,
+        });
+
+        expect(btnSlide).toBeInTheDocument();
+      }
     });
   });
 
-  test("It must not render the loading of the images.", () => {
-    const { container } = renderComponent();
+  describe("General Tests", () => {
+    const mockHandleLoginWithEmailAndPassword = jest.fn();
+    const mockHandleLoginWithGoogle = jest.fn();
+    const mockHandleGetImages = jest.fn();
 
-    // eslint-disable-next-line
-    const loader = container.querySelector(
-      ".loader_wrapper_all"
-    ) as HTMLDivElement;
+    const isLoadingImages = false;
 
-    expect(loader).not.toBeInTheDocument();
-  });
-
-  test("It must render the image of the first game, the corresponding title and the slide buttons.", () => {
-    const firstImg = IMAGES_MOCK[0];
-    const firstTitle = SLIDE_IMAGES_AUTH["0"];
-    const slideKeys = Object.keys(SLIDE_IMAGES_AUTH);
-
-    renderComponent();
-
-    const img = screen.getByAltText("loginimage");
-    const heading = screen.getByRole("heading", { name: firstTitle });
-
-    expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute("src", firstImg);
-    expect(img).toHaveAttribute("alt", "loginimage");
-    expect(heading).toBeInTheDocument();
-
-    for (const slideKey of slideKeys) {
-      const btnSlide = screen.getByRole("button", { name: `item-${slideKey}` });
-
-      expect(btnSlide).toBeInTheDocument();
-    }
-  });
-});
-
-describe("General Tests", () => {
-  const isLoadingImages = false;
-
-  beforeEach(() => {
-    (useAuthStore as jest.Mock).mockReturnValue({
-      images: IMAGES_MOCK,
-      isLoadingImages: isLoadingImages,
-      handleLoginWithEmailAndPassword: mockHandleLoginWithEmailAndPassword,
-      handleLoginWithGoogle: mockHandleLoginWithGoogle,
-      handleGetImages: mockHandleGetImages,
-    });
-  });
-
-  test("It must render the author's logo, the email input, the password input, the submit button, the Google button and the register link.", () => {
-    renderComponent();
-
-    const imgLogo = screen.getByAltText("logo");
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const btnLogin = screen.getByRole("button", { name: /submit login/i });
-    const btnLoginGoogle = screen.getByRole("button", {
-      name: /login with google/i,
-    });
-    const linkRegister = screen.getByRole("link", {
-      name: /Go to register page/i,
+    beforeEach(() => {
+      (useAuthStore as jest.Mock).mockReturnValue({
+        images: mockImages,
+        isLoadingImages: isLoadingImages,
+        handleLoginWithEmailAndPassword: mockHandleLoginWithEmailAndPassword,
+        handleLoginWithGoogle: mockHandleLoginWithGoogle,
+        handleGetImages: mockHandleGetImages,
+      });
     });
 
-    expect(imgLogo).toBeInTheDocument();
-    expect(imgLogo).toHaveAttribute("src", ASSETS_IMAGE);
-    expect(imgLogo).toHaveAttribute("alt", "logo");
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputPassword).toBeInTheDocument();
-    expect(btnLogin).toBeInTheDocument();
-    expect(btnLoginGoogle).toBeInTheDocument();
-    expect(linkRegister).toBeInTheDocument();
-  });
+    test("It must render the author's logo, the email input, the password input, the submit button, the Google button and the register link.", () => {
+      renderComponent();
 
-  test("It should run the error alert when the form is submitted with invalid fields.", async () => {
-    renderComponent();
+      const imgLogo = screen.getByAltText("logo");
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const btnLogin = screen.getByRole("button", { name: /submit login/i });
+      const btnLoginGoogle = screen.getByRole("button", {
+        name: /login with google/i,
+      });
+      const linkRegister = screen.getByRole("link", {
+        name: /Go to register page/i,
+      });
 
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const btnLogin = screen.getByRole("button", { name: /submit login/i });
-
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputEmail).toHaveValue("");
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputPassword).toHaveValue("");
-    expect(btnLogin).toBeInTheDocument();
-
-    await user.click(btnLogin);
-
-    expect(Swal.fire).toHaveBeenCalledTimes(1);
-    expect(Swal.fire).toHaveBeenCalledWith({
-      icon: "error",
-      title: "Oops...",
-      text: "Invalid email or password",
-    });
-  });
-
-  test("It must execute the relevant functions when the form is submitted.", async () => {
-    const email = "123@gmail.com";
-    const password = "1234";
-
-    renderComponent();
-
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const btnLogin = screen.getByRole("button", { name: /submit login/i });
-
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputEmail).toHaveValue("");
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputPassword).toHaveValue("");
-    expect(btnLogin).toBeInTheDocument();
-
-    await user.clear(inputEmail);
-    await user.click(inputEmail);
-    await user.keyboard(email);
-
-    await user.clear(inputPassword);
-    await user.click(inputPassword);
-    await user.keyboard(password);
-
-    expect(inputEmail).toHaveValue(email);
-    expect(inputPassword).toHaveValue(password);
-
-    await user.click(btnLogin);
-
-    expect(mockHandleLoginWithEmailAndPassword).toHaveBeenCalledTimes(1);
-    expect(mockHandleLoginWithEmailAndPassword).toHaveBeenCalledWith({
-      email: email,
-      password: password,
-    });
-  });
-
-  test("It should execute the relevant functions when the Google button is clicked.", async () => {
-    renderComponent();
-
-    const btnLoginGoogle = screen.getByRole("button", {
-      name: /login with google/i,
+      expect(imgLogo).toBeInTheDocument();
+      expect(imgLogo).toHaveAttribute("src", mockAssetsImage);
+      expect(imgLogo).toHaveAttribute("alt", "logo");
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputPassword).toBeInTheDocument();
+      expect(btnLogin).toBeInTheDocument();
+      expect(btnLoginGoogle).toBeInTheDocument();
+      expect(linkRegister).toBeInTheDocument();
     });
 
-    expect(btnLoginGoogle).toBeInTheDocument();
+    test("It should run the error alert when the form is submitted with invalid fields.", async () => {
+      renderComponent();
 
-    await user.click(btnLoginGoogle);
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const btnLogin = screen.getByRole("button", { name: /submit login/i });
 
-    expect(mockHandleLoginWithGoogle).toHaveBeenCalledTimes(1);
-  });
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputEmail).toHaveValue("");
+      expect(inputPassword).toBeInTheDocument();
+      expect(inputPassword).toHaveValue("");
+      expect(btnLogin).toBeInTheDocument();
 
-  test("It must render the wave.", () => {
-    const { container } = renderComponent();
+      await user.click(btnLogin);
 
-    // eslint-disable-next-line
-    const wave = container.querySelector(".login_wave") as HTMLElement;
+      expect(Swal.fire).toHaveBeenCalledTimes(1);
+      expect(Swal.fire).toHaveBeenCalledWith({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid email or password",
+      });
+    });
 
-    expect(wave).toBeInTheDocument();
+    test("It must execute the relevant functions when the form is submitted.", async () => {
+      const email = "123@gmail.com";
+      const password = "1234";
+
+      renderComponent();
+
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const btnLogin = screen.getByRole("button", { name: /submit login/i });
+
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputEmail).toHaveValue("");
+      expect(inputPassword).toBeInTheDocument();
+      expect(inputPassword).toHaveValue("");
+      expect(btnLogin).toBeInTheDocument();
+
+      await user.clear(inputEmail);
+      await user.click(inputEmail);
+      await user.keyboard(email);
+
+      await user.clear(inputPassword);
+      await user.click(inputPassword);
+      await user.keyboard(password);
+
+      expect(inputEmail).toHaveValue(email);
+      expect(inputPassword).toHaveValue(password);
+
+      await user.click(btnLogin);
+
+      expect(mockHandleLoginWithEmailAndPassword).toHaveBeenCalledTimes(1);
+      expect(mockHandleLoginWithEmailAndPassword).toHaveBeenCalledWith({
+        email: email,
+        password: password,
+      });
+    });
+
+    test("It should execute the relevant functions when the Google button is clicked.", async () => {
+      renderComponent();
+
+      const btnLoginGoogle = screen.getByRole("button", {
+        name: /login with google/i,
+      });
+
+      expect(btnLoginGoogle).toBeInTheDocument();
+
+      await user.click(btnLoginGoogle);
+
+      expect(mockHandleLoginWithGoogle).toHaveBeenCalledTimes(1);
+    });
+
+    test("It must render the wave.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const wave = container.querySelector(".login__wave") as HTMLElement;
+
+      expect(wave).toBeInTheDocument();
+    });
   });
 });

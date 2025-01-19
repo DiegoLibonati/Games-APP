@@ -14,18 +14,22 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the auth loader.", () => {
-  const { container } = renderComponent();
+describe("CheckingAuth.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the auth loader.", () => {
+      const { container } = renderComponent();
 
-  // eslint-disable-next-line
-  const loaderRoot = container.querySelector(
-    ".loader_wrapper"
-  ) as HTMLDivElement;
-  // eslint-disable-next-line
-  const loaderAuth = loaderRoot!.querySelector(
-    ".loader_checking_auth"
-  ) as HTMLDivElement;
+      // eslint-disable-next-line
+      const loaderRoot = container.querySelector(
+        ".loader__wrapper-auth"
+      ) as HTMLDivElement;
+      // eslint-disable-next-line
+      const loaderAuth = loaderRoot!.querySelector(
+        ".loader__auth"
+      ) as HTMLDivElement;
 
-  expect(loaderRoot).toBeInTheDocument();
-  expect(loaderAuth).toBeInTheDocument();
+      expect(loaderRoot).toBeInTheDocument();
+      expect(loaderAuth).toBeInTheDocument();
+    });
+  });
 });

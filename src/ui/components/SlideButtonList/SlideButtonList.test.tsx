@@ -2,7 +2,7 @@ import { screen, render } from "@testing-library/react";
 
 import { SlideButtonList } from "./SlideButtonList";
 
-import { SLIDE_IMAGES_AUTH } from "../../../tests/jest.setup";
+import { mockSlideImagesAuth } from "../../../tests/jest.constants";
 
 type RenderComponent = {
   props: { index: number; handleSetIndex: jest.Mock };
@@ -32,41 +32,43 @@ const renderComponent = ({ index }: RenderComponentProps): RenderComponent => {
   };
 };
 
-test("It must render the root of the slide buttons.", () => {
-  const { container } = renderComponent({ index: 0 });
+describe("SlideButtonList.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the root of the slide buttons.", () => {
+      const { container } = renderComponent({ index: 0 });
 
-  // eslint-disable-next-line
-  const root = container.querySelector(
-    ".slide_button_container_main"
-  ) as HTMLDivElement;
+      // eslint-disable-next-line
+      const root = container.querySelector(".slide__btns") as HTMLDivElement;
 
-  expect(root).toBeInTheDocument();
-});
+      expect(root).toBeInTheDocument();
+    });
 
-test("It must render all the buttons.", () => {
-  renderComponent({ index: 0 });
+    test("It must render all the buttons.", () => {
+      renderComponent({ index: 0 });
 
-  const keys = Object.keys(SLIDE_IMAGES_AUTH);
+      const keys = Object.keys(mockSlideImagesAuth);
 
-  for (const key of keys) {
-    const btn = screen.getByRole("button", { name: `item-${key}` });
+      for (const key of keys) {
+        const btn = screen.getByRole("button", { name: `item-${key}` });
 
-    expect(btn).toBeInTheDocument();
-    expect(btn).toHaveClass("slide_button");
-  }
-});
+        expect(btn).toBeInTheDocument();
+        expect(btn).toHaveClass("slide__btn");
+      }
+    });
 
-test("Only button 0 must be active.", () => {
-  renderComponent({ index: 0 });
+    test("Only button 0 must be active.", () => {
+      renderComponent({ index: 0 });
 
-  const keys = Object.keys(SLIDE_IMAGES_AUTH);
+      const keys = Object.keys(mockSlideImagesAuth);
 
-  for (const key of keys) {
-    const btn = screen.getByRole("button", { name: `item-${key}` });
+      for (const key of keys) {
+        const btn = screen.getByRole("button", { name: `item-${key}` });
 
-    expect(btn).toBeInTheDocument();
-    expect(btn).toHaveClass(
-      key === "0" ? "slide_button slide_button_active" : "slide_button"
-    );
-  }
+        expect(btn).toBeInTheDocument();
+        expect(btn).toHaveClass(
+          key === "0" ? "slide__btn slide__btn--active" : "slide__btn"
+        );
+      }
+    });
+  });
 });

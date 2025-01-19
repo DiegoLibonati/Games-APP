@@ -1,15 +1,15 @@
-.footer_container {
+.footer {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-flow: column wrap;
   width: 100%;
   height: auto;
-  background-color: #251351;
+  background-color: var(--secondary-color);
   padding: 0 0 5rem 0;
 }
 
-.footer_container_icons {
+.footer__links {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -18,14 +18,14 @@
   height: auto;
 }
 
-.footer_icon {
+.footer__icon {
   font-size: 3rem;
-  color: #fff;
+  color: var(--white-color);
   cursor: pointer;
   transition: color 1s;
 }
 
-.footer_icon:hover {
-  color: #040926;
+.footer__icon:hover {
+  color: var(--primary-color);
   transition: color 1s;
 }

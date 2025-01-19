@@ -1,4 +1,4 @@
-.upcoming_game_container {
+.upcoming__game {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,14 +9,14 @@
   margin: 1rem;
 }
 
-.upcoming_game_container_img {
+.upcoming__game-img {
   width: 100%;
   height: 40rem;
   object-fit: cover;
   position: relative;
 }
 
-.upcoming_game_container_h2 {
+.upcoming__game-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,33 +24,33 @@
   height: 40rem;
   opacity: 0;
   font-size: 3rem;
-  color: #fff;
+  color: var(--white-color);
   position: absolute;
   text-align: center;
   font-family: var(--font-montserrat);
-  background: rgba(0, 0, 0, 0.501);
+  background: rgba(var(--black-int-color), 0.501);
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.2s, visibility 0.2s;
 }
 
-.upcoming_game_container:hover .upcoming_game_container_h2 {
+.upcoming__game:hover .upcoming__game-title {
   visibility: visible;
   opacity: 1;
 }
 
 @media only screen and (min-width: 540px) {
-  .upcoming_game_container {
+  .upcoming__game {
     width: 50rem;
     height: 50rem;
   }
 
-  .upcoming_game_container_img {
+  .upcoming__game-img {
     width: 100%;
     height: 100%;
   }
 
-  .upcoming_game_container_h2 {
+  .upcoming__game-title {
     width: 100%;
     height: 100%;
   }

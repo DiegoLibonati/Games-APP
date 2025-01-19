@@ -1,4 +1,4 @@
-.main_container_login {
+.login__page {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -7,10 +7,10 @@
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background-color: #040926;
+  background-color: var(--primary-color);
 }
 
-.login_container {
+.login {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
@@ -18,114 +18,108 @@
   padding: 1rem 1rem 0 1rem;
 }
 
-.login_container_information {
+.login__information {
   width: 100%;
   height: 25rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
   position: relative;
 }
 
-.login_container_information img {
+.login__information img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.login_container_form {
+.login__form {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-flow: column wrap;
   width: 100%;
   height: 30rem;
-  background-color: #251351;
+  background-color: var(--secondary-color);
   padding: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
 }
 
-.login_container_form img {
+.login__form img {
   display: none;
 }
 
-.login_container_form input {
+.login__form input {
   width: 100%;
   padding: 1rem;
   font-size: 1.5rem;
   outline: none;
-  color: #040926;
-  background: #fff;
+  color: var(--primary-color);
+  background: var(--white-color);
   border: none;
   font-family: var(--font-montserrat);
   letter-spacing: 0.1rem;
 }
 
-.login_container_form input::placeholder {
-  color: #040926;
+.login__form input::placeholder {
+  color: var(--primary-color);
 }
 
-.login_container_form button {
+.login__form button {
   width: 100%;
   font-size: 1.5rem;
   padding: 1rem;
-  color: #fff;
-  background: #040926;
+  color: var(--white-color);
+  background: var(--primary-color);
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
   font-family: var(--font-montserrat);
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
 
-.login_container_form a {
+.login__form a {
   width: 100%;
   font-size: 1.5rem;
   padding: 1rem;
-  color: #fff;
-  background: #040926;
+  color: var(--white-color);
+  background: var(--primary-color);
   text-decoration: none;
   border: none;
   text-align: end;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
   font-family: var(--font-montserrat);
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
 
-.login_wave {
+.login__wave {
   position: absolute;
   bottom: 0;
   height: 10rem;
 }
 
-.login_container_form button:hover {
+.login__form button:hover {
   background-image: linear-gradient(
     to right,
-    #000000,
-    #000000 16.65%,
-    #02040f 33.3%,
-    #040926 49.95%,
-    #060e3d 66.6%,
-    #091454 83.25%,
-    #251351 100%
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
   );
   animation: slidebg 2s linear infinite;
 }
 
-.login_container_form a:hover {
+.login__form a:hover {
   background-image: linear-gradient(
     to right,
-    #000000,
-    #000000 16.65%,
-    #02040f 33.3%,
-    #040926 49.95%,
-    #060e3d 66.6%,
-    #091454 83.25%,
-    #251351 100%
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
   );
   animation: slidebg 2s linear infinite;
 }
 
-.slide_button_container_main {
+.slide__btns {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -148,56 +142,56 @@
 }
 
 @media only screen and (min-width: 280px) and (orientation: landscape) {
-  .main_container_login {
+  .login__page {
     height: 80rem;
   }
 }
 
 @media only screen and (min-width: 540px) and (orientation: portrait) {
-  .login_container {
+  .login {
     width: 50rem;
     height: 60rem;
   }
 
-  .login_container_information {
+  .login__information {
     height: 30rem;
   }
 }
 
 @media only screen and (min-width: 768px) and (orientation: portrait) {
-  .main_container_login {
+  .login__page {
     justify-content: center;
   }
 
-  .login_wave {
+  .login__wave {
     height: 15rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .main_container_login {
+  .login__page {
     height: 100vh;
     justify-content: center;
   }
 
-  .login_container {
+  .login {
     grid-template-columns: repeat(2, 1fr);
     height: 50rem;
     width: 80rem;
     padding: 0 1rem 0 1rem;
   }
 
-  .login_container_information {
+  .login__information {
     height: 50rem;
   }
 
-  .login_container_form {
+  .login__form {
     justify-content: flex-end;
     height: 50rem;
     position: relative;
   }
 
-  .login_container_form img {
+  .login__form img {
     display: block;
     width: 20rem;
     height: 20rem;
@@ -206,25 +200,25 @@
     top: 2rem;
   }
 
-  .login_container_form input {
+  .login__form input {
     margin-bottom: 1rem;
   }
 
-  .login_container_form button {
+  .login__form button {
     margin-bottom: 1rem;
   }
 
-  .login_container_form a {
+  .login__form a {
     margin-bottom: 1rem;
   }
 
-  .login_wave {
+  .login__wave {
     height: 10rem;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .login_wave {
+  .login__wave {
     height: 15rem;
   }
 } ;

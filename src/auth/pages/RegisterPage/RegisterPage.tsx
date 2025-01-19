@@ -11,6 +11,7 @@ import { InputForm } from "../../components/InputForm/InputForm";
 import { useSlide } from "../../../hooks/useSlide";
 import { useAuthStore } from "../../../hooks/useAuthStore";
 import { useForm } from "../../../hooks/useForm";
+import { rootCss } from "../../../constants/configCss";
 
 import logo from "../../../assets/logo.png";
 import "./RegisterPage.css";
@@ -72,14 +73,14 @@ export const RegisterPage = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="main_container_login">
-      <section className="login_container">
-        <article className="login_container_information">
+    <main className="register__page">
+      <section className="register">
+        <article className="register__information">
           {isLoadingImages ? (
             <Loader></Loader>
           ) : (
             <Fragment>
-              <img src={images[index]} alt="loginimage"></img>
+              <img src={images[index]} alt="registerimage"></img>
 
               <HeaderPresentation>
                 {index === 0
@@ -97,7 +98,7 @@ export const RegisterPage = (): JSX.Element => {
           )}
         </article>
 
-        <form className="login_container_form" onSubmit={onSubmitForm}>
+        <form className="register__form" onSubmit={onSubmitForm}>
           <img src={logo} alt="logo"></img>
 
           <InputForm
@@ -142,8 +143,8 @@ export const RegisterPage = (): JSX.Element => {
       </section>
 
       <Wave
-        className="login_wave"
-        fill="#251351"
+        className="register__wave"
+        fill={rootCss.colors.secondary}
         paused={false}
         options={{
           amplitude: 40,

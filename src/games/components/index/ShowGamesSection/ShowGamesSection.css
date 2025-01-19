@@ -1,23 +1,23 @@
-.cards_games_section_container {
+.show__games {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-flow: row wrap;
   width: 100%;
   height: auto;
-  background-color: #040926;
+  background-color: var(--primary-color);
   padding: 1rem;
 }
 
-.cards_games_section_container_title {
+.show__games-title {
   font-size: 4.5rem;
-  color: #fff;
+  color: var(--white-color);
   width: 100%;
   font-family: var(--font-montserrat);
   margin: 1rem 0 1rem 0;
 }
 
-.card_games_section_container_list {
+.show__games-cards {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -26,13 +26,13 @@
 }
 
 @media only screen and (min-width: 540px) {
-  .cards_games_section_container_title {
+  .show__games-title {
     font-size: 6rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .cards_games_section_container_title {
+  .show__games-title {
     font-size: 7rem;
   }
 }

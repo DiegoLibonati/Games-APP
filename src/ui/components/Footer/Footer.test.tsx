@@ -14,23 +14,27 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the footer.", () => {
-  const { container } = renderComponent();
+describe("Footer.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the footer.", () => {
+      const { container } = renderComponent();
 
-  // eslint-disable-next-line
-  const footer = container.querySelector(".footer_container") as HTMLElement;
+      // eslint-disable-next-line
+      const footer = container.querySelector(".footer") as HTMLElement;
 
-  expect(footer).toBeInTheDocument();
-});
+      expect(footer).toBeInTheDocument();
+    });
 
-test("It must render all the links.", () => {
-  const links = ["facebook", "github", "instagram", "linkedin"];
+    test("It must render all the links.", () => {
+      const links = ["facebook", "github", "instagram", "linkedin"];
 
-  renderComponent();
+      renderComponent();
 
-  for (const link of links) {
-    const anchorLink = screen.getByRole("link", { name: `open ${link}` });
+      for (const link of links) {
+        const anchorLink = screen.getByRole("link", { name: `open ${link}` });
 
-    expect(anchorLink).toBeInTheDocument();
-  }
+        expect(anchorLink).toBeInTheDocument();
+      }
+    });
+  });
 });

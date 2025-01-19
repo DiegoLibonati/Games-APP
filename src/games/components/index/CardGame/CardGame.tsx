@@ -37,12 +37,12 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
 
   return (
     <div
-      className={`card_game_container`}
+      className={`index__page-card`}
       style={{ animationName: isInformationOpen ? "nospin" : "spin" }}
     >
       <div
-        className={`card_game_container_img ${
-          isInformationOpen && "card_game_container_img_open"
+        className={`index__page-card-img ${
+          isInformationOpen && "index__page-card-img--open"
         }`}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
@@ -55,8 +55,8 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
         ></div>
       </div>
       <div
-        className={`card_game_container_information ${
-          isInformationOpen && "open_information_card_game"
+        className={`index__page-card-information ${
+          isInformationOpen && "index__page-card-information--open"
         }`}
       >
         <h2>{game.title}</h2>
@@ -77,7 +77,7 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
           Release date: <span>{game.release_date}</span>
         </h3>
 
-        <div className="card_game_container_information_links">
+        <div className="index__page-card-links">
           <a
             href={game.freetogame_profile_url}
             target="_blank"

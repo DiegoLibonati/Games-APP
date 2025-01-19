@@ -15,7 +15,7 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
 
   return (
     <article
-      className="main_games_section_container_grid_games_game"
+      className="games__page-card"
       onClick={() => showActiveGame(game)}
     >
       <img src={game.thumbnail} alt={game.title}></img>

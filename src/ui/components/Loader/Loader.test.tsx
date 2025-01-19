@@ -14,16 +14,22 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the loader.", () => {
-  const { container } = renderComponent();
+describe("Loader.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the loader.", () => {
+      const { container } = renderComponent();
 
-  // eslint-disable-next-line
-  const loaderRoot = container.querySelector(
-    ".loader_wrapper_all"
-  ) as HTMLDivElement;
-  // eslint-disable-next-line
-  const loaderChild = loaderRoot!.querySelector(".loader") as HTMLDivElement;
+      // eslint-disable-next-line
+      const loaderRoot = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+      // eslint-disable-next-line
+      const loaderChild = loaderRoot!.querySelector(
+        ".loader"
+      ) as HTMLDivElement;
 
-  expect(loaderRoot).toBeInTheDocument();
-  expect(loaderChild).toBeInTheDocument();
+      expect(loaderRoot).toBeInTheDocument();
+      expect(loaderChild).toBeInTheDocument();
+    });
+  });
 });

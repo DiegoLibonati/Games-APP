@@ -1,4 +1,4 @@
-.main_container_favorite {
+.favorite__page {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -6,12 +6,12 @@
   min-height: 80vh;
   height: auto;
   padding: 1rem;
-  background-color: #040926;
+  background-color: var(--primary-color);
   padding-top: 6rem;
   position: relative;
 }
 
-.main_container_favorite_container_withoutgames {
+.favorite__not-games {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,14 +20,14 @@
   min-height: 65vh;
 }
 
-.main_container_favorite_container_withoutgames h1 {
+.favorite__not-games h1 {
   font-size: 4rem;
-  color: #fff;
+  color: var(--white-color);
   font-family: var(--font-montserrat);
   text-align: center;
 }
 
-.main_container_favorite_container {
+.favorite__games {
   display: flex;
   align-items: center;
   justify-content: center;

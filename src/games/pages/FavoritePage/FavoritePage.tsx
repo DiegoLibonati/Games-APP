@@ -35,11 +35,11 @@ export const FavoritePage = (): JSX.Element => {
     <Fragment>
       <NavBar></NavBar>
 
-      <main className="main_container_favorite">
+      <main className="favorite__page">
         {isLoadingFavoritesGames ? (
           <Loader></Loader>
         ) : favoritesGames.length > 0 ? (
-          <section className="main_container_favorite_container">
+          <section className="favorite__games">
             {favoritesGames.map((favoriteGame) => {
               return (
                 <CardFavoriteGame
@@ -50,7 +50,7 @@ export const FavoritePage = (): JSX.Element => {
             })}
           </section>
         ) : (
-          <section className="main_container_favorite_container_withoutgames">
+          <section className="favorite__not-games">
             <h1>Add a game to your favorites list</h1>
           </section>
         )}

@@ -32,25 +32,29 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the root.", () => {
-  renderComponent();
+describe("UpcomingGame.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the root.", () => {
+      renderComponent();
 
-  const articleRoot = screen.getByRole("article");
+      const articleRoot = screen.getByRole("article");
 
-  expect(articleRoot).toBeInTheDocument();
-  expect(articleRoot).toHaveClass("upcoming_game_container");
-});
+      expect(articleRoot).toBeInTheDocument();
+      expect(articleRoot).toHaveClass("upcoming__game");
+    });
 
-test("It must render the image and title.", () => {
-  const { props } = renderComponent();
+    test("It must render the image and title.", () => {
+      const { props } = renderComponent();
 
-  const img = screen.getByRole("img");
-  const title = screen.getByRole("heading", {
-    name: `${props.name} ${props.release_date}`,
+      const img = screen.getByRole("img");
+      const title = screen.getByRole("heading", {
+        name: `${props.name} ${props.release_date}`,
+      });
+
+      expect(img).toBeInTheDocument();
+      expect(img).toHaveAttribute("src", props.img);
+      expect(img).toHaveAttribute("alt", props.name);
+      expect(title).toBeInTheDocument();
+    });
   });
-
-  expect(img).toBeInTheDocument();
-  expect(img).toHaveAttribute("src", props.img);
-  expect(img).toHaveAttribute("alt", props.name);
-  expect(title).toBeInTheDocument();
 });

@@ -19,7 +19,7 @@ export const CardFavoriteGame = ({
 
   return (
     <article
-      className="card_favorite_container"
+      className="card__favorite"
       onClick={() => handleClick(game)}
     >
       <img src={game.thumbnail} alt={game.title}></img>

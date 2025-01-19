@@ -17,26 +17,26 @@ export const OptionFilter = ({
   handleClickOpenAndClose,
 }: OptionFilterProps): JSX.Element => {
   return (
-    <article className="main_games_section_container_grid_options_option">
+    <article className="option__filter">
       <div
-        className="main_games_section_container_grid_options_option_header"
+        className="option__filter-header"
         onClick={handleClickOpenAndClose}
       >
         <h3>{name}</h3>
         {!isOpen && (
           <button type="button" aria-label="open filter">
-            <FaChevronDown className="games_section_icon_header"></FaChevronDown>
+            <FaChevronDown className="icon__option-filter-header"></FaChevronDown>
           </button>
         )}
         {isOpen && (
           <button type="button" aria-label="close filter">
-            <FaChevronUp className="games_section_icon_header"></FaChevronUp>
+            <FaChevronUp className="icon__option-filter-header"></FaChevronUp>
           </button>
         )}
       </div>
 
       {isOpen && (
-        <ul className="main_games_section_container_grid_options_list">
+        <ul className="sub-filter__options">
           {arr.map((option) => (
             <OptionFilterListItem
               key={option}

@@ -1,15 +1,15 @@
-.carousel_games_container {
+.carousels {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-flow: column wrap;
   height: auto;
   width: 100%;
-  background-color: #040926;
+  background-color: var(--primary-color);
   position: relative;
 }
 
-.carousel_games_container_carousel {
+.carousel__games {
   height: 35rem;
   margin: auto;
   position: relative;
@@ -19,11 +19,11 @@
   overflow: hidden;
 }
 
-.carousel_games_container_carousel::before,
-.carousel_games_container_carousel::after {
+.carousel__games::before,
+.carousel__games::after {
   background: linear-gradient(
     to right,
-    #040926 0%,
+    var(--primary-color) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   content: "";
@@ -33,12 +33,12 @@
   z-index: 2;
 }
 
-.carousel_games_container_carousel::before {
+.carousel__games::before {
   left: 0;
   top: 0;
 }
 
-.carousel_games_container_carousel::after {
+.carousel__games::after {
   right: 0;
   top: 0;
   transform: rotateZ(180deg);

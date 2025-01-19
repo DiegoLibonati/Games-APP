@@ -10,30 +10,24 @@ export const SlideButtonList = ({
   handleSetIndex,
 }: SlideButtonListProps): JSX.Element => {
   return (
-    <div className="slide_button_container_main">
+    <div className="slide__btns">
       <button
         type="button"
         aria-label="item-0"
         onClick={() => handleSetIndex(0)}
-        className={
-          index === 0 ? "slide_button slide_button_active" : "slide_button"
-        }
+        className={index === 0 ? "slide__btn slide__btn--active" : "slide__btn"}
       ></button>
       <button
         type="button"
         aria-label="item-1"
         onClick={() => handleSetIndex(1)}
-        className={
-          index === 1 ? "slide_button slide_button_active" : "slide_button"
-        }
+        className={index === 1 ? "slide__btn slide__btn--active" : "slide__btn"}
       ></button>
       <button
         type="button"
         aria-label="item-2"
         onClick={() => handleSetIndex(2)}
-        className={
-          index === 2 ? "slide_button slide_button_active" : "slide_button"
-        }
+        className={index === 2 ? "slide__btn slide__btn--active" : "slide__btn"}
       ></button>
     </div>
   );

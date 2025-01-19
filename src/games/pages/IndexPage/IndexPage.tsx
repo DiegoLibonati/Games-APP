@@ -9,6 +9,8 @@ import { UpcomingGamesSection } from "../../components/index/UpcomingGamesSectio
 
 import { useGamesStore } from "../../../hooks/useGamesStore";
 
+import "./IndexPage.css";
+
 export const IndexPage = (): JSX.Element => {
   const { handleGetGames, handleSetToInitialState } = useGamesStore();
 
@@ -32,7 +34,7 @@ export const IndexPage = (): JSX.Element => {
     <Fragment>
       <NavBar></NavBar>
 
-      <main className="main_container_index">
+      <main className="index__page">
         <HomeImagesSection></HomeImagesSection>
         <CarouselsGamesSection></CarouselsGamesSection>
         <ShowGamesSection></ShowGamesSection>

@@ -1,4 +1,4 @@
-.carousel_games_container_carousel {
+.carousel__games {
   height: 35rem;
   margin: auto;
   position: relative;
@@ -8,29 +8,29 @@
   overflow: hidden;
 }
 
-.carousel_games_container_carousel h2 {
+.carousel__games h2 {
   position: absolute;
   left: 0;
   top: 50%;
-  color: #fff;
+  color: var(--white-color);
   font-size: 4rem;
   font-family: var(--font-montserrat);
   z-index: 1000;
   text-transform: uppercase;
 }
 
-.carousel_games_container_carousel_track {
+.carousel__games-track {
   display: flex;
   width: calc(50rem * 18);
   animation: scroll 40s linear infinite;
   margin-top: 5rem;
 }
 
-.carousel_games_container_carousel_track:hover {
+.carousel__games-track:hover {
   animation-play-state: paused;
 }
 
-.carousel-item {
+.carousel__games-item {
   height: 30rem;
   width: 50rem;
   display: flex;
@@ -42,23 +42,23 @@
   position: relative;
 }
 
-.carousel-item img {
+.carousel__games-item img {
   height: 25rem;
   width: 50rem;
   object-fit: cover;
   transition: transform 1s;
 }
 
-.carousel-item img:hover {
+.carousel__games-item img:hover {
   transform: translateZ(2rem);
   transition: transform 1s;
 }
 
-.carousel_games_container_carousel::before,
-.carousel_games_container_carousel::after {
+.carousel__games::before,
+.carousel__games::after {
   background: linear-gradient(
     to right,
-    #040926 0%,
+    var(--primary-color) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   content: "";
@@ -68,25 +68,25 @@
   z-index: 2;
 }
 
-.carousel_games_container_carousel::before {
+.carousel__games::before {
   left: 0;
   top: 0;
 }
 
-.carousel_games_container_carousel::after {
+.carousel__games::after {
   right: 0;
   top: 0;
   transform: rotateZ(180deg);
 }
 
-.carousel-item-button {
+.carousel__games-item-button {
   width: 40%;
   font-size: 1.5rem;
   padding: 1rem;
-  color: #fff;
-  background: #040926;
+  color: var(--white-color);
+  background: var(--primary-color);
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
   font-family: var(--font-montserrat);
   letter-spacing: 0.1rem;
   cursor: pointer;
@@ -95,21 +95,18 @@
   transition: opacity 1s;
 }
 
-.carousel-item-button:hover {
+.carousel__games-item-button:hover {
   background-image: linear-gradient(
     to right,
-    #000000,
-    #000000 16.65%,
-    #02040f 33.3%,
-    #040926 49.95%,
-    #060e3d 66.6%,
-    #091454 83.25%,
-    #251351 100%
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
   );
   animation: slidebg 2s linear infinite;
 }
 
-.carousel-item:hover .carousel-item-button {
+.carousel__games-item:hover .carousel__games-item-button {
   opacity: 1;
   transition: opacity 1s;
 }
@@ -130,7 +127,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .carousel_games_container_carousel h2 {
+  .carousel__games h2 {
     font-size: 5rem;
   }
 }

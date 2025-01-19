@@ -55,8 +55,8 @@ export const GamesPage = (): JSX.Element => {
     <Fragment>
       <NavBar></NavBar>
 
-      <main className="main_games_section_container_grid">
-        <section className="main_games_section_container_grid_options">
+      <main className="games__page">
+        <section className="games__page-options">
           <h2>Filters</h2>
           <OptionFilter
             name="Categories"
@@ -74,8 +74,8 @@ export const GamesPage = (): JSX.Element => {
         {isLoadingGames ? (
           <Loader></Loader>
         ) : games.length > 0 ? (
-          <section className="main_games_section_container_grid_games">
-            <div className="main_games_section_container_grid_games_title">
+          <section className="all__games">
+            <div className="all__games-title">
               <h2>Games</h2>
             </div>
             {games.map((game) => (
@@ -83,7 +83,7 @@ export const GamesPage = (): JSX.Element => {
             ))}
           </section>
         ) : (
-          <section className="main_games_section_container_withoutgames">
+          <section className="all__games-not-games">
             <h1>¡That category does not exists!</h1>
           </section>
         )}

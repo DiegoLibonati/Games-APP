@@ -2,7 +2,7 @@ import "./Loader.css";
 
 export const Loader = (): JSX.Element => {
   return (
-    <div className="loader_wrapper_all">
+    <div className="loade__all-wrapper">
       <div className="loader"></div>
     </div>
   );

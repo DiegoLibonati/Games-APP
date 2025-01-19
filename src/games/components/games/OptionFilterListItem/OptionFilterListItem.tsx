@@ -9,7 +9,7 @@ export const OptionFilterListItem = ({
 }: OptionFilterListItemProps): JSX.Element => {
   return (
     <li
-      className="main_games_section_container_grid_options_list_item"
+      className="option__filter-item"
       onClick={() => handleClickFilter(filter)}
     >
       {filter}

@@ -10,19 +10,11 @@ import { FavoritePage } from "./FavoritePage";
 import { useGamesStore } from "../../../hooks/useGamesStore";
 import { store } from "../../../store/store";
 
-import { REQUEST_GAMES_MOCK } from "../../../tests/jest.setup";
+import { mockRequestGames } from "../../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;
 };
-
-const mockHandleGetFavoriteGames = jest.fn();
-const mockHandleSetToInitialState = jest.fn();
-
-jest.mock("../../../hooks/useGamesStore", () => ({
-  ...jest.requireActual("../../../hooks/useGamesStore"),
-  useGamesStore: jest.fn(),
-}));
 
 const renderComponent = (): RenderComponent => {
   const { container } = render(
@@ -58,131 +50,154 @@ const asyncRenderComponent = async (): Promise<RenderComponent> => {
   };
 };
 
-describe("If key 'isLoadingFavoriteGames' is true", () => {
-  const favoritesGames: Game[] = [];
-  const isLoadingFavoritesGames = true;
+jest.mock("../../../hooks/useGamesStore", () => ({
+  ...jest.requireActual("../../../hooks/useGamesStore"),
+  useGamesStore: jest.fn(),
+}));
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+describe("FavoritePage.tsx", () => {
+  describe("If key 'isLoadingFavoriteGames' is true", () => {
+    const mockHandleGetFavoriteGames = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
 
-    (useGamesStore as jest.Mock).mockReturnValue({
-      favoritesGames: favoritesGames,
-      isLoadingFavoritesGames: isLoadingFavoritesGames,
-      handleGetFavoriteGames: mockHandleGetFavoriteGames,
-      handleSetToInitialState: mockHandleSetToInitialState,
+    const favoritesGames: Game[] = [];
+    const isLoadingFavoritesGames = true;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useGamesStore as jest.Mock).mockReturnValue({
+        favoritesGames: favoritesGames,
+        isLoadingFavoritesGames: isLoadingFavoritesGames,
+        handleGetFavoriteGames: mockHandleGetFavoriteGames,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
+    });
+
+    test("It must render the loader.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const loaderRoot = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+      // eslint-disable-next-line
+      const loaderChild = loaderRoot!.querySelector(
+        ".loader"
+      ) as HTMLDivElement;
+
+      expect(loaderRoot).toBeInTheDocument();
+      expect(loaderChild).toBeInTheDocument();
     });
   });
 
-  test("It must render the loader.", () => {
-    const { container } = renderComponent();
+  describe("If key 'isLoadingFavoriteGames' is false and there are not favorite games.", () => {
+    const mockHandleGetFavoriteGames = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
 
-    // eslint-disable-next-line
-    const loaderRoot = container.querySelector(
-      ".loader_wrapper_all"
-    ) as HTMLDivElement;
-    // eslint-disable-next-line
-    const loaderChild = loaderRoot!.querySelector(".loader") as HTMLDivElement;
+    const favoritesGames: Game[] = [];
+    const isLoadingFavoritesGames = false;
 
-    expect(loaderRoot).toBeInTheDocument();
-    expect(loaderChild).toBeInTheDocument();
-  });
-});
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-describe("If key 'isLoadingFavoriteGames' is false and there are not favorite games.", () => {
-  const favoritesGames: Game[] = [];
-  const isLoadingFavoritesGames = false;
+      (useGamesStore as jest.Mock).mockReturnValue({
+        favoritesGames: favoritesGames,
+        isLoadingFavoritesGames: isLoadingFavoritesGames,
+        handleGetFavoriteGames: mockHandleGetFavoriteGames,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
+    });
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+    test("It should render the message that there are no games in favorites.", () => {
+      renderComponent();
 
-    (useGamesStore as jest.Mock).mockReturnValue({
-      favoritesGames: favoritesGames,
-      isLoadingFavoritesGames: isLoadingFavoritesGames,
-      handleGetFavoriteGames: mockHandleGetFavoriteGames,
-      handleSetToInitialState: mockHandleSetToInitialState,
+      const heading = screen.getByRole("heading", {
+        name: /Add a game to your favorites list/i,
+      });
+
+      expect(heading).toBeInTheDocument();
     });
   });
 
-  test("It should render the message that there are no games in favorites.", () => {
-    renderComponent();
+  describe("If key 'isLoadingFavoriteGames' is false and there are favorite games.", () => {
+    const mockHandleGetFavoriteGames = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
 
-    const heading = screen.getByRole("heading", {
-      name: /Add a game to your favorites list/i,
+    const favoritesGames: Game[] = mockRequestGames;
+    const isLoadingFavoritesGames = false;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useGamesStore as jest.Mock).mockReturnValue({
+        favoritesGames: favoritesGames,
+        isLoadingFavoritesGames: isLoadingFavoritesGames,
+        handleGetFavoriteGames: mockHandleGetFavoriteGames,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
     });
 
-    expect(heading).toBeInTheDocument();
-  });
-});
+    test("It must render all games in favorites.", () => {
+      renderComponent();
 
-describe("If key 'isLoadingFavoriteGames' is false and there are favorite games.", () => {
-  const favoritesGames: Game[] = REQUEST_GAMES_MOCK;
-  const isLoadingFavoritesGames = false;
+      const articles = screen.getAllByRole("article");
+      const articleFavoriteGameRoots = articles.filter((article) =>
+        article.classList.contains("card__favorite")
+      );
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useGamesStore as jest.Mock).mockReturnValue({
-      favoritesGames: favoritesGames,
-      isLoadingFavoritesGames: isLoadingFavoritesGames,
-      handleGetFavoriteGames: mockHandleGetFavoriteGames,
-      handleSetToInitialState: mockHandleSetToInitialState,
-    });
-  });
-
-  test("It must render all games in favorites.", () => {
-    renderComponent();
-
-    const articles = screen.getAllByRole("article");
-    const articleFavoriteGameRoots = articles.filter((article) =>
-      article.classList.contains("card_favorite_container")
-    );
-
-    expect(articleFavoriteGameRoots).toHaveLength(favoritesGames.length);
-  });
-});
-
-describe("General Tests.", () => {
-  const favoritesGames: Game[] = REQUEST_GAMES_MOCK;
-  const isLoadingFavoritesGames = false;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useGamesStore as jest.Mock).mockReturnValue({
-      favoritesGames: favoritesGames,
-      isLoadingFavoritesGames: isLoadingFavoritesGames,
-      handleGetFavoriteGames: mockHandleGetFavoriteGames,
-      handleSetToInitialState: mockHandleSetToInitialState,
+      expect(articleFavoriteGameRoots).toHaveLength(favoritesGames.length);
     });
   });
 
-  test("It must render the navbar.", async () => {
-    const { container } = await asyncRenderComponent();
+  describe("General Tests.", () => {
+    const mockHandleGetFavoriteGames = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
 
-    // eslint-disable-next-line
-    const header = container.querySelector(".header_container") as HTMLElement;
-    // eslint-disable-next-line
-    const nav = container.querySelector("nav") as HTMLElement;
+    const favoritesGames: Game[] = mockRequestGames;
+    const isLoadingFavoritesGames = false;
 
-    expect(header).toBeInTheDocument();
-    expect(nav).toBeInTheDocument();
-  });
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-  test("It must render the main.", async () => {
-    await asyncRenderComponent();
+      (useGamesStore as jest.Mock).mockReturnValue({
+        favoritesGames: favoritesGames,
+        isLoadingFavoritesGames: isLoadingFavoritesGames,
+        handleGetFavoriteGames: mockHandleGetFavoriteGames,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
+    });
 
-    const main = screen.getByRole("main");
+    test("It must render the navbar.", async () => {
+      const { container } = await asyncRenderComponent();
 
-    expect(main).toBeInTheDocument();
-  });
+      // eslint-disable-next-line
+      const header = container.querySelector(
+        ".header__wrapper"
+      ) as HTMLElement;
+      // eslint-disable-next-line
+      const nav = container.querySelector("nav") as HTMLElement;
 
-  test("It must render the footer.", async () => {
-    const { container } = await asyncRenderComponent();
+      expect(header).toBeInTheDocument();
+      expect(nav).toBeInTheDocument();
+    });
 
-    // eslint-disable-next-line
-    const footer = container.querySelector("footer") as HTMLElement;
+    test("It must render the main.", async () => {
+      await asyncRenderComponent();
 
-    expect(footer).toBeInTheDocument();
-    expect(footer).toHaveClass("footer_container");
+      const main = screen.getByRole("main");
+
+      expect(main).toBeInTheDocument();
+    });
+
+    test("It must render the footer.", async () => {
+      const { container } = await asyncRenderComponent();
+
+      // eslint-disable-next-line
+      const footer = container.querySelector("footer") as HTMLElement;
+
+      expect(footer).toBeInTheDocument();
+      expect(footer).toHaveClass("footer");
+    });
   });
 });

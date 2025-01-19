@@ -43,9 +43,9 @@ export const ActiveGame = (): JSX.Element => {
   };
 
   return (
-    <div className="active_game_wrapper">
-      <div className="active_game_container">
-        <div className="active_game_container_header">
+    <div className="active__game-wrapper">
+      <div className="active__game">
+        <div className="active__game-header">
           <img src={activeGame!.thumbnail} alt={activeGame!.title}></img>
 
           <h2>{activeGame!.title}</h2>
@@ -53,7 +53,7 @@ export const ActiveGame = (): JSX.Element => {
 
         <p>{activeGame!.short_description}</p>
 
-        <div className="active_game_container_specs">
+        <div className="active__game-specs">
           <h3>
             Gender: <span>{activeGame!.genre}</span>
           </h3>
@@ -70,7 +70,7 @@ export const ActiveGame = (): JSX.Element => {
             Release date: <span>{activeGame!.release_date}</span>
           </h3>
 
-          <div className="active_game_container_specs_links">
+          <div className="active__game-links">
             <a
               href={activeGame!.game_url}
               target="_blank"

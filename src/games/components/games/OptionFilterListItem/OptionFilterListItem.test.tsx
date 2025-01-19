@@ -30,23 +30,27 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the element filter.", () => {
-  renderComponent();
+describe("OptionFilterListItem.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the element filter.", () => {
+      renderComponent();
 
-  const filter = screen.getByRole("listitem");
+      const filter = screen.getByRole("listitem");
 
-  expect(filter).toBeInTheDocument();
-});
+      expect(filter).toBeInTheDocument();
+    });
 
-test("It must execute the relevant function when the filter is clicked.", async () => {
-  const { props } = renderComponent();
+    test("It must execute the relevant function when the filter is clicked.", async () => {
+      const { props } = renderComponent();
 
-  const filter = screen.getByRole("listitem");
+      const filter = screen.getByRole("listitem");
 
-  expect(filter).toBeInTheDocument();
+      expect(filter).toBeInTheDocument();
 
-  await user.click(filter);
+      await user.click(filter);
 
-  expect(props.mockHandleClickFilter).toHaveBeenCalledTimes(1);
-  expect(props.mockHandleClickFilter).toHaveBeenCalledWith(props.filter);
+      expect(props.mockHandleClickFilter).toHaveBeenCalledTimes(1);
+      expect(props.mockHandleClickFilter).toHaveBeenCalledWith(props.filter);
+    });
+  });
 });

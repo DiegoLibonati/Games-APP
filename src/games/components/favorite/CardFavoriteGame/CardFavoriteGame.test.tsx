@@ -10,7 +10,7 @@ import { Game } from "../../../../entities/entities";
 import { useGamesStore } from "../../../../hooks/useGamesStore";
 import { store } from "../../../../store/store";
 
-import { REQUEST_GAMES_MOCK } from "../../../../tests/jest.setup";
+import { mockRequestGames } from "../../../../tests/jest.constants";
 
 type RenderComponent = {
   props: {
@@ -19,24 +19,9 @@ type RenderComponent = {
   container: HTMLElement;
 };
 
-const mockHandleSetActiveGame = jest.fn();
-
-jest.mock("../../../../hooks/useGamesStore", () => ({
-  ...jest.requireActual("../../../../hooks/useGamesStore"),
-  useGamesStore: jest.fn(),
-}));
-
-beforeEach(() => {
-  jest.clearAllMocks();
-
-  (useGamesStore as jest.Mock).mockReturnValue({
-    handleSetActiveGame: mockHandleSetActiveGame,
-  });
-});
-
 const renderComponent = (): RenderComponent => {
   const props = {
-    game: REQUEST_GAMES_MOCK[0],
+    game: mockRequestGames[0],
   };
 
   const { container } = render(
@@ -51,28 +36,47 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the root of the card. In addition, you must click on it and execute the relevant functions.", async () => {
-  const { props } = renderComponent();
+jest.mock("../../../../hooks/useGamesStore", () => ({
+  ...jest.requireActual("../../../../hooks/useGamesStore"),
+  useGamesStore: jest.fn(),
+}));
 
-  const articleRoot = screen.getByRole("article");
+describe("CardFavoriteGame.tsx", () => {
+  describe("General Tests.", () => {
+    const mockHandleSetActiveGame = jest.fn();
 
-  expect(articleRoot).toBeInTheDocument();
-  expect(articleRoot).toHaveClass("card_favorite_container");
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-  await user.click(articleRoot);
+      (useGamesStore as jest.Mock).mockReturnValue({
+        handleSetActiveGame: mockHandleSetActiveGame,
+      });
+    });
 
-  expect(mockHandleSetActiveGame).toHaveBeenCalledTimes(1);
-  expect(mockHandleSetActiveGame).toHaveBeenCalledWith(props.game);
-});
+    test("It must render the root of the card. In addition, you must click on it and execute the relevant functions.", async () => {
+      const { props } = renderComponent();
 
-test("It must render the image and the title of the game.", () => {
-  const { props } = renderComponent();
+      const articleRoot = screen.getByRole("article");
 
-  const img = screen.getByRole("img");
-  const title = screen.getByRole("heading", { name: props.game.title });
+      expect(articleRoot).toBeInTheDocument();
+      expect(articleRoot).toHaveClass("card__favorite");
 
-  expect(img).toBeInTheDocument();
-  expect(img).toHaveAttribute("src", props.game.thumbnail);
-  expect(img).toHaveAttribute("alt", props.game.title);
-  expect(title).toBeInTheDocument();
+      await user.click(articleRoot);
+
+      expect(mockHandleSetActiveGame).toHaveBeenCalledTimes(1);
+      expect(mockHandleSetActiveGame).toHaveBeenCalledWith(props.game);
+    });
+
+    test("It must render the image and the title of the game.", () => {
+      const { props } = renderComponent();
+
+      const img = screen.getByRole("img");
+      const title = screen.getByRole("heading", { name: props.game.title });
+
+      expect(img).toBeInTheDocument();
+      expect(img).toHaveAttribute("src", props.game.thumbnail);
+      expect(img).toHaveAttribute("alt", props.game.title);
+      expect(title).toBeInTheDocument();
+    });
+  });
 });

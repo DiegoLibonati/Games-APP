@@ -6,9 +6,9 @@ import "./UpcomingGamesSection.css";
 
 export const UpcomingGamesSection = (): JSX.Element => {
   return (
-    <section className="upcoming_games_container">
-      <h2 className="upcoming_games_container_title">Upcoming Games</h2>
-      <div className="line_wrapper">
+    <section className="upcoming__games">
+      <h2 className="upcoming__games-title">Upcoming Games</h2>
+      <div className="line__wrapper">
         <div className="line"></div>
       </div>
 

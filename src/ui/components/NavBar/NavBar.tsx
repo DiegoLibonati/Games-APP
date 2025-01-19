@@ -12,8 +12,8 @@ export const NavBar = (): JSX.Element => {
   const { displayName, photoURL, handleLogOut } = useAuthStore();
 
   return (
-    <header className="header_container">
-      <div className="header_container_logo">
+    <header className="header__wrapper">
+      <div className="header__logo">
         <img src={logo} alt="logo"></img>
 
         <Hamburger></Hamburger>
@@ -22,12 +22,12 @@ export const NavBar = (): JSX.Element => {
       <nav
         className={
           isNavBarOpen
-            ? "header_container_nav navbar_open"
-            : "header_container_nav"
+            ? "header__nav header__nav--open"
+            : "header__nav"
         }
       >
-        <ul className="header_container_nav_list">
-          <li className="header_container_nav_list_item">
+        <ul className="header__list">
+          <li className="header__list-item">
             <NavLink
               to="/games/index"
               aria-label="go to home page"
@@ -37,7 +37,7 @@ export const NavBar = (): JSX.Element => {
             </NavLink>
           </li>
 
-          <li className="header_container_nav_list_item">
+          <li className="header__list-item">
             <NavLink
               to="/games/favorite"
               aria-label="go to favorite page"
@@ -47,7 +47,7 @@ export const NavBar = (): JSX.Element => {
             </NavLink>
           </li>
 
-          <li className="header_container_nav_list_item">
+          <li className="header__list-item">
             <NavLink
               to="/games/games"
               aria-label="go to games page"
@@ -59,14 +59,14 @@ export const NavBar = (): JSX.Element => {
         </ul>
 
         <button
-          className="button_logout"
+          className="btn__logout"
           onClick={handleLogOut}
           aria-label="logout button"
         >
           LogOut
         </button>
 
-        <div className="header_container_nav_user">
+        <div className="header__user">
           <h2>{displayName}</h2>
           {photoURL ? (
             <img

@@ -11,22 +11,14 @@ import { useAuthStore } from "../../../hooks/useAuthStore";
 import { store } from "../../../store/store";
 
 import {
-  ASSETS_IMAGE,
-  IMAGES_MOCK,
-  SLIDE_IMAGES_AUTH,
-} from "../../../tests/jest.setup";
+  mockAssetsImage,
+  mockImages,
+  mockSlideImagesAuth,
+} from "../../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;
 };
-
-jest.mock("../../../hooks/useAuthStore", () => ({
-  ...jest.requireActual("../../../hooks/useAuthStore"),
-  useAuthStore: jest.fn(),
-}));
-
-const mockHandleCreateNewUserWithEmailAndPassword = jest.fn();
-const mockHandleGetImages = jest.fn();
 
 const renderComponent = (): RenderComponent => {
   const { container } = render(
@@ -44,281 +36,299 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("If the key isLoadingImages is 'true'.", () => {
-  const isLoadingImages = true;
+jest.mock("../../../hooks/useAuthStore", () => ({
+  ...jest.requireActual("../../../hooks/useAuthStore"),
+  useAuthStore: jest.fn(),
+}));
 
-  beforeEach(() => {
-    (useAuthStore as jest.Mock).mockReturnValue({
-      images: [],
-      isLoadingImages: isLoadingImages,
-      handleCreateNewUserWithEmailAndPassword:
-        mockHandleCreateNewUserWithEmailAndPassword,
-      handleGetImages: mockHandleGetImages,
+describe("RegisterPage.tsx", () => {
+  describe("If the key isLoadingImages is 'true'.", () => {
+    const mockHandleCreateNewUserWithEmailAndPassword = jest.fn();
+    const mockHandleGetImages = jest.fn();
+
+    const isLoadingImages = true;
+
+    beforeEach(() => {
+      (useAuthStore as jest.Mock).mockReturnValue({
+        images: [],
+        isLoadingImages: isLoadingImages,
+        handleCreateNewUserWithEmailAndPassword:
+          mockHandleCreateNewUserWithEmailAndPassword,
+        handleGetImages: mockHandleGetImages,
+      });
+    });
+
+    test("It must render the loading of the images.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const loader = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+
+      expect(loader).toBeInTheDocument();
     });
   });
 
-  test("It must render the loading of the images.", () => {
-    const { container } = renderComponent();
+  describe("If the key isLoadingImages is 'false'.", () => {
+    const mockHandleCreateNewUserWithEmailAndPassword = jest.fn();
+    const mockHandleGetImages = jest.fn();
 
-    // eslint-disable-next-line
-    const loader = container.querySelector(
-      ".loader_wrapper_all"
-    ) as HTMLDivElement;
+    const isLoadingImages = false;
 
-    expect(loader).toBeInTheDocument();
-  });
-});
+    beforeEach(() => {
+      (useAuthStore as jest.Mock).mockReturnValue({
+        images: mockImages,
+        isLoadingImages: isLoadingImages,
+        handleCreateNewUserWithEmailAndPassword:
+          mockHandleCreateNewUserWithEmailAndPassword,
+        handleGetImages: mockHandleGetImages,
+      });
+    });
 
-describe("If the key isLoadingImages is 'false'.", () => {
-  const isLoadingImages = false;
+    test("It must not render the loading of the images.", () => {
+      const { container } = renderComponent();
 
-  beforeEach(() => {
-    (useAuthStore as jest.Mock).mockReturnValue({
-      images: IMAGES_MOCK,
-      isLoadingImages: isLoadingImages,
-      handleCreateNewUserWithEmailAndPassword:
-        mockHandleCreateNewUserWithEmailAndPassword,
-      handleGetImages: mockHandleGetImages,
+      // eslint-disable-next-line
+      const loader = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+
+      expect(loader).not.toBeInTheDocument();
+    });
+
+    test("It must render the image of the first game, the corresponding title and the slide buttons.", () => {
+      const firstImg = mockImages[0];
+      const firstTitle = mockSlideImagesAuth["0"];
+      const slideKeys = Object.keys(mockSlideImagesAuth);
+
+      renderComponent();
+
+      const img = screen.getByAltText("registerimage");
+      const heading = screen.getByRole("heading", { name: firstTitle });
+
+      expect(img).toBeInTheDocument();
+      expect(img).toHaveAttribute("src", firstImg);
+      expect(img).toHaveAttribute("alt", "registerimage");
+      expect(heading).toBeInTheDocument();
+
+      for (const slideKey of slideKeys) {
+        const btnSlide = screen.getByRole("button", {
+          name: `item-${slideKey}`,
+        });
+
+        expect(btnSlide).toBeInTheDocument();
+      }
     });
   });
 
-  test("It must not render the loading of the images.", () => {
-    const { container } = renderComponent();
+  describe("General Tests", () => {
+    const mockHandleCreateNewUserWithEmailAndPassword = jest.fn();
+    const mockHandleGetImages = jest.fn();
 
-    // eslint-disable-next-line
-    const loader = container.querySelector(
-      ".loader_wrapper_all"
-    ) as HTMLDivElement;
+    const isLoadingImages = false;
 
-    expect(loader).not.toBeInTheDocument();
-  });
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-  test("It must render the image of the first game, the corresponding title and the slide buttons.", () => {
-    const firstImg = IMAGES_MOCK[0];
-    const firstTitle = SLIDE_IMAGES_AUTH["0"];
-    const slideKeys = Object.keys(SLIDE_IMAGES_AUTH);
-
-    renderComponent();
-
-    const img = screen.getByAltText("loginimage");
-    const heading = screen.getByRole("heading", { name: firstTitle });
-
-    expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute("src", firstImg);
-    expect(img).toHaveAttribute("alt", "loginimage");
-    expect(heading).toBeInTheDocument();
-
-    for (const slideKey of slideKeys) {
-      const btnSlide = screen.getByRole("button", { name: `item-${slideKey}` });
-
-      expect(btnSlide).toBeInTheDocument();
-    }
-  });
-});
-
-describe("General Tests", () => {
-  const isLoadingImages = false;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useAuthStore as jest.Mock).mockReturnValue({
-      images: IMAGES_MOCK,
-      isLoadingImages: isLoadingImages,
-      handleCreateNewUserWithEmailAndPassword:
-        mockHandleCreateNewUserWithEmailAndPassword,
-      handleGetImages: mockHandleGetImages,
-    });
-  });
-
-  test("It must render the author's logo, the email input, the password input, the username input, the repeatPassword input, the submit button and the login link.", () => {
-    renderComponent();
-
-    const imgLogo = screen.getByAltText("logo");
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const inputRepeatPassword = screen.getByPlaceholderText(
-      "Repeat your password"
-    );
-    const inputUsername = screen.getByPlaceholderText("Your username");
-    const btnRegister = screen.getByRole("button", {
-      name: /submit register/i,
-    });
-    const linkLogin = screen.getByRole("link", {
-      name: /Go to login page/i,
+      (useAuthStore as jest.Mock).mockReturnValue({
+        images: mockImages,
+        isLoadingImages: isLoadingImages,
+        handleCreateNewUserWithEmailAndPassword:
+          mockHandleCreateNewUserWithEmailAndPassword,
+        handleGetImages: mockHandleGetImages,
+      });
     });
 
-    expect(imgLogo).toBeInTheDocument();
-    expect(imgLogo).toHaveAttribute("src", ASSETS_IMAGE);
-    expect(imgLogo).toHaveAttribute("alt", "logo");
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputRepeatPassword).toBeInTheDocument();
-    expect(inputUsername).toBeInTheDocument();
-    expect(btnRegister).toBeInTheDocument();
-    expect(linkLogin).toBeInTheDocument();
-  });
+    test("It must render the author's logo, the email input, the password input, the username input, the repeatPassword input, the submit button and the login link.", () => {
+      renderComponent();
 
-  test("It should run the error alert when the form is submitted with invalid fields.", async () => {
-    renderComponent();
+      const imgLogo = screen.getByAltText("logo");
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const inputRepeatPassword = screen.getByPlaceholderText(
+        "Repeat your password"
+      );
+      const inputUsername = screen.getByPlaceholderText("Your username");
+      const btnRegister = screen.getByRole("button", {
+        name: /submit register/i,
+      });
+      const linkLogin = screen.getByRole("link", {
+        name: /Go to login page/i,
+      });
 
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const btnRegister = screen.getByRole("button", {
-      name: /submit register/i,
+      expect(imgLogo).toBeInTheDocument();
+      expect(imgLogo).toHaveAttribute("src", mockAssetsImage);
+      expect(imgLogo).toHaveAttribute("alt", "logo");
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputPassword).toBeInTheDocument();
+      expect(inputRepeatPassword).toBeInTheDocument();
+      expect(inputUsername).toBeInTheDocument();
+      expect(btnRegister).toBeInTheDocument();
+      expect(linkLogin).toBeInTheDocument();
     });
-    const inputRepeatPassword = screen.getByPlaceholderText(
-      "Repeat your password"
-    );
-    const inputUsername = screen.getByPlaceholderText("Your username");
 
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputEmail).toHaveValue("");
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputPassword).toHaveValue("");
-    expect(inputRepeatPassword).toBeInTheDocument();
-    expect(inputRepeatPassword).toHaveValue("");
-    expect(inputUsername).toBeInTheDocument();
-    expect(inputUsername).toHaveValue("");
-    expect(btnRegister).toBeInTheDocument();
+    test("It should run the error alert when the form is submitted with invalid fields.", async () => {
+      renderComponent();
 
-    await user.click(btnRegister);
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const btnRegister = screen.getByRole("button", {
+        name: /submit register/i,
+      });
+      const inputRepeatPassword = screen.getByPlaceholderText(
+        "Repeat your password"
+      );
+      const inputUsername = screen.getByPlaceholderText("Your username");
 
-    expect(Swal.fire).toHaveBeenCalledTimes(1);
-    expect(Swal.fire).toHaveBeenCalledWith({
-      icon: "error",
-      title: "Oops...",
-      text: "You need to complete all the fields",
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputEmail).toHaveValue("");
+      expect(inputPassword).toBeInTheDocument();
+      expect(inputPassword).toHaveValue("");
+      expect(inputRepeatPassword).toBeInTheDocument();
+      expect(inputRepeatPassword).toHaveValue("");
+      expect(inputUsername).toBeInTheDocument();
+      expect(inputUsername).toHaveValue("");
+      expect(btnRegister).toBeInTheDocument();
+
+      await user.click(btnRegister);
+
+      expect(Swal.fire).toHaveBeenCalledTimes(1);
+      expect(Swal.fire).toHaveBeenCalledWith({
+        icon: "error",
+        title: "Oops...",
+        text: "You need to complete all the fields",
+      });
     });
-  });
 
-  test("It should run the error alert when the form is submitted with passwords that do not match.", async () => {
-    const email = "123@gmail.com";
-    const username = "1234";
-    const password = "pepe";
-    const repeatPassword = "pep";
+    test("It should run the error alert when the form is submitted with passwords that do not match.", async () => {
+      const email = "123@gmail.com";
+      const username = "1234";
+      const password = "pepe";
+      const repeatPassword = "pep";
 
-    renderComponent();
+      renderComponent();
 
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const btnRegister = screen.getByRole("button", {
-      name: /submit register/i,
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const btnRegister = screen.getByRole("button", {
+        name: /submit register/i,
+      });
+      const inputRepeatPassword = screen.getByPlaceholderText(
+        "Repeat your password"
+      );
+      const inputUsername = screen.getByPlaceholderText("Your username");
+
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputEmail).toHaveValue("");
+      expect(inputPassword).toBeInTheDocument();
+      expect(inputPassword).toHaveValue("");
+      expect(inputRepeatPassword).toBeInTheDocument();
+      expect(inputRepeatPassword).toHaveValue("");
+      expect(inputUsername).toBeInTheDocument();
+      expect(inputUsername).toHaveValue("");
+      expect(btnRegister).toBeInTheDocument();
+
+      await user.clear(inputEmail);
+      await user.click(inputEmail);
+      await user.keyboard(email);
+
+      await user.clear(inputUsername);
+      await user.click(inputUsername);
+      await user.keyboard(username);
+
+      await user.clear(inputPassword);
+      await user.click(inputPassword);
+      await user.keyboard(password);
+
+      await user.clear(inputRepeatPassword);
+      await user.click(inputRepeatPassword);
+      await user.keyboard(repeatPassword);
+
+      expect(inputEmail).toHaveValue(email);
+      expect(inputUsername).toHaveValue(username);
+      expect(inputPassword).toHaveValue(password);
+      expect(inputRepeatPassword).toHaveValue(repeatPassword);
+
+      await user.click(btnRegister);
+
+      expect(Swal.fire).toHaveBeenCalledTimes(1);
+      expect(Swal.fire).toHaveBeenCalledWith({
+        icon: "error",
+        title: "Oops...",
+        text: "Passwords must be identical to each other",
+      });
     });
-    const inputRepeatPassword = screen.getByPlaceholderText(
-      "Repeat your password"
-    );
-    const inputUsername = screen.getByPlaceholderText("Your username");
 
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputEmail).toHaveValue("");
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputPassword).toHaveValue("");
-    expect(inputRepeatPassword).toBeInTheDocument();
-    expect(inputRepeatPassword).toHaveValue("");
-    expect(inputUsername).toBeInTheDocument();
-    expect(inputUsername).toHaveValue("");
-    expect(btnRegister).toBeInTheDocument();
+    test("It must execute the relevant functions when the form is submitted.", async () => {
+      const email = "123@gmail.com";
+      const username = "1234";
+      const password = "pepe";
+      const repeatPassword = "pepe";
 
-    await user.clear(inputEmail);
-    await user.click(inputEmail);
-    await user.keyboard(email);
+      renderComponent();
 
-    await user.clear(inputUsername);
-    await user.click(inputUsername);
-    await user.keyboard(username);
+      const inputEmail = screen.getByPlaceholderText("Your email");
+      const inputPassword = screen.getByPlaceholderText("Your password");
+      const btnRegister = screen.getByRole("button", {
+        name: /submit register/i,
+      });
+      const inputRepeatPassword = screen.getByPlaceholderText(
+        "Repeat your password"
+      );
+      const inputUsername = screen.getByPlaceholderText("Your username");
 
-    await user.clear(inputPassword);
-    await user.click(inputPassword);
-    await user.keyboard(password);
+      expect(inputEmail).toBeInTheDocument();
+      expect(inputEmail).toHaveValue("");
+      expect(inputPassword).toBeInTheDocument();
+      expect(inputPassword).toHaveValue("");
+      expect(inputRepeatPassword).toBeInTheDocument();
+      expect(inputRepeatPassword).toHaveValue("");
+      expect(inputUsername).toBeInTheDocument();
+      expect(inputUsername).toHaveValue("");
+      expect(btnRegister).toBeInTheDocument();
 
-    await user.clear(inputRepeatPassword);
-    await user.click(inputRepeatPassword);
-    await user.keyboard(repeatPassword);
+      await user.clear(inputEmail);
+      await user.click(inputEmail);
+      await user.keyboard(email);
 
-    expect(inputEmail).toHaveValue(email);
-    expect(inputUsername).toHaveValue(username);
-    expect(inputPassword).toHaveValue(password);
-    expect(inputRepeatPassword).toHaveValue(repeatPassword);
+      await user.clear(inputUsername);
+      await user.click(inputUsername);
+      await user.keyboard(username);
 
-    await user.click(btnRegister);
+      await user.clear(inputPassword);
+      await user.click(inputPassword);
+      await user.keyboard(password);
 
-    expect(Swal.fire).toHaveBeenCalledTimes(1);
-    expect(Swal.fire).toHaveBeenCalledWith({
-      icon: "error",
-      title: "Oops...",
-      text: "Passwords must be identical to each other",
+      await user.clear(inputRepeatPassword);
+      await user.click(inputRepeatPassword);
+      await user.keyboard(repeatPassword);
+
+      expect(inputEmail).toHaveValue(email);
+      expect(inputUsername).toHaveValue(username);
+      expect(inputPassword).toHaveValue(password);
+      expect(inputRepeatPassword).toHaveValue(repeatPassword);
+
+      await user.click(btnRegister);
+
+      expect(mockHandleCreateNewUserWithEmailAndPassword).toHaveBeenCalledTimes(
+        1
+      );
+      expect(mockHandleCreateNewUserWithEmailAndPassword).toHaveBeenCalledWith({
+        email: email,
+        username: username,
+        password: password,
+        repeatPassword: repeatPassword,
+      });
     });
-  });
 
-  test("It must execute the relevant functions when the form is submitted.", async () => {
-    const email = "123@gmail.com";
-    const username = "1234";
-    const password = "pepe";
-    const repeatPassword = "pepe";
+    test("It must render the wave.", () => {
+      const { container } = renderComponent();
 
-    renderComponent();
+      // eslint-disable-next-line
+      const wave = container.querySelector(".register__wave") as HTMLElement;
 
-    const inputEmail = screen.getByPlaceholderText("Your email");
-    const inputPassword = screen.getByPlaceholderText("Your password");
-    const btnRegister = screen.getByRole("button", {
-      name: /submit register/i,
+      expect(wave).toBeInTheDocument();
     });
-    const inputRepeatPassword = screen.getByPlaceholderText(
-      "Repeat your password"
-    );
-    const inputUsername = screen.getByPlaceholderText("Your username");
-
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputEmail).toHaveValue("");
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputPassword).toHaveValue("");
-    expect(inputRepeatPassword).toBeInTheDocument();
-    expect(inputRepeatPassword).toHaveValue("");
-    expect(inputUsername).toBeInTheDocument();
-    expect(inputUsername).toHaveValue("");
-    expect(btnRegister).toBeInTheDocument();
-
-    await user.clear(inputEmail);
-    await user.click(inputEmail);
-    await user.keyboard(email);
-
-    await user.clear(inputUsername);
-    await user.click(inputUsername);
-    await user.keyboard(username);
-
-    await user.clear(inputPassword);
-    await user.click(inputPassword);
-    await user.keyboard(password);
-
-    await user.clear(inputRepeatPassword);
-    await user.click(inputRepeatPassword);
-    await user.keyboard(repeatPassword);
-
-    expect(inputEmail).toHaveValue(email);
-    expect(inputUsername).toHaveValue(username);
-    expect(inputPassword).toHaveValue(password);
-    expect(inputRepeatPassword).toHaveValue(repeatPassword);
-
-    await user.click(btnRegister);
-
-    expect(mockHandleCreateNewUserWithEmailAndPassword).toHaveBeenCalledTimes(
-      1
-    );
-    expect(mockHandleCreateNewUserWithEmailAndPassword).toHaveBeenCalledWith({
-      email: email,
-      username: username,
-      password: password,
-      repeatPassword: repeatPassword,
-    });
-  });
-
-  test("It must render the wave.", () => {
-    const { container } = renderComponent();
-
-    // eslint-disable-next-line
-    const wave = container.querySelector(".login_wave") as HTMLElement;
-
-    expect(wave).toBeInTheDocument();
   });
 });

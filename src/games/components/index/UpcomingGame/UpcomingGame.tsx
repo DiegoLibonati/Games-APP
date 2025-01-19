@@ -12,10 +12,10 @@ export const UpcomingGame = ({
   release_date,
 }: UpcomingGameProps): JSX.Element => {
   return (
-    <article className="upcoming_game_container">
-      <img className="upcoming_game_container_img" src={img} alt={name}></img>
+    <article className="upcoming__game">
+      <img className="upcoming__game-img" src={img} alt={name}></img>
 
-      <h2 className="upcoming_game_container_h2">
+      <h2 className="upcoming__game-title">
         {name} <br></br> {release_date}
       </h2>
     </article>

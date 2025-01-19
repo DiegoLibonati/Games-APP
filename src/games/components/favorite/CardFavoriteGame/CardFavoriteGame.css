@@ -1,4 +1,4 @@
-.card_favorite_container {
+.card__favorite {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,12 +10,12 @@
   transition: transform 1s;
 }
 
-.card_favorite_container:hover {
+.card__favorite:hover {
   transform: scale(0.9);
   transition: transform 1s;
 }
 
-.card_favorite_container img {
+.card__favorite img {
   height: 25rem;
   width: 100%;
   object-fit: cover;
@@ -23,14 +23,14 @@
   border-top-right-radius: 1rem;
 }
 
-.card_favorite_container h2 {
+.card__favorite h2 {
   font-size: 1.5rem;
   font-family: var(--font-montserrat);
-  color: #fff;
+  color: var(--white-color);
   width: 100%;
   height: auto;
   padding: 1rem;
-  background-color: #251351;
+  background-color: var(--secondary-color);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
@@ -38,12 +38,12 @@
 .card_favorite_container_information_trash {
   font-size: 1.5rem;
   font-family: var(--font-montserrat);
-  color: #fff;
+  color: var(--white-color);
   cursor: pointer;
 }
 
 @media only screen and (min-width: 540px) {
-  .card_favorite_container {
+  .card__favorite {
     width: 40rem;
     margin: 1rem;
   }

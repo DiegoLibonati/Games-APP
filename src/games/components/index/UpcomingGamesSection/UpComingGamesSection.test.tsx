@@ -16,21 +16,25 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the section title.", () => {
-  renderComponent();
+describe("UpComingGamesSection.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the section title.", () => {
+      renderComponent();
 
-  const heading = screen.getByRole("heading", { name: /Upcoming Games/i });
+      const heading = screen.getByRole("heading", { name: /Upcoming Games/i });
 
-  expect(heading).toBeInTheDocument();
-});
+      expect(heading).toBeInTheDocument();
+    });
 
-test("It must render all the games that are about to be released.", () => {
-  renderComponent();
+    test("It must render all the games that are about to be released.", () => {
+      renderComponent();
 
-  const articles = screen.getAllByRole("article");
-  const upcomingGamesRoots = articles.filter((article) =>
-    article.classList.contains("upcoming_game_container")
-  );
+      const articles = screen.getAllByRole("article");
+      const upcomingGamesRoots = articles.filter((article) =>
+        article.classList.contains("upcoming__game")
+      );
 
-  expect(upcomingGamesRoots).toHaveLength(upcomingGames.length);
+      expect(upcomingGamesRoots).toHaveLength(upcomingGames.length);
+    });
+  });
 });

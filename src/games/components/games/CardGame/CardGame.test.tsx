@@ -10,7 +10,7 @@ import { Game } from "../../../../entities/entities";
 import { useGamesStore } from "../../../../hooks/useGamesStore";
 import { store } from "../../../../store/store";
 
-import { REQUEST_GAMES_MOCK } from "../../../../tests/jest.setup";
+import { mockRequestGames } from "../../../../tests/jest.constants";
 
 type RenderComponent = {
   props: {
@@ -19,24 +19,9 @@ type RenderComponent = {
   container: HTMLElement;
 };
 
-const mockHandleSetActiveGame = jest.fn();
-
-jest.mock("../../../../hooks/useGamesStore", () => ({
-  ...jest.requireActual("../../../../hooks/useGamesStore"),
-  useGamesStore: jest.fn(),
-}));
-
-beforeEach(() => {
-  jest.clearAllMocks();
-
-  (useGamesStore as jest.Mock).mockReturnValue({
-    handleSetActiveGame: mockHandleSetActiveGame,
-  });
-});
-
 const renderComponent = (): RenderComponent => {
   const props = {
-    game: REQUEST_GAMES_MOCK[0],
+    game: mockRequestGames[0],
   };
 
   const { container } = render(
@@ -51,36 +36,55 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the root of the card.", () => {
-  renderComponent();
+jest.mock("../../../../hooks/useGamesStore", () => ({
+  ...jest.requireActual("../../../../hooks/useGamesStore"),
+  useGamesStore: jest.fn(),
+}));
 
-  const root = screen.getByRole("article");
+describe("CardGame.tsx", () => {
+  describe("General Tests.", () => {
+    const mockHandleSetActiveGame = jest.fn();
 
-  expect(root).toBeInTheDocument();
-  expect(root).toHaveClass("main_games_section_container_grid_games_game");
-});
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-test("It must execute the relevant functions when the card is clicked.", async () => {
-  const { props } = renderComponent();
+      (useGamesStore as jest.Mock).mockReturnValue({
+        handleSetActiveGame: mockHandleSetActiveGame,
+      });
+    });
 
-  const root = screen.getByRole("article");
+    test("It must render the root of the card.", () => {
+      renderComponent();
 
-  expect(root).toBeInTheDocument();
+      const root = screen.getByRole("article");
 
-  await user.click(root);
+      expect(root).toBeInTheDocument();
+      expect(root).toHaveClass("games__page-card");
+    });
 
-  expect(mockHandleSetActiveGame).toHaveBeenCalledTimes(1);
-  expect(mockHandleSetActiveGame).toHaveBeenCalledWith(props.game);
-});
+    test("It must execute the relevant functions when the card is clicked.", async () => {
+      const { props } = renderComponent();
 
-test("It must render the image and the title of the game.", () => {
-  const { props } = renderComponent();
+      const root = screen.getByRole("article");
 
-  const img = screen.getByRole("img");
-  const title = screen.getByRole("heading", { name: props.game.title });
+      expect(root).toBeInTheDocument();
 
-  expect(img).toBeInTheDocument();
-  expect(img).toHaveAttribute("src", props.game.thumbnail);
-  expect(img).toHaveAttribute("alt", props.game.title);
-  expect(title).toBeInTheDocument();
+      await user.click(root);
+
+      expect(mockHandleSetActiveGame).toHaveBeenCalledTimes(1);
+      expect(mockHandleSetActiveGame).toHaveBeenCalledWith(props.game);
+    });
+
+    test("It must render the image and the title of the game.", () => {
+      const { props } = renderComponent();
+
+      const img = screen.getByRole("img");
+      const title = screen.getByRole("heading", { name: props.game.title });
+
+      expect(img).toBeInTheDocument();
+      expect(img).toHaveAttribute("src", props.game.thumbnail);
+      expect(img).toHaveAttribute("alt", props.game.title);
+      expect(title).toBeInTheDocument();
+    });
+  });
 });

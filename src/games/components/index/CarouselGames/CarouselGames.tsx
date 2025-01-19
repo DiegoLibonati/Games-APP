@@ -17,16 +17,16 @@ export const CarouselGames = ({ name, games }: CarouselGamesProps): JSX.Element 
   };
 
   return (
-    <article className="carousel_games_container_carousel">
+    <article className="carousel__games">
       <h2>{name}</h2>
 
-      <div className="carousel_games_container_carousel_track">
+      <div className="carousel__games-track">
         {games.map((game) => {
           return (
-            <div className={`carousel-item game-${game.id}`} key={game.id}>
+            <div className={`carousel__games-item game__${game.id}`} key={game.id}>
               <img src={game.thumbnail} alt={game.title}></img>
               <button
-                className="carousel-item-button"
+                className="carousel__games-item-button"
                 type="button"
                 aria-label={`add game to fav ${game.title}`}
                 onClick={() => handleSetFavoriteGame(game)}

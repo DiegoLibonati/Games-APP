@@ -4,8 +4,6 @@ import Swal from "sweetalert2";
 import { AppRouter } from "./router/AppRouter";
 import { useAuthStore } from "./hooks/useAuthStore";
 
-import "./App.css";
-
 function App(): JSX.Element {
   const { errorMessage } = useAuthStore();
 

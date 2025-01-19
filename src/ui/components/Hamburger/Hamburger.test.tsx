@@ -12,14 +12,6 @@ type RenderComponent = {
   container: HTMLElement;
 };
 
-const mockHandleOpenNavBar = jest.fn();
-const mockHandleCloseNavBar = jest.fn();
-
-jest.mock("../../../hooks/useUiStore", () => ({
-  ...jest.requireActual("../../../hooks/useUiStore"),
-  useUiStore: jest.fn(),
-}));
-
 const renderComponent = (): RenderComponent => {
   const { container } = render(
     <Provider store={store}>
@@ -32,77 +24,93 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("If isNavBarOpen is 'true'.", () => {
-  const isNavBarOpen = true;
+jest.mock("../../../hooks/useUiStore", () => ({
+  ...jest.requireActual("../../../hooks/useUiStore"),
+  useUiStore: jest.fn(),
+}));
 
-  beforeEach(() => {
-    (useUiStore as jest.Mock).mockReturnValue({
-      isNavBarOpen: isNavBarOpen,
-      handleCloseNavBar: mockHandleCloseNavBar,
-      handleOpenNavBar: mockHandleOpenNavBar,
+describe("Hamburger.tsx", () => {
+  describe("If isNavBarOpen is 'true'.", () => {
+    const mockHandleOpenNavBar = jest.fn();
+    const mockHandleCloseNavBar = jest.fn();
+
+    const isNavBarOpen = true;
+
+    beforeEach(() => {
+      (useUiStore as jest.Mock).mockReturnValue({
+        isNavBarOpen: isNavBarOpen,
+        handleCloseNavBar: mockHandleCloseNavBar,
+        handleOpenNavBar: mockHandleOpenNavBar,
+      });
+    });
+
+    test("It should render the root with the relevant classes and when clicked it should execute the relevant functions.", async () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
+
+      expect(hamburger).toBeInTheDocument();
+      expect(hamburger).toHaveClass("hamburger icon nav-icon-5 open");
+
+      await user.click(hamburger);
+
+      expect(mockHandleCloseNavBar).toHaveBeenCalledTimes(1);
     });
   });
 
-  test("It should render the root with the relevant classes and when clicked it should execute the relevant functions.", async () => {
-    const { container } = renderComponent();
+  describe("If isNavBarOpen is 'false'.", () => {
+    const mockHandleOpenNavBar = jest.fn();
+    const mockHandleCloseNavBar = jest.fn();
 
-    // eslint-disable-next-line
-    const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
+    const isNavBarOpen = false;
 
-    expect(hamburger).toBeInTheDocument();
-    expect(hamburger).toHaveClass("hamburger icon nav-icon-5 open");
+    beforeEach(() => {
+      (useUiStore as jest.Mock).mockReturnValue({
+        isNavBarOpen: isNavBarOpen,
+        handleCloseNavBar: mockHandleCloseNavBar,
+        handleOpenNavBar: mockHandleOpenNavBar,
+      });
+    });
 
-    await user.click(hamburger);
+    test("It should render the root with the relevant classes and when clicked it should execute the relevant functions.", async () => {
+      const { container } = renderComponent();
 
-    expect(mockHandleCloseNavBar).toHaveBeenCalledTimes(1);
-  });
-});
+      // eslint-disable-next-line
+      const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
 
-describe("If isNavBarOpen is 'false'.", () => {
-  const isNavBarOpen = false;
+      expect(hamburger).toBeInTheDocument();
+      expect(hamburger).toHaveClass("hamburger icon nav-icon-5");
 
-  beforeEach(() => {
-    (useUiStore as jest.Mock).mockReturnValue({
-      isNavBarOpen: isNavBarOpen,
-      handleCloseNavBar: mockHandleCloseNavBar,
-      handleOpenNavBar: mockHandleOpenNavBar,
+      await user.click(hamburger);
+
+      expect(mockHandleOpenNavBar).toHaveBeenCalledTimes(1);
     });
   });
 
-  test("It should render the root with the relevant classes and when clicked it should execute the relevant functions.", async () => {
-    const { container } = renderComponent();
+  describe("General Tests", () => {
+    const mockHandleOpenNavBar = jest.fn();
+    const mockHandleCloseNavBar = jest.fn();
 
-    // eslint-disable-next-line
-    const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
+    const isNavBarOpen = false;
 
-    expect(hamburger).toBeInTheDocument();
-    expect(hamburger).toHaveClass("hamburger icon nav-icon-5");
-
-    await user.click(hamburger);
-
-    expect(mockHandleOpenNavBar).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("General Tests", () => {
-  const isNavBarOpen = false;
-
-  beforeEach(() => {
-    (useUiStore as jest.Mock).mockReturnValue({
-      isNavBarOpen: isNavBarOpen,
-      handleCloseNavBar: mockHandleCloseNavBar,
-      handleOpenNavBar: mockHandleOpenNavBar,
+    beforeEach(() => {
+      (useUiStore as jest.Mock).mockReturnValue({
+        isNavBarOpen: isNavBarOpen,
+        handleCloseNavBar: mockHandleCloseNavBar,
+        handleOpenNavBar: mockHandleOpenNavBar,
+      });
     });
-  });
 
-  test("It should render the hamburger icon menu.", () => {
-    const { container } = renderComponent();
+    test("It should render the hamburger icon menu.", () => {
+      const { container } = renderComponent();
 
-    // eslint-disable-next-line
-    const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
+      // eslint-disable-next-line
+      const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
 
-    expect(hamburger).toBeInTheDocument();
-    // eslint-disable-next-line
-    expect(hamburger.children).toHaveLength(3);
+      expect(hamburger).toBeInTheDocument();
+      // eslint-disable-next-line
+      expect(hamburger.children).toHaveLength(3);
+    });
   });
 });

@@ -2,8 +2,8 @@ import "./CheckingAuth.css";
 
 export const CheckingAuth = (): JSX.Element => {
   return (
-    <div className="loader_wrapper">
-      <div className="loader_checking_auth"></div>
+    <div className="loader__wrapper-auth">
+      <div className="loader__auth"></div>
     </div>
   );
 };

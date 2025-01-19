@@ -11,27 +11,11 @@ import { useUiStore } from "../../../hooks/useUiStore";
 import { useGamesStore } from "../../../hooks/useGamesStore";
 import { store } from "../../../store/store";
 
-import { REQUEST_GAMES_MOCK } from "../../../tests/jest.setup";
+import { mockRequestGames } from "../../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;
 };
-
-const mockHandleGetGamesByCategory = jest.fn();
-const mockHandleSetToInitialState = jest.fn();
-
-const mockHandleOpenFilterCategories = jest.fn();
-const mockHandleCloseFilterCategories = jest.fn();
-
-jest.mock("../../../hooks/useGamesStore", () => ({
-  ...jest.requireActual("../../../hooks/useGamesStore"),
-  useGamesStore: jest.fn(),
-}));
-
-jest.mock("../../../hooks/useUiStore", () => ({
-  ...jest.requireActual("../../../hooks/useUiStore"),
-  useUiStore: jest.fn(),
-}));
 
 const renderComponent = (): RenderComponent => {
   const { container } = render(
@@ -67,179 +51,218 @@ const asyncRenderComponent = async (): Promise<RenderComponent> => {
   };
 };
 
-describe("If isLoadingGames is true.", () => {
-  const games: Game[] = [];
-  const isLoadingGames = true;
-  const categories: string[] = [];
+jest.mock("../../../hooks/useGamesStore", () => ({
+  ...jest.requireActual("../../../hooks/useGamesStore"),
+  useGamesStore: jest.fn(),
+}));
+jest.mock("../../../hooks/useUiStore", () => ({
+  ...jest.requireActual("../../../hooks/useUiStore"),
+  useUiStore: jest.fn(),
+}));
 
-  const isFilterCategoriesOpen = false;
+describe("GamesPage.tsx", () => {
+  describe("If isLoadingGames is true.", () => {
+    const mockHandleGetGamesByCategory = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+    const mockHandleOpenFilterCategories = jest.fn();
+    const mockHandleCloseFilterCategories = jest.fn();
 
-    (useGamesStore as jest.Mock).mockReturnValue({
-      games: games,
-      isLoadingGames: isLoadingGames,
-      categories: categories,
-      handleGetGamesByCategory: mockHandleGetGamesByCategory,
-      handleSetToInitialState: mockHandleSetToInitialState,
+    const games: Game[] = [];
+    const isLoadingGames = true;
+    const categories: string[] = [];
+
+    const isFilterCategoriesOpen = false;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useGamesStore as jest.Mock).mockReturnValue({
+        games: games,
+        isLoadingGames: isLoadingGames,
+        categories: categories,
+        handleGetGamesByCategory: mockHandleGetGamesByCategory,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
+
+      (useUiStore as jest.Mock).mockReturnValue({
+        isFilterCategoriesOpen: isFilterCategoriesOpen,
+        handleOpenFilterCategories: mockHandleOpenFilterCategories,
+        handleCloseFilterCategories: mockHandleCloseFilterCategories,
+      });
+
+      (useLocation as jest.Mock).mockReturnValue({ search: "" });
     });
 
-    (useUiStore as jest.Mock).mockReturnValue({
-      isFilterCategoriesOpen: isFilterCategoriesOpen,
-      handleOpenFilterCategories: mockHandleOpenFilterCategories,
-      handleCloseFilterCategories: mockHandleCloseFilterCategories,
+    test("It must render the loader.", () => {
+      const { container } = renderComponent();
+
+      // eslint-disable-next-line
+      const loaderRoot = container.querySelector(
+        ".loade__all-wrapper"
+      ) as HTMLDivElement;
+      // eslint-disable-next-line
+      const loaderChild = loaderRoot!.querySelector(
+        ".loader"
+      ) as HTMLDivElement;
+
+      expect(loaderRoot).toBeInTheDocument();
+      expect(loaderChild).toBeInTheDocument();
+    });
+  });
+
+  describe("If isLoadingGames is false and there are not games.", () => {
+    const mockHandleGetGamesByCategory = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
+
+    const mockHandleOpenFilterCategories = jest.fn();
+    const mockHandleCloseFilterCategories = jest.fn();
+
+    const games: Game[] = [];
+    const isLoadingGames = false;
+    const categories: string[] = [];
+
+    const isFilterCategoriesOpen = false;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useGamesStore as jest.Mock).mockReturnValue({
+        games: games,
+        isLoadingGames: isLoadingGames,
+        categories: categories,
+        handleGetGamesByCategory: mockHandleGetGamesByCategory,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
+
+      (useUiStore as jest.Mock).mockReturnValue({
+        isFilterCategoriesOpen: isFilterCategoriesOpen,
+        handleOpenFilterCategories: mockHandleOpenFilterCategories,
+        handleCloseFilterCategories: mockHandleCloseFilterCategories,
+      });
+
+      (useLocation as jest.Mock).mockReturnValue({ search: "" });
     });
 
-    (useLocation as jest.Mock).mockReturnValue({ search: "" });
+    test("It should render the message that there are no games.", () => {
+      renderComponent();
+
+      const heading = screen.getByRole("heading", {
+        name: /¡That category does not exists!/i,
+      });
+
+      expect(heading).toBeInTheDocument();
+    });
   });
 
-  test("It must render the loader.", () => {
-    const { container } = renderComponent();
+  describe("If isLoadingGames is false and there are games.", () => {
+    const mockHandleGetGamesByCategory = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
 
-    // eslint-disable-next-line
-    const loaderRoot = container.querySelector(
-      ".loader_wrapper_all"
-    ) as HTMLDivElement;
-    // eslint-disable-next-line
-    const loaderChild = loaderRoot!.querySelector(".loader") as HTMLDivElement;
+    const mockHandleOpenFilterCategories = jest.fn();
+    const mockHandleCloseFilterCategories = jest.fn();
 
-    expect(loaderRoot).toBeInTheDocument();
-    expect(loaderChild).toBeInTheDocument();
-  });
-});
+    const games: Game[] = mockRequestGames;
+    const isLoadingGames = false;
+    const categories: string[] = [];
 
-describe("If isLoadingGames is false and there are not games.", () => {
-  const games: Game[] = [];
-  const isLoadingGames = false;
-  const categories: string[] = [];
+    const isFilterCategoriesOpen = false;
 
-  const isFilterCategoriesOpen = false;
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+      (useGamesStore as jest.Mock).mockReturnValue({
+        games: games,
+        isLoadingGames: isLoadingGames,
+        categories: categories,
+        handleGetGamesByCategory: mockHandleGetGamesByCategory,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
 
-    (useGamesStore as jest.Mock).mockReturnValue({
-      games: games,
-      isLoadingGames: isLoadingGames,
-      categories: categories,
-      handleGetGamesByCategory: mockHandleGetGamesByCategory,
-      handleSetToInitialState: mockHandleSetToInitialState,
+      (useUiStore as jest.Mock).mockReturnValue({
+        isFilterCategoriesOpen: isFilterCategoriesOpen,
+        handleOpenFilterCategories: mockHandleOpenFilterCategories,
+        handleCloseFilterCategories: mockHandleCloseFilterCategories,
+      });
+
+      (useLocation as jest.Mock).mockReturnValue({ search: "" });
     });
 
-    (useUiStore as jest.Mock).mockReturnValue({
-      isFilterCategoriesOpen: isFilterCategoriesOpen,
-      handleOpenFilterCategories: mockHandleOpenFilterCategories,
-      handleCloseFilterCategories: mockHandleCloseFilterCategories,
+    test("It must render all games in favorites.", () => {
+      renderComponent();
+
+      const articles = screen.getAllByRole("article");
+      const articleGameRoots = articles.filter((article) =>
+        article.classList.contains("games__page-card")
+      );
+
+      expect(articleGameRoots).toHaveLength(games.length);
+    });
+  });
+
+  describe("General Tests.", () => {
+    const mockHandleGetGamesByCategory = jest.fn();
+    const mockHandleSetToInitialState = jest.fn();
+
+    const mockHandleOpenFilterCategories = jest.fn();
+    const mockHandleCloseFilterCategories = jest.fn();
+
+    const games: Game[] = mockRequestGames;
+    const isLoadingGames = false;
+    const categories: string[] = [];
+
+    const isFilterCategoriesOpen = false;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useGamesStore as jest.Mock).mockReturnValue({
+        games: games,
+        isLoadingGames: isLoadingGames,
+        categories: categories,
+        handleGetGamesByCategory: mockHandleGetGamesByCategory,
+        handleSetToInitialState: mockHandleSetToInitialState,
+      });
+
+      (useUiStore as jest.Mock).mockReturnValue({
+        isFilterCategoriesOpen: isFilterCategoriesOpen,
+        handleOpenFilterCategories: mockHandleOpenFilterCategories,
+        handleCloseFilterCategories: mockHandleCloseFilterCategories,
+      });
+
+      (useLocation as jest.Mock).mockReturnValue({ search: "" });
     });
 
-    (useLocation as jest.Mock).mockReturnValue({ search: "" });
-  });
+    test("It must render the navbar.", async () => {
+      const { container } = await asyncRenderComponent();
 
-  test("It should render the message that there are no games.", () => {
-    renderComponent();
+      // eslint-disable-next-line
+      const header = container.querySelector(
+        ".header__wrapper"
+      ) as HTMLElement;
+      // eslint-disable-next-line
+      const nav = container.querySelector("nav") as HTMLElement;
 
-    const heading = screen.getByRole("heading", {
-      name: /¡That category does not exists!/i,
+      expect(header).toBeInTheDocument();
+      expect(nav).toBeInTheDocument();
     });
 
-    expect(heading).toBeInTheDocument();
-  });
-});
+    test("It must render the main.", async () => {
+      await asyncRenderComponent();
 
-describe("If isLoadingGames is false and there are games.", () => {
-  const games: Game[] = REQUEST_GAMES_MOCK;
-  const isLoadingGames = false;
-  const categories: string[] = [];
+      const main = screen.getByRole("main");
 
-  const isFilterCategoriesOpen = false;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useGamesStore as jest.Mock).mockReturnValue({
-      games: games,
-      isLoadingGames: isLoadingGames,
-      categories: categories,
-      handleGetGamesByCategory: mockHandleGetGamesByCategory,
-      handleSetToInitialState: mockHandleSetToInitialState,
+      expect(main).toBeInTheDocument();
     });
 
-    (useUiStore as jest.Mock).mockReturnValue({
-      isFilterCategoriesOpen: isFilterCategoriesOpen,
-      handleOpenFilterCategories: mockHandleOpenFilterCategories,
-      handleCloseFilterCategories: mockHandleCloseFilterCategories,
+    test("It must render the footer.", async () => {
+      const { container } = await asyncRenderComponent();
+
+      // eslint-disable-next-line
+      const footer = container.querySelector("footer") as HTMLElement;
+
+      expect(footer).toBeInTheDocument();
+      expect(footer).toHaveClass("footer");
     });
-
-    (useLocation as jest.Mock).mockReturnValue({ search: "" });
-  });
-
-  test("It must render all games in favorites.", () => {
-    renderComponent();
-
-    const articles = screen.getAllByRole("article");
-    const articleGameRoots = articles.filter((article) =>
-      article.classList.contains("main_games_section_container_grid_games_game")
-    );
-
-    expect(articleGameRoots).toHaveLength(games.length);
-  });
-});
-
-describe("General Tests.", () => {
-  const games: Game[] = REQUEST_GAMES_MOCK;
-  const isLoadingGames = false;
-  const categories: string[] = [];
-
-  const isFilterCategoriesOpen = false;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useGamesStore as jest.Mock).mockReturnValue({
-      games: games,
-      isLoadingGames: isLoadingGames,
-      categories: categories,
-      handleGetGamesByCategory: mockHandleGetGamesByCategory,
-      handleSetToInitialState: mockHandleSetToInitialState,
-    });
-
-    (useUiStore as jest.Mock).mockReturnValue({
-      isFilterCategoriesOpen: isFilterCategoriesOpen,
-      handleOpenFilterCategories: mockHandleOpenFilterCategories,
-      handleCloseFilterCategories: mockHandleCloseFilterCategories,
-    });
-
-    (useLocation as jest.Mock).mockReturnValue({ search: "" });
-  });
-
-  test("It must render the navbar.", async () => {
-    const { container } = await asyncRenderComponent();
-
-    // eslint-disable-next-line
-    const header = container.querySelector(".header_container") as HTMLElement;
-    // eslint-disable-next-line
-    const nav = container.querySelector("nav") as HTMLElement;
-
-    expect(header).toBeInTheDocument();
-    expect(nav).toBeInTheDocument();
-  });
-
-  test("It must render the main.", async () => {
-    await asyncRenderComponent();
-
-    const main = screen.getByRole("main");
-
-    expect(main).toBeInTheDocument();
-  });
-
-  test("It must render the footer.", async () => {
-    const { container } = await asyncRenderComponent();
-
-    // eslint-disable-next-line
-    const footer = container.querySelector("footer") as HTMLElement;
-
-    expect(footer).toBeInTheDocument();
-    expect(footer).toHaveClass("footer_container");
   });
 });

@@ -18,10 +18,14 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the presentation header.", () => {
-  const { text } = renderComponent();
+describe("HeaderPresentation.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the presentation header.", () => {
+      const { text } = renderComponent();
 
-  const heading = screen.getByRole("heading", { name: text });
+      const heading = screen.getByRole("heading", { name: text });
 
-  expect(heading).toBeInTheDocument();
+      expect(heading).toBeInTheDocument();
+    });
+  });
 });

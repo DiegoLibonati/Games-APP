@@ -13,13 +13,13 @@ export const ShowGamesSection = (): JSX.Element => {
   const shuffledGames = useMemo(() => getSliceArraySorted(games, 12), [games]);
 
   return (
-    <section className="cards_games_section_container">
-      <h2 className="cards_games_section_container_title">Other Games</h2>
-      <article className="line_wrapper">
+    <section className="show__games">
+      <h2 className="show__games-title">Other Games</h2>
+      <article className="line__wrapper">
         <div className="line"></div>
       </article>
 
-      <article className="card_games_section_container_list">
+      <article className="show__games-cards">
         {shuffledGames?.map((game) => (
           <CardGame key={game.id} game={game}></CardGame>
         ))}

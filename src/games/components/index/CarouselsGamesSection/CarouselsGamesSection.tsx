@@ -50,12 +50,12 @@ export const CarouselsGamesSection = (): JSX.Element => {
   }, [categories]);
 
   return (
-    <section className="carousel_games_container">
+    <section className="carousels">
       {carousels.map((carousel, index) => {
         return carousel.isLoading ? (
           <article
             key={`${carousel.name}-${index}`}
-            className="carousel_games_container_carousel"
+            className="carousel__games"
           >
             <Loader></Loader>
           </article>
