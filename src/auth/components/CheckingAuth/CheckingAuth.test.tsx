@@ -21,11 +21,11 @@ describe("CheckingAuth.tsx", () => {
 
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loader__wrapper-auth"
+        ".loader-wrapper"
       ) as HTMLDivElement;
       // eslint-disable-next-line
       const loaderAuth = loaderRoot!.querySelector(
-        ".loader__auth"
+        ".loader-wrapper__auth"
       ) as HTMLDivElement;
 
       expect(loaderRoot).toBeInTheDocument();

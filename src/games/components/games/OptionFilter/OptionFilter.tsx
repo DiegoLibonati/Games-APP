@@ -1,6 +1,8 @@
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { OptionFilterListItem } from "../OptionFilterListItem/OptionFilterListItem";
 
+import "./OptionFilter.css";
+
 interface OptionFilterProps {
   name: string;
   isOpen: boolean;
@@ -17,26 +19,31 @@ export const OptionFilter = ({
   handleClickOpenAndClose,
 }: OptionFilterProps): JSX.Element => {
   return (
-    <article className="option__filter">
-      <div
-        className="option__filter-header"
-        onClick={handleClickOpenAndClose}
-      >
-        <h3>{name}</h3>
+    <article className="option-filter">
+      <div className="option-filter__header" onClick={handleClickOpenAndClose}>
+        <h3 className="option-filter__name">{name}</h3>
         {!isOpen && (
-          <button type="button" aria-label="open filter">
-            <FaChevronDown className="icon__option-filter-header"></FaChevronDown>
+          <button
+            type="button"
+            aria-label="open filter"
+            className="option-filter__btn-open"
+          >
+            <FaChevronDown className="option-filter__icon"></FaChevronDown>
           </button>
         )}
         {isOpen && (
-          <button type="button" aria-label="close filter">
-            <FaChevronUp className="icon__option-filter-header"></FaChevronUp>
+          <button
+            type="button"
+            aria-label="close filter"
+            className="option-filter__btn-close"
+          >
+            <FaChevronUp className="option-filter__icon"></FaChevronUp>
           </button>
         )}
       </div>
 
       {isOpen && (
-        <ul className="sub-filter__options">
+        <ul className="option-filter__list">
           {arr.map((option) => (
             <OptionFilterListItem
               key={option}

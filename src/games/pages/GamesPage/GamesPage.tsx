@@ -55,9 +55,9 @@ export const GamesPage = (): JSX.Element => {
     <Fragment>
       <NavBar></NavBar>
 
-      <main className="games__page">
-        <section className="games__page-options">
-          <h2>Filters</h2>
+      <main className="main-games-page">
+        <section className="games-page-options">
+          <h2 className="games-page-options__title">Filters</h2>
           <OptionFilter
             name="Categories"
             isOpen={isFilterCategoriesOpen}
@@ -74,17 +74,19 @@ export const GamesPage = (): JSX.Element => {
         {isLoadingGames ? (
           <Loader></Loader>
         ) : games.length > 0 ? (
-          <section className="all__games">
-            <div className="all__games-title">
-              <h2>Games</h2>
+          <section className="all-games">
+            <div className="all-games__title">
+              <h2 className="all-games__title-text">Games</h2>
             </div>
             {games.map((game) => (
               <CardGame key={game.id} game={game}></CardGame>
             ))}
           </section>
         ) : (
-          <section className="all__games-not-games">
-            <h1>¡That category does not exists!</h1>
+          <section className="all-games__not-games">
+            <h2 className="all-games__not-games-label">
+              ¡That category does not exists!
+            </h2>
           </section>
         )}
       </main>

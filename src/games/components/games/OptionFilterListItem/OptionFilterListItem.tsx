@@ -1,3 +1,5 @@
+import "./OptionFilterListItem.css";
+
 interface OptionFilterListItemProps {
   filter: string;
   handleClickFilter: (value: string) => void;
@@ -9,7 +11,7 @@ export const OptionFilterListItem = ({
 }: OptionFilterListItemProps): JSX.Element => {
   return (
     <li
-      className="option__filter-item"
+      className="option-filter-list-item"
       onClick={() => handleClickFilter(filter)}
     >
       {filter}

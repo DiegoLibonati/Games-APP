@@ -65,7 +65,7 @@ describe("RegisterPage.tsx - API", () => {
       const { container } = renderComponent();
 
       // eslint-disable-next-line
-      const loader = container.querySelector(".loade__all-wrapper");
+      const loader = container.querySelector(".loader-all-wrapper");
 
       expect(loader).toBeInTheDocument();
 

@@ -5,9 +5,9 @@ import { GrClose, GrFavorite } from "react-icons/gr";
 import { Game } from "../../../entities/entities";
 
 import { useGamesStore } from "../../../hooks/useGamesStore";
+import { useUiStore } from "../../../hooks/useUiStore";
 
 import "./ActiveGame.css";
-import { useUiStore } from "../../../hooks/useUiStore";
 
 export const ActiveGame = (): JSX.Element => {
   const { pathname } = useLocation();
@@ -43,38 +43,58 @@ export const ActiveGame = (): JSX.Element => {
   };
 
   return (
-    <div className="active__game-wrapper">
-      <div className="active__game">
-        <div className="active__game-header">
-          <img src={activeGame!.thumbnail} alt={activeGame!.title}></img>
+    <div className="active-game-wrapper">
+      <div className="active-game">
+        <div className="active-game__header">
+          <img
+            src={activeGame!.thumbnail}
+            alt={activeGame!.title}
+            className="active-game__img"
+          ></img>
 
-          <h2>{activeGame!.title}</h2>
+          <h2 className="active-game__title">{activeGame!.title}</h2>
         </div>
 
-        <p>{activeGame!.short_description}</p>
+        <p className="active-game__description">
+          {activeGame!.short_description}
+        </p>
 
-        <div className="active__game-specs">
-          <h3>
-            Gender: <span>{activeGame!.genre}</span>
+        <div className="active-game__specs">
+          <h3 className="active-game__genre">
+            Gender:{" "}
+            <span className="active-game__genre-span">{activeGame!.genre}</span>
           </h3>
-          <h3>
-            Platform: <span>{activeGame!.platform}</span>
+          <h3 className="active-game__platform">
+            Platform:{" "}
+            <span className="active-game__platform-span">
+              {activeGame!.platform}
+            </span>
           </h3>
-          <h3>
-            Published by: <span>{activeGame!.publisher}</span>
+          <h3 className="active-game__publisher">
+            Published by:{" "}
+            <span className="active-game__publisher-span">
+              {activeGame!.publisher}
+            </span>
           </h3>
-          <h3>
-            Developed by: <span>{activeGame!.developer}</span>
+          <h3 className="active-game__developer">
+            Developed by:{" "}
+            <span className="active-game__developer-span">
+              {activeGame!.developer}
+            </span>
           </h3>
-          <h3>
-            Release date: <span>{activeGame!.release_date}</span>
+          <h3 className="active-game__release-date">
+            Release date:{" "}
+            <span className="active-game__release-date-span">
+              {activeGame!.release_date}
+            </span>
           </h3>
 
-          <div className="active__game-links">
+          <div className="active-game__links">
             <a
               href={activeGame!.game_url}
               target="_blank"
               rel="noreferrer"
+              className="active-game__official-website"
               aria-label={`official website ${activeGame.title}`}
             >
               Official website
@@ -86,8 +106,9 @@ export const ActiveGame = (): JSX.Element => {
           type="button"
           aria-label="close active game"
           onClick={handleClickClose}
+          className="active-game-btn-close"
         >
-          <GrClose className="close_active_game"></GrClose>
+          <GrClose className="active-game-btn-close-icon"></GrClose>
         </button>
 
         {pathname === "/games/favorite" && (
@@ -95,8 +116,9 @@ export const ActiveGame = (): JSX.Element => {
             type="button"
             aria-label="delete favorite game"
             onClick={() => handleDeleteFavoriteGame(activeGame)}
+            className="active-game-btn-trash"
           >
-            <FaTrash className="active_game_trash"></FaTrash>
+            <FaTrash className="active-game-btn-trash-icon"></FaTrash>
           </button>
         )}
 
@@ -105,8 +127,9 @@ export const ActiveGame = (): JSX.Element => {
             type="button"
             aria-label="save new game to favorite"
             onClick={() => handleClickSaveNewGameToFavorite(activeGame)}
+            className="active-game-btn-favorite"
           >
-            <GrFavorite className="active_game_trash"></GrFavorite>
+            <GrFavorite className="active-game-btn-favorite-icon"></GrFavorite>
           </button>
         )}
       </div>

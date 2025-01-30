@@ -3,6 +3,7 @@ interface InputFormProps {
   placeholder: string;
   value: string;
   name: string;
+  className?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -11,6 +12,7 @@ export const InputForm = ({
   placeholder,
   value,
   name,
+  className,
   onChange,
 }: InputFormProps): JSX.Element => {
   return (
@@ -19,6 +21,7 @@ export const InputForm = ({
       placeholder={placeholder}
       value={value}
       name={name}
+      className={className}
       onChange={onChange}
     ></input>
   );

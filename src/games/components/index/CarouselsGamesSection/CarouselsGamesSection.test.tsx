@@ -69,17 +69,17 @@ describe("CarouselsGamesSection.tsx", () => {
 
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
       // eslint-disable-next-line
       const loaderParent = loaderRoot.parentElement as HTMLElement;
       // eslint-disable-next-line
       const loaderChild = loaderRoot!.querySelector(
-        ".loader"
+        ".loader-all"
       ) as HTMLDivElement;
 
       expect(loaderParent).toBeInTheDocument();
-      expect(loaderParent).toHaveClass("carousel__games");
+      expect(loaderParent).toHaveClass("carousel-games");
       expect(loaderRoot).toBeInTheDocument();
       expect(loaderChild).toBeInTheDocument();
 
@@ -98,7 +98,7 @@ describe("CarouselsGamesSection.tsx", () => {
       for (const game of mockRequestGames) {
         // eslint-disable-next-line
         const rootCard = container.querySelector(
-          `.game__${game.id}`
+          `.game-${game.id}`
         ) as HTMLDivElement;
         const imgGame = screen.getByAltText(game.title);
         const btnAddToFav = screen.getByRole("button", {

@@ -7,5 +7,5 @@ interface HeaderPresentationProps extends GeneralProps {}
 export const HeaderPresentation = ({
   children,
 }: HeaderPresentationProps): JSX.Element => {
-  return <h1 className="header__presentation">{children}</h1>;
+  return <h1 className="header-presentation">{children}</h1>;
 };

@@ -1,4 +1,4 @@
-.slide__btns {
+.slide-button-list {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,7 +14,7 @@
   bottom: 2rem;
 }
 
-.slide__btn {
+.slide-button-list__btn {
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 50%;
@@ -23,6 +23,6 @@
   cursor: pointer;
 }
 
-.slide__btn--active {
+.slide-button-list__btn--active {
   background-color: var(--primary-color);
 }

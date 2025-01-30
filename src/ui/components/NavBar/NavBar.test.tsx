@@ -70,7 +70,7 @@ describe("NavBar.tsx", () => {
       const nav = screen.getByRole("navigation");
 
       expect(nav).toBeInTheDocument();
-      expect(nav).toHaveClass("header__nav header__nav--open");
+      expect(nav).toHaveClass("header-wrapper__nav header-wrapper__nav--open");
     });
   });
 
@@ -101,7 +101,7 @@ describe("NavBar.tsx", () => {
       const nav = screen.getByRole("navigation");
 
       expect(nav).toBeInTheDocument();
-      expect(nav).toHaveClass("header__nav");
+      expect(nav).toHaveClass("header-wrapper__nav");
     });
   });
 
@@ -130,7 +130,7 @@ describe("NavBar.tsx", () => {
       const { container } = renderComponent();
 
       // eslint-disable-next-line
-      const header = container.querySelector(".header__wrapper");
+      const header = container.querySelector(".header-wrapper");
 
       expect(header).toBeInTheDocument();
     });

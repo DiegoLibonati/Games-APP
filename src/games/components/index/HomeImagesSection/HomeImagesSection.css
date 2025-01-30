@@ -1,4 +1,4 @@
-.home__images {
+.home-images {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-.home__images-background {
+.home-images__background {
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -21,21 +21,21 @@
   transition: transform 1s;
 }
 
-.home__images-background.activeSlide {
+.home-images__background--active-slide {
   transform: translateX(0%);
   transition: transform 1s;
 }
 
-.home__images-background.nextSlide {
+.home-images__background--next-slide {
   transform: translateX(100%);
 }
 
-.home__images-background.lastSlide {
+.home-images__background--last-slide {
   transform: translateX(-100%);
 }
 
 @media only screen and (min-width: 1024px) {
-  .home__images-background {
+  .home-images__background {
     background-size: 100% 100vh;
   }
 }

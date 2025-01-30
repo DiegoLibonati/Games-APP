@@ -1,4 +1,4 @@
-.active__game-wrapper {
+.active-game-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@
   z-index: 99999999;
 }
 
-.active__game {
+.active-game {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@
   position: relative;
 }
 
-.active__game-header {
+.active-game__header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -33,13 +33,13 @@
   position: relative;
 }
 
-.active__game-header img {
+.active-game__img {
   width: 10rem;
   height: auto;
   object-fit: cover;
 }
 
-.active__game-header h2 {
+.active-game__title {
   font-size: 2rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
@@ -47,7 +47,7 @@
   width: 100%;
 }
 
-.active__game p {
+.active-game__description {
   font-size: 1.5rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
@@ -56,7 +56,7 @@
   margin-top: 1rem;
 }
 
-.active__game-specs {
+.active-game__specs {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -67,20 +67,28 @@
   text-align: center;
 }
 
-.active__game-specs h3 {
+.active-game__genre,
+.active-game__platform,
+.active-game__publisher,
+.active-game__developer,
+.active-game__release-date {
   font-size: 1.5rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
   margin: 1rem 0 1rem 0;
 }
 
-.active__game-specs h3 span {
+.active-game__genre-span,
+.active-game__platform-span,
+.active-game__publisher-span,
+.active-game__developer-span,
+.active-game__release-date-span {
   font-size: 1.2rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
 }
 
-.active__game-links {
+.active-game__links {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -90,7 +98,7 @@
   margin: 1rem 0 1rem 0;
 }
 
-.active__game-links a {
+.active-game__official-website {
   text-decoration: none;
   font-size: 1.4rem;
   color: var(--white-color);
@@ -98,7 +106,7 @@
   cursor: pointer;
 }
 
-.close_active_game {
+.active-game-btn-close-icon {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -109,7 +117,8 @@
   cursor: pointer;
 }
 
-.active_game_trash {
+.active-game-btn-trash-icon,
+.active-game-btn-favorite-icon {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
@@ -121,37 +130,45 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .active__game-specs {
+  .active-game__specs {
     flex-flow: row wrap;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .active__game {
+  .active-game {
     width: 70rem;
   }
 
-  .active__game-header img {
+  .active-game__img {
     width: 25rem;
   }
 
-  .active__game-header h2 {
+  .active-game__title {
     font-size: 4rem;
   }
 
-  .active__game p {
+  .active-game__description {
     font-size: 3rem;
   }
 
-  .active__game-specs h3 {
+  .active-game__genre,
+  .active-game__platform,
+  .active-game__publisher,
+  .active-game__developer,
+  .active-game__release-date {
     font-size: 2.5rem;
   }
 
-  .active__game-specs h3 span {
+  .active-game__genre-span,
+  .active-game__platform-span,
+  .active-game__publisher-span,
+  .active-game__developer-span,
+  .active-game__release-date-span {
     font-size: 2rem;
   }
 
-  .active__game-links a {
+  .active-game__official-website {
     font-size: 1.5rem;
   }
 }

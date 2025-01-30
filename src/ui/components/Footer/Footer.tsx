@@ -11,7 +11,7 @@ import "./Footer.css";
 
 export const Footer = (): JSX.Element => {
   return (
-    <footer className="footer">
+    <footer className="footer-wrapper">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
@@ -24,14 +24,14 @@ export const Footer = (): JSX.Element => {
         ></path>
       </svg>
 
-      <div className="footer__links">
+      <div className="footer-wrapper__links">
         <a
           href="https://www.facebook.com/dielibonati/"
           target="_blank"
           rel="noreferrer"
           aria-label="open facebook"
         >
-          <FaFacebook className="footer__icon"></FaFacebook>
+          <FaFacebook className="footer-wrapper__icon"></FaFacebook>
         </a>
         <a
           href="https://github.com/DiegoLibonati"
@@ -39,7 +39,7 @@ export const Footer = (): JSX.Element => {
           rel="noreferrer"
           aria-label="open github"
         >
-          <FaGithub className="footer__icon"></FaGithub>
+          <FaGithub className="footer-wrapper__icon"></FaGithub>
         </a>
         <a
           href="https://www.instagram.com/die_libonati/"
@@ -47,7 +47,7 @@ export const Footer = (): JSX.Element => {
           rel="noreferrer"
           aria-label="open instagram"
         >
-          <FaInstagram className="footer__icon"></FaInstagram>
+          <FaInstagram className="footer-wrapper__icon"></FaInstagram>
         </a>
         <a
           href="https://www.linkedin.com/in/diego-libonati-67102419b/"
@@ -55,7 +55,7 @@ export const Footer = (): JSX.Element => {
           rel="noreferrer"
           aria-label="open linkedin"
         >
-          <FaLinkedinIn className="footer__icon"></FaLinkedinIn>
+          <FaLinkedinIn className="footer-wrapper__icon"></FaLinkedinIn>
         </a>
       </div>
     </footer>

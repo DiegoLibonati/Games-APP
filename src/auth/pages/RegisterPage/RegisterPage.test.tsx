@@ -63,7 +63,7 @@ describe("RegisterPage.tsx", () => {
 
       // eslint-disable-next-line
       const loader = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
 
       expect(loader).toBeInTheDocument();
@@ -91,7 +91,7 @@ describe("RegisterPage.tsx", () => {
 
       // eslint-disable-next-line
       const loader = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
 
       expect(loader).not.toBeInTheDocument();
@@ -326,7 +326,7 @@ describe("RegisterPage.tsx", () => {
       const { container } = renderComponent();
 
       // eslint-disable-next-line
-      const wave = container.querySelector(".register__wave") as HTMLElement;
+      const wave = container.querySelector(".register-wave") as HTMLElement;
 
       expect(wave).toBeInTheDocument();
     });

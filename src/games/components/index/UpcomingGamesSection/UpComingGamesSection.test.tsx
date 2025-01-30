@@ -31,7 +31,7 @@ describe("UpComingGamesSection.tsx", () => {
 
       const articles = screen.getAllByRole("article");
       const upcomingGamesRoots = articles.filter((article) =>
-        article.classList.contains("upcoming__game")
+        article.classList.contains("upcoming-game")
       );
 
       expect(upcomingGamesRoots).toHaveLength(upcomingGames.length);

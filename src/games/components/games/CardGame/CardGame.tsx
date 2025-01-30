@@ -2,6 +2,8 @@ import { useGamesStore } from "../../../../hooks/useGamesStore";
 
 import { Game } from "../../../../entities/entities";
 
+import "./CardGame.css";
+
 interface CardGameProps {
   game: Game;
 }
@@ -14,13 +16,14 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
   };
 
   return (
-    <article
-      className="games__page-card"
-      onClick={() => showActiveGame(game)}
-    >
-      <img src={game.thumbnail} alt={game.title}></img>
+    <article className="card-game-games" onClick={() => showActiveGame(game)}>
+      <img
+        src={game.thumbnail}
+        alt={game.title}
+        className="card-game-games__img"
+      ></img>
 
-      <h2>{game.title}</h2>
+      <h2 className="card-game-games__title">{game.title}</h2>
     </article>
   );
 };

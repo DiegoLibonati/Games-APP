@@ -85,7 +85,7 @@ describe("OptionFilter.tsx", () => {
       const article = screen.getByRole("article");
 
       expect(article).toBeInTheDocument();
-      expect(article).toHaveClass("option__filter");
+      expect(article).toHaveClass("option-filter");
     });
 
     test("It must render the root of the filter header.", () => {
@@ -93,11 +93,11 @@ describe("OptionFilter.tsx", () => {
 
       // eslint-disable-next-line
       const header = container.querySelector(
-        ".option__filter-header"
+        ".option-filter__header"
       ) as HTMLDivElement;
 
       expect(header).toBeInTheDocument();
-      expect(header).toHaveClass("option__filter-header");
+      expect(header).toHaveClass("option-filter__header");
     });
 
     test("It should execute the relevant function when the header is clicked.", async () => {
@@ -105,7 +105,7 @@ describe("OptionFilter.tsx", () => {
 
       // eslint-disable-next-line
       const header = container.querySelector(
-        ".option__filter-header"
+        ".option-filter__header"
       ) as HTMLDivElement;
 
       expect(header).toBeInTheDocument();

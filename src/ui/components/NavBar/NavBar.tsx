@@ -12,9 +12,9 @@ export const NavBar = (): JSX.Element => {
   const { displayName, photoURL, handleLogOut } = useAuthStore();
 
   return (
-    <header className="header__wrapper">
-      <div className="header__logo">
-        <img src={logo} alt="logo"></img>
+    <header className="header-wrapper">
+      <div className="header-wrapper__menu">
+        <img src={logo} alt="logo" className="header-wrapper__logo"></img>
 
         <Hamburger></Hamburger>
       </div>
@@ -22,36 +22,48 @@ export const NavBar = (): JSX.Element => {
       <nav
         className={
           isNavBarOpen
-            ? "header__nav header__nav--open"
-            : "header__nav"
+            ? "header-wrapper__nav header-wrapper__nav--open"
+            : "header-wrapper__nav"
         }
       >
-        <ul className="header__list">
-          <li className="header__list-item">
+        <ul className="header-wrapper__list">
+          <li className="header-wrapper__list-item">
             <NavLink
               to="/games/index"
               aria-label="go to home page"
-              className={({ isActive }) => (isActive ? "isActive" : undefined)}
+              className={({ isActive }) =>
+                isActive
+                  ? "header-wrapper__link header-wrapper__link--active"
+                  : "header-wrapper__link"
+              }
             >
               Home
             </NavLink>
           </li>
 
-          <li className="header__list-item">
+          <li className="header-wrapper__list-item">
             <NavLink
               to="/games/favorite"
               aria-label="go to favorite page"
-              className={({ isActive }) => (isActive ? "isActive" : undefined)}
+              className={({ isActive }) =>
+                isActive
+                  ? "header-wrapper__link header-wrapper__link--active"
+                  : "header-wrapper__link"
+              }
             >
               Favorite
             </NavLink>
           </li>
 
-          <li className="header__list-item">
+          <li className="header-wrapper__list-item">
             <NavLink
               to="/games/games"
               aria-label="go to games page"
-              className={({ isActive }) => (isActive ? "isActive" : undefined)}
+              className={({ isActive }) =>
+                isActive
+                  ? "header-wrapper__link header-wrapper__link--active"
+                  : "header-wrapper__link"
+              }
             >
               Games
             </NavLink>
@@ -59,23 +71,28 @@ export const NavBar = (): JSX.Element => {
         </ul>
 
         <button
-          className="btn__logout"
+          className="header-wrapper__logout"
           onClick={handleLogOut}
           aria-label="logout button"
         >
           LogOut
         </button>
 
-        <div className="header__user">
-          <h2>{displayName}</h2>
+        <div className="header-wrapper__user">
+          <h2 className="header-wrapper__username">{displayName}</h2>
           {photoURL ? (
             <img
               src={photoURL}
               referrerPolicy="no-referrer"
               alt={displayName!}
+              className="header-wrapper__avatar"
             ></img>
           ) : (
-            <img src="http://i.imgur.com/AtBE7.png" alt="photoURL"></img>
+            <img
+              src="http://i.imgur.com/AtBE7.png"
+              alt="photoURL"
+              className="header-wrapper__avatar"
+            ></img>
           )}
         </div>
       </nav>

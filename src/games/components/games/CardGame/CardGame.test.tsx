@@ -59,7 +59,7 @@ describe("CardGame.tsx", () => {
       const root = screen.getByRole("article");
 
       expect(root).toBeInTheDocument();
-      expect(root).toHaveClass("games__page-card");
+      expect(root).toHaveClass("card-game-games");
     });
 
     test("It must execute the relevant functions when the card is clicked.", async () => {

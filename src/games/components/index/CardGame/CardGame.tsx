@@ -37,12 +37,12 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
 
   return (
     <div
-      className={`index__page-card`}
+      className={`index-page-card`}
       style={{ animationName: isInformationOpen ? "nospin" : "spin" }}
     >
       <div
-        className={`index__page-card-img ${
-          isInformationOpen && "index__page-card-img--open"
+        className={`index-page-card__img ${
+          isInformationOpen && "index-page-card__img--open"
         }`}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
@@ -51,38 +51,53 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
         style={{ backgroundImage: `url(${game.thumbnail})` }}
       >
         <div
+          className="index-page-card__img-circle"
           style={isInformationOpen ? { display: "none" } : { display: "block" }}
         ></div>
       </div>
       <div
-        className={`index__page-card-information ${
-          isInformationOpen && "index__page-card-information--open"
+        className={`index-page-card__information ${
+          isInformationOpen && "index-page-card__information--open"
         }`}
       >
-        <h2>{game.title}</h2>
-        <p>{game.short_description}</p>
-        <h3>
-          Gender: <span>{game.genre}</span>
+        <h2 className="index-page-card__title">{game.title}</h2>
+        <p className="index-page-card__description">{game.short_description}</p>
+        <h3 className="index-page-card__genre">
+          Gender:{" "}
+          <span className="index-page-card__genre-span">{game.genre}</span>
         </h3>
-        <h3>
-          Platform: <span>{game.platform}</span>
+        <h3 className="index-page-card__platform">
+          Platform:{" "}
+          <span className="index-page-card__platform-span">
+            {game.platform}
+          </span>
         </h3>
-        <h3>
-          Published by: <span>{game.publisher}</span>
+        <h3 className="index-page-card__published-by">
+          Published by:{" "}
+          <span className="index-page-card__published-by-span">
+            {game.publisher}
+          </span>
         </h3>
-        <h3>
-          Developed by: <span>{game.developer}</span>
+        <h3 className="index-page-card__developed-by">
+          Developed by:{" "}
+          <span className="index-page-card__developed-by-span">
+            {game.developer}
+          </span>
         </h3>
-        <h3>
-          Release date: <span>{game.release_date}</span>
+        <h3 className="index-page-card__release-date">
+          Release date:{" "}
+          <span className="index-page-card__release-date-span">
+            {game.release_date}
+          </span>
         </h3>
 
-        <div className="index__page-card-links">
+        <div className="index-page-card__links">
           <a
             href={game.freetogame_profile_url}
             target="_blank"
             rel="noreferrer"
             aria-label={`go to official website ${game.title}`}
+            className="index-page-card__link-official-website"
           >
             Official website
           </a>
@@ -91,6 +106,7 @@ export const CardGame = ({ game }: CardGameProps): JSX.Element => {
             type="button"
             onClick={() => handleSaveGameToFavorite(game)}
             aria-label={`add to favorites ${game.title}`}
+            className="index-page-card__btn-favorite"
           >
             Add to Favorites
           </button>

@@ -49,11 +49,11 @@ describe("HomeCard.tsx", () => {
 
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
       // eslint-disable-next-line
       const loaderChild = loaderRoot!.querySelector(
-        ".loader"
+        ".loader-all"
       ) as HTMLDivElement;
 
       expect(loaderRoot).toBeInTheDocument();
@@ -66,7 +66,7 @@ describe("HomeCard.tsx", () => {
       const article = screen.getByRole("article");
 
       expect(article).toBeInTheDocument();
-      expect(article).toHaveClass("home__card effect__load");
+      expect(article).toHaveClass("home-card home-card--effect-load");
     });
   });
 

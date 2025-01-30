@@ -1,0 +1,42 @@
+.option-filter {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: auto;
+  border-bottom: 0.1rem solid var(--white-color);
+  padding: 1rem 0 1rem 0;
+}
+
+.option-filter__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.option-filter__name {
+  font-size: 2rem;
+  color: var(--white-color);
+  font-family: var(--font-montserrat);
+}
+
+.option-filter__icon {
+  font-size: 2rem;
+  color: var(--white-color);
+  font-family: var(--font-montserrat);
+}
+
+.option-filter__list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+}

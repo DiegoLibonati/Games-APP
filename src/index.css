@@ -65,6 +65,21 @@ button {
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
+.line-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+.line {
+  width: 20rem;
+  height: 0.5rem;
+  background-color: var(--white-color);
+  margin-bottom: 1rem;
+}
+
 @keyframes shake {
   10%,
   90% {

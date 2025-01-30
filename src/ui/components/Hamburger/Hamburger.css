@@ -1,4 +1,4 @@
-.nav-icon-5 {
+.hamburger {
   width: 3rem;
   height: 3rem;
   margin: 0.5rem 0.5rem;
@@ -6,42 +6,49 @@
   cursor: pointer;
   display: inline-block;
 }
-.nav-icon-5 span {
+
+.hamburger__span {
   background-color: var(--white-color);
   position: absolute;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   transition: 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
   width: 100%;
-  height: .4rem;
+  height: 0.4rem;
   transition-duration: 500ms;
 }
-.nav-icon-5 span:nth-child(1) {
+
+.hamburger__span:nth-child(1) {
   top: 0;
   left: 0;
 }
-.nav-icon-5 span:nth-child(2) {
+
+.hamburger__span:nth-child(2) {
   top: 1.3rem;
   left: 0;
   opacity: 1;
 }
-.nav-icon-5 span:nth-child(3) {
+
+.hamburger__span:nth-child(3) {
   bottom: 0;
   left: 0;
 }
-.nav-icon-5.open span:nth-child(1) {
+
+.hamburger--open.hamburger__span:nth-child(1) {
   transform: rotate(45deg);
   top: 1.3rem;
 }
-.nav-icon-5.open span:nth-child(2) {
+
+.hamburger--open.hamburger__span:nth-child(2) {
   opacity: 0;
 }
-.nav-icon-5.open span:nth-child(3) {
+
+.hamburger--open.hamburger__span:nth-child(3) {
   transform: rotate(-45deg);
   top: 1.3rem;
 }
 
 @media only screen and (min-width: 1024px) {
-  .nav-icon-5 {
+  .hamburger {
     display: none;
   }
 }

@@ -51,7 +51,7 @@ describe("Hamburger.tsx", () => {
       const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
 
       expect(hamburger).toBeInTheDocument();
-      expect(hamburger).toHaveClass("hamburger icon nav-icon-5 open");
+      expect(hamburger).toHaveClass("hamburger hamburger--open");
 
       await user.click(hamburger);
 
@@ -80,7 +80,7 @@ describe("Hamburger.tsx", () => {
       const hamburger = container.querySelector(".hamburger") as HTMLDivElement;
 
       expect(hamburger).toBeInTheDocument();
-      expect(hamburger).toHaveClass("hamburger icon nav-icon-5");
+      expect(hamburger).toHaveClass("hamburger");
 
       await user.click(hamburger);
 

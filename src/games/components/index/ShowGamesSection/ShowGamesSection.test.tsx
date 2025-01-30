@@ -53,7 +53,7 @@ describe("ShowGamesSection.tsx", () => {
 
       const articles = screen.getAllByRole("article");
       const articleGames = articles.find((article) =>
-        article.classList.contains("show__games-cards")
+        article.classList.contains("show-games__cards")
       );
 
       expect(articleGames).toBeInTheDocument();

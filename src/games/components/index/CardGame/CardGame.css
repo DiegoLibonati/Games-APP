@@ -1,4 +1,4 @@
-.index__page-card {
+.index-page-card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   padding: 1rem;
 }
 
-.index__page-card-img {
+.index-page-card__img {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +26,7 @@
   transition: opacity 1s, border-radius 1s;
 }
 
-.index__page-card-img div {
+.index-page-card__img-circle {
   background-color: var(--secondary-color);
   height: 7rem;
   width: 7rem;
@@ -34,17 +34,17 @@
   border: 0.1rem solid var(--gray-color);
 }
 
-.index__page-card-img:hover {
+.index-page-card__img:hover {
   opacity: 0.5;
   transition: opacity 1s;
 }
 
-.index__page-card-img.index__page-card-img--open {
+.index-page-card__img--open {
   border-radius: 0;
   transition: border-radius 1s;
 }
 
-.index__page-card-information {
+.index-page-card__information {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -58,12 +58,12 @@
   transition: max-height 1s;
 }
 
-.index__page-card-information.index__page-card-information--open {
+.index-page-card__information--open {
   max-height: 100rem;
   transition: max-height 1s;
 }
 
-.index__page-card-information h2 {
+.index-page-card__title {
   font-size: 3rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
@@ -72,27 +72,35 @@
   padding-top: 1rem;
 }
 
-.index__page-card-information p {
+.index-page-card__description {
   font-size: 2.5rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
   margin-bottom: 1rem;
 }
 
-.index__page-card-information h3 {
+.index-page-card__genre,
+.index-page-card__platform,
+.index-page-card__published-by,
+.index-page-card__developed-by,
+.index-page-card__release-date {
   font-size: 2rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
   margin-bottom: 1rem;
 }
 
-.index__page-card-information h3 span {
+.index-page-card__genre-span,
+.index-page-card__platform-span,
+.index-page-card__published-by-span,
+.index-page-card__developed-by-span,
+.index-page-card__release-date-span {
   font-size: 1.5rem;
   color: var(--white-color);
   font-family: var(--font-montserrat);
 }
 
-.index__page-card-links {
+.index-page-card__links {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -102,7 +110,7 @@
   padding-bottom: 1rem;
 }
 
-.index__page-card-links a {
+.index-page-card__link-official-website {
   width: auto;
   font-size: 1.5rem;
   padding: 1rem;
@@ -117,22 +125,7 @@
   margin: 0.5rem 0 0.5rem 0;
 }
 
-.index__page-card-links button {
-  width: auto;
-  font-size: 1.5rem;
-  padding: 1rem;
-  color: var(--white-color);
-  background: var(--primary-color);
-  text-decoration: none;
-  border: none;
-  text-align: end;
-  font-family: var(--font-montserrat);
-  letter-spacing: 0.1rem;
-  cursor: pointer;
-  margin: 0.5rem 0 0.5rem 0;
-}
-
-.index__page-card-links button:hover {
+.index-page-card__link-official-website:hover {
   background-image: linear-gradient(
     to right,
     var(--black-color),
@@ -143,7 +136,22 @@
   animation: slidebg 2s linear infinite;
 }
 
-.index__page-card-links a:hover {
+.index-page-card__btn-favorite {
+  width: auto;
+  font-size: 1.5rem;
+  padding: 1rem;
+  color: var(--white-color);
+  background: var(--primary-color);
+  text-decoration: none;
+  border: none;
+  text-align: end;
+  font-family: var(--font-montserrat);
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.index-page-card__btn-favorite:hover {
   background-image: linear-gradient(
     to right,
     var(--black-color),
@@ -176,22 +184,23 @@
 }
 
 @media only screen and (min-width: 540px) {
-  .index__page-card {
+  .index-page-card {
     width: auto;
     margin: 0;
   }
 
-  .index__page-card-img {
+  .index-page-card__img {
     height: 40rem;
     width: 40rem;
   }
-  .index__page-card-information {
+
+  .index-page-card__information {
     width: 40rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .index__page-card {
+  .index-page-card {
     animation-name: spin;
     animation-duration: 5000ms;
     animation-iteration-count: infinite;

@@ -79,11 +79,11 @@ describe("FavoritePage.tsx", () => {
 
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
       // eslint-disable-next-line
       const loaderChild = loaderRoot!.querySelector(
-        ".loader"
+        ".loader-all"
       ) as HTMLDivElement;
 
       expect(loaderRoot).toBeInTheDocument();
@@ -143,7 +143,7 @@ describe("FavoritePage.tsx", () => {
 
       const articles = screen.getAllByRole("article");
       const articleFavoriteGameRoots = articles.filter((article) =>
-        article.classList.contains("card__favorite")
+        article.classList.contains("card-favorite-game")
       );
 
       expect(articleFavoriteGameRoots).toHaveLength(favoritesGames.length);
@@ -172,11 +172,8 @@ describe("FavoritePage.tsx", () => {
       const { container } = await asyncRenderComponent();
 
       // eslint-disable-next-line
-      const header = container.querySelector(
-        ".header__wrapper"
-      ) as HTMLElement;
-      // eslint-disable-next-line
-      const nav = container.querySelector("nav") as HTMLElement;
+      const header = container.querySelector(".header-wrapper") as HTMLElement;
+      const nav = screen.getByRole("navigation");
 
       expect(header).toBeInTheDocument();
       expect(nav).toBeInTheDocument();
@@ -197,7 +194,7 @@ describe("FavoritePage.tsx", () => {
       const footer = container.querySelector("footer") as HTMLElement;
 
       expect(footer).toBeInTheDocument();
-      expect(footer).toHaveClass("footer");
+      expect(footer).toHaveClass("footer-wrapper");
     });
   });
 });

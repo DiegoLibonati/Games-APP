@@ -1,4 +1,4 @@
-.login__page {
+.main-login {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -10,7 +10,7 @@
   background-color: var(--primary-color);
 }
 
-.login {
+.login-wrapper {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
@@ -18,20 +18,20 @@
   padding: 1rem 1rem 0 1rem;
 }
 
-.login__information {
+.login-wrapper__information {
   width: 100%;
   height: 25rem;
-  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 0.5rem 1.5rem;
   position: relative;
 }
 
-.login__information img {
+.login-wrapper__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.login__form {
+.login-wrapper__form {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -40,14 +40,14 @@
   height: 30rem;
   background-color: var(--secondary-color);
   padding: 1rem;
-  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 0.5rem 1.5rem;
 }
 
-.login__form img {
+.login-wrapper__logo {
   display: none;
 }
 
-.login__form input {
+.login-wrapper__input {
   width: 100%;
   padding: 1rem;
   font-size: 1.5rem;
@@ -59,24 +59,35 @@
   letter-spacing: 0.1rem;
 }
 
-.login__form input::placeholder {
+.login-wrapper__input::placeholder {
   color: var(--primary-color);
 }
 
-.login__form button {
+.login-wrapper__btn {
   width: 100%;
   font-size: 1.5rem;
   padding: 1rem;
   color: var(--white-color);
   background: var(--primary-color);
   border: none;
-  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 0.5rem 1.5rem;
   font-family: var(--font-montserrat);
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
 
-.login__form a {
+.login-wrapper__btn:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.login-wrapper__link {
   width: 100%;
   font-size: 1.5rem;
   padding: 1rem;
@@ -85,54 +96,27 @@
   text-decoration: none;
   border: none;
   text-align: end;
-  box-shadow: rgba(var(--black-int-color), 0.35) 0 .5rem 1.5rem;
+  box-shadow: rgba(var(--black-int-color), 0.35) 0 0.5rem 1.5rem;
   font-family: var(--font-montserrat);
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
 
-.login__wave {
+.login-wrapper__link:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.login-wave {
   position: absolute;
   bottom: 0;
   height: 10rem;
-}
-
-.login__form button:hover {
-  background-image: linear-gradient(
-    to right,
-    var(--black-color),
-    var(--black-color) 16.65%,
-    var(--primary-color) 49.95%,
-    var(--secondary-color) 100%
-  );
-  animation: slidebg 2s linear infinite;
-}
-
-.login__form a:hover {
-  background-image: linear-gradient(
-    to right,
-    var(--black-color),
-    var(--black-color) 16.65%,
-    var(--primary-color) 49.95%,
-    var(--secondary-color) 100%
-  );
-  animation: slidebg 2s linear infinite;
-}
-
-.slide__btns {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: row wrap;
-  width: 5rem;
-  height: auto;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  bottom: 2rem;
 }
 
 @keyframes slidebg {
@@ -142,56 +126,56 @@
 }
 
 @media only screen and (min-width: 280px) and (orientation: landscape) {
-  .login__page {
+  .main-login {
     height: 80rem;
   }
 }
 
 @media only screen and (min-width: 540px) and (orientation: portrait) {
-  .login {
+  .login-wrapper {
     width: 50rem;
     height: 60rem;
   }
 
-  .login__information {
+  .login-wrapper__information {
     height: 30rem;
   }
 }
 
 @media only screen and (min-width: 768px) and (orientation: portrait) {
-  .login__page {
+  .main-login {
     justify-content: center;
   }
 
-  .login__wave {
+  .login-wave {
     height: 15rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .login__page {
+  .main-login {
     height: 100vh;
     justify-content: center;
   }
 
-  .login {
+  .login-wrapper {
     grid-template-columns: repeat(2, 1fr);
     height: 50rem;
     width: 80rem;
     padding: 0 1rem 0 1rem;
   }
 
-  .login__information {
+  .login-wrapper__information {
     height: 50rem;
   }
 
-  .login__form {
+  .login-wrapper__form {
     justify-content: flex-end;
     height: 50rem;
     position: relative;
   }
 
-  .login__form img {
+  .login-wrapper__logo {
     display: block;
     width: 20rem;
     height: 20rem;
@@ -200,25 +184,25 @@
     top: 2rem;
   }
 
-  .login__form input {
+  .login-wrapper__input {
     margin-bottom: 1rem;
   }
 
-  .login__form button {
+  .login-wrapper__btn {
     margin-bottom: 1rem;
   }
 
-  .login__form a {
+  .login-wrapper__link {
     margin-bottom: 1rem;
   }
 
-  .login__wave {
+  .login-wave {
     height: 10rem;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .login__wave {
+  .login-wave {
     height: 15rem;
   }
-} ;
+}

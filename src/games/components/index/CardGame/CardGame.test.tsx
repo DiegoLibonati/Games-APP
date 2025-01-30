@@ -56,11 +56,11 @@ describe("CardGame.tsx", () => {
 
       // eslint-disable-next-line
       const rootCard = container.querySelector(
-        ".index__page-card"
+        ".index-page-card"
       ) as HTMLDivElement;
 
       expect(rootCard).toBeInTheDocument();
-      expect(rootCard).toHaveClass("index__page-card");
+      expect(rootCard).toHaveClass("index-page-card");
     });
 
     test("It must render the disk.", () => {
@@ -68,11 +68,11 @@ describe("CardGame.tsx", () => {
 
       // eslint-disable-next-line
       const disk = container.querySelector(
-        ".index__page-card-img"
+        ".index-page-card__img"
       ) as HTMLDivElement;
 
       expect(disk).toBeInTheDocument();
-      expect(disk).toHaveClass("index__page-card-img");
+      expect(disk).toHaveClass("index-page-card__img");
       expect(disk).toHaveStyle({
         backgroundImage: `url(${props.game.thumbnail})`,
       });
@@ -83,11 +83,11 @@ describe("CardGame.tsx", () => {
 
       // eslint-disable-next-line
       const rootInformation = container.querySelector(
-        ".index__page-card-information"
+        ".index-page-card__information"
       ) as HTMLDivElement;
 
       expect(rootInformation).toBeInTheDocument();
-      expect(rootInformation).toHaveClass("index__page-card-information");
+      expect(rootInformation).toHaveClass("index-page-card__information");
     });
 
     test("It must render the title, description, genre, platform, publisher, developer and release date.", () => {
@@ -144,11 +144,11 @@ describe("CardGame.tsx", () => {
 
       // eslint-disable-next-line
       const disk = container.querySelector(
-        ".index__page-card-img"
+        ".index-page-card__img"
       ) as HTMLDivElement;
       // eslint-disable-next-line
       const rootInformation = container.querySelector(
-        ".index__page-card-information"
+        ".index-page-card__information"
       ) as HTMLDivElement;
 
       expect(disk).toBeInTheDocument();
@@ -158,14 +158,14 @@ describe("CardGame.tsx", () => {
 
       expect(
         // eslint-disable-next-line
-        container.querySelector(".index__page-card-img") as HTMLDivElement
-      ).toHaveClass("index__page-card-img--open");
+        container.querySelector(".index-page-card__img") as HTMLDivElement
+      ).toHaveClass("index-page-card__img--open");
       expect(
         // eslint-disable-next-line
         container.querySelector(
-          ".index__page-card-information"
+          ".index-page-card__information"
         ) as HTMLDivElement
-      ).toHaveClass("index__page-card-information--open");
+      ).toHaveClass("index-page-card__information--open");
     });
 
     test("It should close the description when you double click on the disk.", async () => {
@@ -173,7 +173,7 @@ describe("CardGame.tsx", () => {
 
       // eslint-disable-next-line
       const disk = container.querySelector(
-        ".index__page-card-img"
+        ".index-page-card__img"
       ) as HTMLDivElement;
 
       expect(disk).toBeInTheDocument();
@@ -182,27 +182,27 @@ describe("CardGame.tsx", () => {
 
       expect(
         // eslint-disable-next-line
-        container.querySelector(".index__page-card-img") as HTMLDivElement
-      ).toHaveClass("index__page-card-img--open");
+        container.querySelector(".index-page-card__img") as HTMLDivElement
+      ).toHaveClass("index-page-card__img--open");
       expect(
         // eslint-disable-next-line
         container.querySelector(
-          ".index__page-card-information"
+          ".index-page-card__information"
         ) as HTMLDivElement
-      ).toHaveClass("index__page-card-information--open");
+      ).toHaveClass("index-page-card__information--open");
 
       await user.dblClick(disk);
 
       expect(
         // eslint-disable-next-line
-        container.querySelector(".index__page-card-img") as HTMLDivElement
-      ).not.toHaveClass("index__page-card-img--open");
+        container.querySelector(".index-page-card__img") as HTMLDivElement
+      ).not.toHaveClass("index-page-card__img--open");
       expect(
         // eslint-disable-next-line
         container.querySelector(
-          ".index__page-card-information"
+          ".index-page-card__information"
         ) as HTMLDivElement
-      ).not.toHaveClass("index__page-card-information--open");
+      ).not.toHaveClass("index-page-card__information--open");
     });
   });
 });

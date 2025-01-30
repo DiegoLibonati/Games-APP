@@ -34,7 +34,7 @@ export const IndexPage = (): JSX.Element => {
     <Fragment>
       <NavBar></NavBar>
 
-      <main className="index__page">
+      <main className="main-index-page">
         <HomeImagesSection></HomeImagesSection>
         <CarouselsGamesSection></CarouselsGamesSection>
         <ShowGamesSection></ShowGamesSection>

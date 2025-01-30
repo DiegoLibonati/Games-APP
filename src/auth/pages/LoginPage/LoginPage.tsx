@@ -67,14 +67,18 @@ export const LoginPage = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="login__page">
-      <section className="login">
-        <article className="login__information">
+    <main className="main-login">
+      <section className="login-wrapper">
+        <article className="login-wrapper__information">
           {isLoadingImages ? (
             <Loader></Loader>
           ) : (
             <Fragment>
-              <img src={images[index]} alt="loginimage"></img>
+              <img
+                src={images[index]}
+                alt="loginimage"
+                className="login-wrapper__img"
+              ></img>
 
               <HeaderPresentation>
                 {index === 0
@@ -92,14 +96,15 @@ export const LoginPage = (): JSX.Element => {
           )}
         </article>
 
-        <form className="login__form" onSubmit={onSubmitForm}>
-          <img src={logo} alt="logo"></img>
+        <form className="login-wrapper__form" onSubmit={onSubmitForm}>
+          <img src={logo} alt="logo" className="login-wrapper__logo"></img>
 
           <InputForm
             type="text"
             placeholder="Your email"
             value={formState.email}
             name="email"
+            className="login-wrapper__input"
             onChange={onInputChange}
           ></InputForm>
 
@@ -108,27 +113,37 @@ export const LoginPage = (): JSX.Element => {
             placeholder="Your password"
             value={formState.password}
             name="password"
+            className="login-wrapper__input"
             onChange={onInputChange}
           ></InputForm>
 
-          <button type="submit" aria-label="submit login">
+          <button
+            type="submit"
+            aria-label="submit login"
+            className="login-wrapper__btn"
+          >
             Login
           </button>
           <button
             type="button"
+            className="login-wrapper__btn"
             aria-label="login with google"
             onClick={onSubmitWithGoogle}
           >
             Google
           </button>
-          <Link to="/auth/register" aria-label="Go to register page">
+          <Link
+            to="/auth/register"
+            aria-label="Go to register page"
+            className="login-wrapper__link"
+          >
             Register
           </Link>
         </form>
       </section>
 
       <Wave
-        className="login__wave"
+        className="login-wave"
         fill={rootCss.colors.secondary}
         paused={false}
         options={{

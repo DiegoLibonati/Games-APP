@@ -59,7 +59,7 @@ describe("CardFavoriteGame.tsx", () => {
       const articleRoot = screen.getByRole("article");
 
       expect(articleRoot).toBeInTheDocument();
-      expect(articleRoot).toHaveClass("card__favorite");
+      expect(articleRoot).toHaveClass("card-favorite-game");
 
       await user.click(articleRoot);
 

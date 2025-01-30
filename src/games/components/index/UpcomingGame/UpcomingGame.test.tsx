@@ -40,7 +40,7 @@ describe("UpcomingGame.tsx", () => {
       const articleRoot = screen.getByRole("article");
 
       expect(articleRoot).toBeInTheDocument();
-      expect(articleRoot).toHaveClass("upcoming__game");
+      expect(articleRoot).toHaveClass("upcoming-game");
     });
 
     test("It must render the image and title.", () => {

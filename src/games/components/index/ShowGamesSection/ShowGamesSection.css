@@ -1,4 +1,4 @@
-.show__games {
+.show-games {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -9,7 +9,7 @@
   padding: 1rem;
 }
 
-.show__games-title {
+.show-games__title {
   font-size: 4.5rem;
   color: var(--white-color);
   width: 100%;
@@ -17,7 +17,7 @@
   margin: 1rem 0 1rem 0;
 }
 
-.show__games-cards {
+.show-games__cards {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -26,13 +26,13 @@
 }
 
 @media only screen and (min-width: 540px) {
-  .show__games-title {
+  .show-games__title {
     font-size: 6rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .show__games-title {
+  .show-games__title {
     font-size: 7rem;
   }
 }

@@ -18,13 +18,14 @@ export const CardFavoriteGame = ({
   };
 
   return (
-    <article
-      className="card__favorite"
-      onClick={() => handleClick(game)}
-    >
-      <img src={game.thumbnail} alt={game.title}></img>
+    <article className="card-favorite-game" onClick={() => handleClick(game)}>
+      <img
+        src={game.thumbnail}
+        alt={game.title}
+        className="card-favorite-game__img"
+      ></img>
 
-      <h2>{game.title}</h2>
+      <h2 className="card-favorite-game__title">{game.title}</h2>
     </article>
   );
 };

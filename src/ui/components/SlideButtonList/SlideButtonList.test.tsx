@@ -38,7 +38,7 @@ describe("SlideButtonList.tsx", () => {
       const { container } = renderComponent({ index: 0 });
 
       // eslint-disable-next-line
-      const root = container.querySelector(".slide__btns") as HTMLDivElement;
+      const root = container.querySelector(".slide-button-list") as HTMLDivElement;
 
       expect(root).toBeInTheDocument();
     });
@@ -52,7 +52,7 @@ describe("SlideButtonList.tsx", () => {
         const btn = screen.getByRole("button", { name: `item-${key}` });
 
         expect(btn).toBeInTheDocument();
-        expect(btn).toHaveClass("slide__btn");
+        expect(btn).toHaveClass("slide-button-list__btn");
       }
     });
 
@@ -66,7 +66,7 @@ describe("SlideButtonList.tsx", () => {
 
         expect(btn).toBeInTheDocument();
         expect(btn).toHaveClass(
-          key === "0" ? "slide__btn slide__btn--active" : "slide__btn"
+          key === "0" ? "slide-button-list__btn slide-button-list__btn--active" : "slide-button-list__btn"
         );
       }
     });

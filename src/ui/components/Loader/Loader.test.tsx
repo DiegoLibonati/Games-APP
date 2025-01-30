@@ -21,11 +21,11 @@ describe("Loader.tsx", () => {
 
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
       // eslint-disable-next-line
       const loaderChild = loaderRoot!.querySelector(
-        ".loader"
+        ".loader-all"
       ) as HTMLDivElement;
 
       expect(loaderRoot).toBeInTheDocument();

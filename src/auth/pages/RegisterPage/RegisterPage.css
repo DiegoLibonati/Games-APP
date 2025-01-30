@@ -1,4 +1,4 @@
-.register__page {
+.register-page {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -10,7 +10,7 @@
   background-color: var(--primary-color);
 }
 
-.register {
+.register-wrapper {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
@@ -18,20 +18,20 @@
   padding: 1rem 1rem 0 1rem;
 }
 
-.register__information {
+.register-wrapper__information {
   width: 100%;
   height: 25rem;
   box-shadow: rgba(var(--black-int-color), 0.35) 0 0.5rem 1.5rem;
   position: relative;
 }
 
-.register__information img {
+.register-wrapper__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.register__form {
+.register-wrapper__form {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -43,11 +43,11 @@
   box-shadow: rgba(var(--black-int-color), 0.35) 0 0.5rem 1.5rem;
 }
 
-.register__form img {
+.register-wrapper__logo {
   display: none;
 }
 
-.register__form input {
+.register-wrapper__input {
   width: 100%;
   padding: 1rem;
   font-size: 1.5rem;
@@ -59,11 +59,11 @@
   letter-spacing: 0.1rem;
 }
 
-.register__form input::placeholder {
+.register-wrapper__input::placeholder {
   color: var(--primary-color);
 }
 
-.register__form button {
+.register-wrapper__btn {
   width: 100%;
   font-size: 1.5rem;
   padding: 1rem;
@@ -76,7 +76,18 @@
   cursor: pointer;
 }
 
-.register__form a {
+.register-wrapper__btn:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.register-wrapper__link {
   width: 100%;
   font-size: 1.5rem;
   padding: 1rem;
@@ -91,48 +102,21 @@
   cursor: pointer;
 }
 
-.register__wave {
+.register-wrapper__link:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--black-color),
+    var(--black-color) 16.65%,
+    var(--primary-color) 49.95%,
+    var(--secondary-color) 100%
+  );
+  animation: slidebg 2s linear infinite;
+}
+
+.register-wave {
   position: absolute;
   bottom: 0;
   height: 10rem;
-}
-
-.register__form button:hover {
-  background-image: linear-gradient(
-    to right,
-    var(--black-color),
-    var(--black-color) 16.65%,
-    var(--primary-color) 49.95%,
-    var(--secondary-color) 100%
-  );
-  animation: slidebg 2s linear infinite;
-}
-
-.register__form a:hover {
-  background-image: linear-gradient(
-    to right,
-    var(--black-color),
-    var(--black-color) 16.65%,
-    var(--primary-color) 49.95%,
-    var(--secondary-color) 100%
-  );
-  animation: slidebg 2s linear infinite;
-}
-
-.slide__btns {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: row wrap;
-  width: 5rem;
-  height: auto;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  bottom: 2rem;
 }
 
 @keyframes slidebg {
@@ -142,56 +126,56 @@
 }
 
 @media only screen and (min-width: 280px) and (orientation: landscape) {
-  .register__page {
+  .register-page {
     height: 80rem;
   }
 }
 
 @media only screen and (min-width: 540px) and (orientation: portrait) {
-  .register {
+  .register-wrapper {
     width: 50rem;
     height: 60rem;
   }
 
-  .register__information {
+  .register-wrapper__information {
     height: 30rem;
   }
 }
 
 @media only screen and (min-width: 768px) and (orientation: portrait) {
-  .register__page {
+  .register-page {
     justify-content: center;
   }
 
-  .register__wave {
+  .register-wave {
     height: 15rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .register__page {
+  .register-page {
     height: 100vh;
     justify-content: center;
   }
 
-  .register {
+  .register-wrapper {
     grid-template-columns: repeat(2, 1fr);
     height: 50rem;
     width: 80rem;
     padding: 0 1rem 0 1rem;
   }
 
-  .register__information {
+  .register-wrapper__information {
     height: 50rem;
   }
 
-  .register__form {
+  .register-wrapper__form {
     justify-content: flex-end;
     height: 50rem;
     position: relative;
   }
 
-  .register__form img {
+  .register-wrapper__logo {
     display: block;
     width: 20rem;
     height: 20rem;
@@ -200,25 +184,25 @@
     top: 2rem;
   }
 
-  .register__form input {
+  .register-wrapper__input {
     margin-bottom: 1rem;
   }
 
-  .register__form button {
+  .register-wrapper__btn {
     margin-bottom: 1rem;
   }
 
-  .register__form a {
+  .register-wrapper__link {
     margin-bottom: 1rem;
   }
 
-  .register__wave {
+  .register-wave {
     height: 10rem;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .register__wave {
+  .register-wave {
     height: 15rem;
   }
 }

@@ -20,7 +20,7 @@ describe("Footer.tsx", () => {
       const { container } = renderComponent();
 
       // eslint-disable-next-line
-      const footer = container.querySelector(".footer") as HTMLElement;
+      const footer = container.querySelector(".footer-wrapper") as HTMLElement;
 
       expect(footer).toBeInTheDocument();
     });

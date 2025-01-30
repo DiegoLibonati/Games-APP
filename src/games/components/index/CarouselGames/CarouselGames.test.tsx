@@ -58,7 +58,7 @@ describe("CarouselGames.tsx", () => {
       const article = screen.getByRole("article");
 
       expect(article).toBeInTheDocument();
-      expect(article).toHaveClass("carousel__games");
+      expect(article).toHaveClass("carousel-games");
     });
 
     test("It must render the carousel title.", () => {
@@ -74,11 +74,11 @@ describe("CarouselGames.tsx", () => {
 
       // eslint-disable-next-line
       const track = container.querySelector(
-        ".carousel__games-track"
+        ".carousel-games__track"
       ) as HTMLDivElement;
 
       expect(track).toBeInTheDocument();
-      expect(track).toHaveClass("carousel__games-track");
+      expect(track).toHaveClass("carousel-games__track");
     });
 
     test("It must render the root of the card, with its image and button. Additionally, it must execute the relevant function when it is clicked.", async () => {
@@ -87,7 +87,7 @@ describe("CarouselGames.tsx", () => {
       for (const game of props.games) {
         // eslint-disable-next-line
         const track = container.querySelector(
-          `.game__${game.id}`
+          `.game-${game.id}`
         ) as HTMLDivElement;
         const img = screen.getByAltText(game.title);
         const btnAddToFav = screen.getByRole("button", {
@@ -95,12 +95,12 @@ describe("CarouselGames.tsx", () => {
         });
 
         expect(track).toBeInTheDocument();
-        expect(track).toHaveClass("carousel__games-item");
+        expect(track).toHaveClass("carousel-games__item");
         expect(img).toBeInTheDocument();
         expect(img).toHaveAttribute("src", game.thumbnail);
         expect(img).toHaveAttribute("alt", game.title);
         expect(btnAddToFav).toBeInTheDocument();
-        expect(btnAddToFav).toHaveClass("carousel__games-item-button");
+        expect(btnAddToFav).toHaveClass("carousel-games__btn-favorite");
 
         await user.click(btnAddToFav);
 

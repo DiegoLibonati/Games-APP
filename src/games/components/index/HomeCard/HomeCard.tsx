@@ -21,27 +21,26 @@ export const HomeCard = (): JSX.Element => {
 
   return (
     <article
-      className={
-        !game ? "home__card effect__load" : "home__card"
-      }
+      className={!game ? "home-card home-card--effect-load" : "home-card"}
     >
       {!game ? (
         <Loader></Loader>
       ) : (
         <Fragment>
           <img
-            className="home__card-img"
+            className="home-card__img"
             src={game.thumbnail}
             alt={game.title}
           ></img>
-          <div className="home__card-information">
-            <h2>{game.title}</h2>
-            <h3>{game.genre}</h3>
-            <h4>{game.publisher}</h4>
+          <div className="home-card__information">
+            <h2 className="home-card__title">{game.title}</h2>
+            <h3 className="home-card__genre">{game.genre}</h3>
+            <h4 className="home-card__publisher">{game.publisher}</h4>
 
             <button
               type="button"
               aria-label="add to favorite"
+              className="home-card__btn-favorite"
               onClick={() => handleSaveGameToFavorite(game)}
             >
               Add to favorite

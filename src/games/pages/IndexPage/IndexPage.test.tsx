@@ -51,11 +51,8 @@ describe("IndexPage.tsx", () => {
       const { container } = await asyncRenderComponent();
 
       // eslint-disable-next-line
-      const header = container.querySelector(
-        ".header__wrapper"
-      ) as HTMLElement;
-      // eslint-disable-next-line
-      const nav = container.querySelector("nav") as HTMLElement;
+      const header = container.querySelector(".header-wrapper") as HTMLElement;
+      const nav = screen.getByRole("navigation");
 
       expect(header).toBeInTheDocument();
       expect(nav).toBeInTheDocument();
@@ -74,7 +71,7 @@ describe("IndexPage.tsx", () => {
 
       // eslint-disable-next-line
       const homeImagesSection = container.querySelector(
-        ".home__images"
+        ".home-images"
       ) as HTMLElement;
 
       expect(homeImagesSection).toBeInTheDocument();
@@ -96,7 +93,7 @@ describe("IndexPage.tsx", () => {
 
       // eslint-disable-next-line
       const showGamesSection = container.querySelector(
-        ".show__games"
+        ".show-games"
       ) as HTMLElement;
 
       expect(showGamesSection).toBeInTheDocument();
@@ -107,7 +104,7 @@ describe("IndexPage.tsx", () => {
 
       // eslint-disable-next-line
       const upcomingGamesSection = container.querySelector(
-        ".upcoming__games"
+        ".upcoming-games"
       ) as HTMLElement;
 
       expect(upcomingGamesSection).toBeInTheDocument();
@@ -120,7 +117,7 @@ describe("IndexPage.tsx", () => {
       const footer = container.querySelector("footer") as HTMLElement;
 
       expect(footer).toBeInTheDocument();
-      expect(footer).toHaveClass("footer");
+      expect(footer).toHaveClass("footer-wrapper");
     });
   });
 });

@@ -30,7 +30,7 @@ describe("HomeImagesSection.tsx", () => {
 
       // eslint-disable-next-line
       const images = container.querySelectorAll(
-        ".home__images-background"
+        ".home-images__background"
       ) as NodeList;
 
       expect(images).toHaveLength(imagesOfGames.length);
@@ -41,13 +41,13 @@ describe("HomeImagesSection.tsx", () => {
 
       // eslint-disable-next-line
       const images = container.querySelectorAll(
-        ".home__images-background"
+        ".home-images__background"
       ) as NodeList;
 
       const firstImg = images[0];
 
       expect(firstImg).toBeInTheDocument();
-      expect(firstImg).toHaveClass("activeSlide");
+      expect(firstImg).toHaveClass("home-images__background--active-slide");
     });
 
     test("It must render the image that follows the first image with the nextSlide class.", () => {
@@ -55,13 +55,13 @@ describe("HomeImagesSection.tsx", () => {
 
       // eslint-disable-next-line
       const images = container.querySelectorAll(
-        ".home__images-background"
+        ".home-images__background"
       ) as NodeList;
 
       const secondImg = images[1];
 
       expect(secondImg).toBeInTheDocument();
-      expect(secondImg).toHaveClass("nextSlide");
+      expect(secondImg).toHaveClass("home-images__background--next-slide");
     });
 
     test("It must render the last image with the lastSlide class.", () => {
@@ -69,13 +69,13 @@ describe("HomeImagesSection.tsx", () => {
 
       // eslint-disable-next-line
       const images = container.querySelectorAll(
-        ".home__images-background"
+        ".home-images__background"
       ) as NodeList;
 
       const lastImg = images[images.length - 1];
 
       expect(lastImg).toBeInTheDocument();
-      expect(lastImg).toHaveClass("lastSlide");
+      expect(lastImg).toHaveClass("home-images__background--last-slide");
     });
 
     test("It must render the HomeCard component.", () => {
@@ -84,7 +84,7 @@ describe("HomeImagesSection.tsx", () => {
       const homeCardRoot = screen.getByRole("article");
 
       expect(homeCardRoot).toBeInTheDocument();
-      expect(homeCardRoot).toHaveClass("home__card");
+      expect(homeCardRoot).toHaveClass("home-card");
     });
   });
 });

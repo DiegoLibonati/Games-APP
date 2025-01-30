@@ -73,14 +73,18 @@ export const RegisterPage = (): JSX.Element => {
   }, []);
 
   return (
-    <main className="register__page">
-      <section className="register">
-        <article className="register__information">
+    <main className="register-page">
+      <section className="register-wrapper">
+        <article className="register-wrapper__information">
           {isLoadingImages ? (
             <Loader></Loader>
           ) : (
             <Fragment>
-              <img src={images[index]} alt="registerimage"></img>
+              <img
+                src={images[index]}
+                alt="registerimage"
+                className="register-wrapper__img"
+              ></img>
 
               <HeaderPresentation>
                 {index === 0
@@ -98,14 +102,15 @@ export const RegisterPage = (): JSX.Element => {
           )}
         </article>
 
-        <form className="register__form" onSubmit={onSubmitForm}>
-          <img src={logo} alt="logo"></img>
+        <form className="register-wrapper__form" onSubmit={onSubmitForm}>
+          <img src={logo} alt="logo" className="register-wrapper__logo"></img>
 
           <InputForm
             type="text"
             placeholder="Your username"
             value={formState.username}
             name="username"
+            className="register-wrapper__input"
             onChange={onInputChange}
           ></InputForm>
 
@@ -114,6 +119,7 @@ export const RegisterPage = (): JSX.Element => {
             placeholder="Your email"
             value={formState.email}
             name="email"
+            className="register-wrapper__input"
             onChange={onInputChange}
           ></InputForm>
 
@@ -122,6 +128,7 @@ export const RegisterPage = (): JSX.Element => {
             placeholder="Your password"
             value={formState.password}
             name="password"
+            className="register-wrapper__input"
             onChange={onInputChange}
           ></InputForm>
 
@@ -130,20 +137,29 @@ export const RegisterPage = (): JSX.Element => {
             placeholder="Repeat your password"
             value={formState.repeatPassword}
             name="repeatPassword"
+            className="register-wrapper__input"
             onChange={onInputChange}
           ></InputForm>
 
-          <button type="submit" aria-label="submit register">
+          <button
+            type="submit"
+            aria-label="submit register"
+            className="register-wrapper__btn"
+          >
             Register
           </button>
-          <Link to="/auth/login" aria-label="Go to login page">
+          <Link
+            to="/auth/login"
+            aria-label="Go to login page"
+            className="register-wrapper__link"
+          >
             Go to Login
           </Link>
         </form>
       </section>
 
       <Wave
-        className="register__wave"
+        className="register-wave"
         fill={rootCss.colors.secondary}
         paused={false}
         options={{

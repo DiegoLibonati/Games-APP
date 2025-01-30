@@ -1,4 +1,4 @@
-.favorite__page {
+.main-favorite-page {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -11,23 +11,7 @@
   position: relative;
 }
 
-.favorite__not-games {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column wrap;
-  width: 100%;
-  min-height: 65vh;
-}
-
-.favorite__not-games h1 {
-  font-size: 4rem;
-  color: var(--white-color);
-  font-family: var(--font-montserrat);
-  text-align: center;
-}
-
-.favorite__games {
+.favorite-games {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,5 +21,18 @@
   margin: 1rem 0 1rem 0;
 }
 
-@media only screen and (min-width: 1024px) {
+.favorite-games__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  min-height: 65vh;
+}
+
+.favorite-games__empty-label {
+  font-size: 4rem;
+  color: var(--white-color);
+  font-family: var(--font-montserrat);
+  text-align: center;
 }

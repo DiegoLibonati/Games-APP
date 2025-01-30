@@ -1,4 +1,4 @@
-.footer {
+.footer-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -9,7 +9,7 @@
   padding: 0 0 5rem 0;
 }
 
-.footer__links {
+.footer-wrapper__links {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -18,14 +18,14 @@
   height: auto;
 }
 
-.footer__icon {
+.footer-wrapper__icon {
   font-size: 3rem;
   color: var(--white-color);
   cursor: pointer;
   transition: color 1s;
 }
 
-.footer__icon:hover {
+.footer-wrapper__icon:hover {
   color: var(--primary-color);
   transition: color 1s;
 }

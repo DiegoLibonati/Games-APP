@@ -9,19 +9,19 @@ export const HomeImagesSection = (): JSX.Element => {
   const autoIndex = useAutoSlide(imagesOfGames);
 
   return (
-    <section className="home__images">
+    <section className="home-images">
       {imagesOfGames.map((img, index) => {
-        let position = "home__images-background nextSlide";
+        let position = "home-images__background home-images__background--next-slide";
 
         if (index === autoIndex) {
-          position = "home__images-background activeSlide";
+          position = "home-images__background home-images__background--active-slide";
         }
 
         if (
           index === autoIndex - 1 ||
           (autoIndex === 0 && index === imagesOfGames.length - 1)
         ) {
-          position = "home__images-background lastSlide";
+          position = "home-images__background home-images__background--last-slide";
         }
 
         return (

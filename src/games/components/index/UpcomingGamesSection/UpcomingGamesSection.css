@@ -1,4 +1,4 @@
-.upcoming__games {
+.upcoming-games {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -9,7 +9,7 @@
   padding: 1rem;
 }
 
-.upcoming__games-title {
+.upcoming-games__title {
   font-size: 4.5rem;
   color: var(--white-color);
   width: 100%;
@@ -17,29 +17,14 @@
   margin: 1rem 0 1rem 0;
 }
 
-.line__wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: auto;
-}
-
-.line {
-  width: 20rem;
-  height: 0.5rem;
-  background-color: var(--white-color);
-  margin-bottom: 1rem;
-}
-
 @media only screen and (min-width: 540px) {
-  .upcoming__games-title {
+  .upcoming-games__title {
     font-size: 6rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .upcoming__games-title {
+  .upcoming-games__title {
     font-size: 7rem;
   }
 }

@@ -1,21 +1,26 @@
-.home__card {
+.home-card {
   width: 20rem;
   height: 20rem;
   position: absolute;
   left: 1rem;
   bottom: 1rem;
-  box-shadow: rgba(9, 30, 66, 0.25) 0 .4rem .8rem -.2rem,
-    rgba(9, 30, 66, 0.08) 0 0 0 .1rem;
+  box-shadow: rgba(9, 30, 66, 0.25) 0 0.4rem 0.8rem -0.2rem,
+    rgba(9, 30, 66, 0.08) 0 0 0 0.1rem;
 }
 
-.home__card-img {
+.home-card--effect-load {
+  background-color: rgba(var(--black-int-color), 0.537);
+  margin: 1rem;
+}
+
+.home-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 1rem;
 }
 
-.home__card-information {
+.home-card__information {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -32,12 +37,12 @@
   border-radius: 1rem;
 }
 
-.home__card:hover .home__card-information {
+.home-card:hover .home-card__information {
   opacity: 1;
   transition: opacity 1s;
 }
 
-.home__card-information h2 {
+.home-card__title {
   font-family: var(--font-montserrat);
   color: var(--white-color);
   padding-left: 0.2rem;
@@ -45,7 +50,7 @@
   margin-bottom: 3rem;
 }
 
-.home__card-information h3 {
+.home-card__genre {
   font-family: var(--font-montserrat);
   color: var(--white-color);
   padding-left: 0.2rem;
@@ -53,7 +58,7 @@
   margin-bottom: 3rem;
 }
 
-.home__card-information h4 {
+.home-card__publisher {
   font-family: var(--font-montserrat);
   color: var(--white-color);
   padding-left: 0.2rem;
@@ -61,7 +66,7 @@
   margin-bottom: 3rem;
 }
 
-.home__card-information button {
+.home-card__btn-favorite {
   font-family: var(--font-montserrat);
   color: var(--white-color);
   padding-left: 0.2rem;
@@ -73,7 +78,7 @@
   transition: color 1s, letter-spacing 1s, text-transform 1s, font-weight 1s;
 }
 
-.home__card-information button:hover {
+.home-card__btn-favorite:hover {
   color: var(--secondary-color);
   letter-spacing: 0.2rem;
   text-transform: uppercase;
@@ -81,91 +86,86 @@
   transition: color 1s, letter-spacing 1s, text-transform 1s, font-weight 1s;
 }
 
-.effect__load {
-  background-color: rgba(var(--black-int-color), 0.537);
-  margin: 1rem;
-}
-
 @media only screen and (min-width: 360px) {
-  .home__card {
+  .home-card {
     width: 35rem;
     height: 30rem;
   }
 
-  .home__card-information {
+  .home-card__information {
     padding-top: 1rem;
   }
 
-  .home__card-information h2 {
+  .home-card__title {
     padding-left: 1rem;
     font-size: 2rem;
   }
 
-  .home__card-information h3 {
+  .home-card__genre {
     padding-left: 1rem;
     font-size: 1.8rem;
   }
 
-  .home__card-information h4 {
+  .home-card__publisher {
     padding-left: 1rem;
     font-size: 1.5rem;
   }
 
-  .home__card-information button {
+  .home-card__btn-favorite {
     padding-left: 1rem;
     font-size: 1.2rem;
   }
 }
 
 @media only screen and (min-width: 540px) {
-  .home__card {
+  .home-card {
     width: 35rem;
     height: 20rem;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .home__card {
+  .home-card {
     width: 40rem;
     height: 25rem;
   }
 
-  .home__card-information h2 {
+  .home-card__title {
     font-size: 2.5rem;
   }
 
-  .home__card-information h3 {
+  .home-card__genre {
     font-size: 2rem;
   }
 
-  .home__card-information h4 {
+  .home-card__publisher {
     font-size: 1.8rem;
   }
 
-  .home__card-information button {
+  .home-card__btn-favorite {
     font-size: 1.5rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .home__card {
+  .home-card {
     width: 60rem;
     height: 40rem;
   }
 
-  .home__card-information h2 {
+  .home-card__title {
     font-size: 3rem;
   }
 
-  .home__card-information h3 {
+  .home-card__genre {
     font-size: 2.5rem;
   }
 
-  .home__card-information h4 {
+  .home-card__publisher {
     font-size: 2rem;
   }
 
-  .home__card-information button {
+  .home-card__btn-favorite {
     font-size: 1.5rem;
   }
 }

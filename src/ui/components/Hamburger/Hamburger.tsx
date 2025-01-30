@@ -8,11 +8,11 @@ export const Hamburger = (): JSX.Element => {
   return (
     <div
       onClick={isNavBarOpen ? handleCloseNavBar : handleOpenNavBar}
-      className={isNavBarOpen ? "hamburger icon nav-icon-5 open" : "hamburger icon nav-icon-5"}
+      className={isNavBarOpen ? "hamburger hamburger--open" : "hamburger"}
     >
-      <span></span>
-      <span></span>
-      <span></span>
+      <span className="hamburger__span"></span>
+      <span className="hamburger__span"></span>
+      <span className="hamburger__span"></span>
     </div>
   );
 };

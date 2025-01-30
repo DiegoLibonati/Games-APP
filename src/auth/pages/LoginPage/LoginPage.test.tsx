@@ -64,7 +64,7 @@ describe("LoginPage.tsx", () => {
 
       // eslint-disable-next-line
       const loader = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
 
       expect(loader).toBeInTheDocument();
@@ -93,7 +93,7 @@ describe("LoginPage.tsx", () => {
 
       // eslint-disable-next-line
       const loader = container.querySelector(
-        ".loade__all-wrapper"
+        ".loader-all-wrapper"
       ) as HTMLDivElement;
 
       expect(loader).not.toBeInTheDocument();
@@ -242,7 +242,7 @@ describe("LoginPage.tsx", () => {
       const { container } = renderComponent();
 
       // eslint-disable-next-line
-      const wave = container.querySelector(".login__wave") as HTMLElement;
+      const wave = container.querySelector(".login-wave") as HTMLElement;
 
       expect(wave).toBeInTheDocument();
     });
